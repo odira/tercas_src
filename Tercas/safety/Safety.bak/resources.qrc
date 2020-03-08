@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>qml/ListPage.qml</file>
+        <file>qml/ItemPage.qml</file>
+        <file>qml/qmldir</file>
+        <file>images/icon-left-arrow.png</file>
+        <file>qml/Date.qml</file>
+        <file>qml/MapPage.qml</file>
+    </qresource>
+</RCC>

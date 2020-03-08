@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="main.qml">qml/main.qml</file>
+        <file alias="HolidayDialog.qml">qml/HolidayDialog.qml</file>
+        <file alias="CalendarDialog.qml">qml/CalendarDialog.qml</file>
+    </qresource>
+</RCC>

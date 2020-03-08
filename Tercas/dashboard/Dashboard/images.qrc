@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/arrow1.png</file>
+        <file>images/arrow2.png</file>
+        <file>images/arrow3.png</file>
+        <file>images/arrow4.png</file>
+        <file>images/arrow5.png</file>
+        <file>images/arrow6.png</file>
+        <file>images/arrow7.png</file>
+        <file>images/arrow8.png</file>
+        <file alias="arrowImage">images/arrow9.png</file>
+        <file>images/background1.jpg</file>
+        <file alias="homeImage">images/home.png</file>
+        <file>images/search1.png</file>
+        <file alias="searchImage">images/search2.png</file>
+        <file>images/background2.svg</file>
+        <file alias="backgroundImage">images/background3.png</file>
+        <file>images/arrow10.png</file>
+        <file>images/arrow11.png</file>
+        <file>images/arrow12.png</file>
+        <file>images/arrow13.png</file>
+        <file>images/arrow14.png</file>
+        <file>images/arrow15.png</file>
+        <file>images/arrow16.png</file>
+        <file>images/arrow18.png</file>
+        <file>images/arrow19.png</file>
+    </qresource>
+</RCC>

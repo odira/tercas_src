@@ -1,0 +1,8 @@
+macx | linux: {
+    INCLUDEPATH += /usr/local/include/vyborg
+    LIBS += -L/usr/local/lib/vyborg -lvyborg
+}
+#macx: {
+#    INCLUDEPATH += /usr/local/include/vyborg
+#    LIBS += -L/usr/local/lib/vyborg -lvyborg
+#}

@@ -1,0 +1,67 @@
+#include <QtWidgets>
+
+#include "mapperdialog.h"
+#include "declarations.h"
+
+// Uncomment if MapperDelegate is used
+ #include "mapperdelegate.h"
+
+#include "colorwidget.h"
+
+MapperDialog::MapperDialog(QSqlTableModel *model, QWidget *parent)
+    : VyborgMapperDialog(model, parent)
+{
+    createPrivateWidgets();
+    layoutPrivateWidgets();
+    updatePrivateWidgets();
+}
+
+void MapperDialog::createPrivateWidgets()
+{
+    m_colorW = new ColorWidget;
+    m_activityLE = new QLineEdit;
+    m_noteruPTE = new QPlainTextEdit;
+
+    QDataWidgetMapper* m_mapper = mapper();
+    m_mapper->addMapping(m_colorW, emplactivity_pid);
+    m_mapper->addMapping(m_activityLE, emplactivity_emplactivity);
+    m_mapper->addMapping(m_noteruPTE, emplactivity_noteru);
+    m_mapper->setItemDelegate(new MapperDelegate);
+}
+
+void MapperDialog::layoutPrivateWidgets()
+{
+    QLabel *activityLabel = new QLabel(trUtf8("Вид деятельности"));
+    activityLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    activityLabel->setBuddy(m_activityLE);
+
+    QLabel *noteruLabel = new QLabel(trUtf8("Примечание"));
+    noteruLabel->setAlignment(Qt::AlignRight | Qt::AlignTop);
+    noteruLabel->setBuddy(m_noteruPTE);
+
+    QGridLayout *gridLayout = new QGridLayout;
+    gridLayout->addWidget(m_colorW, 0, 2, 1, 1);
+    gridLayout->addWidget(activityLabel, 1, 0);
+    gridLayout->addWidget(m_activityLE, 1, 1, 1, 2);
+    gridLayout->addWidget(noteruLabel, 2, 0);
+    gridLayout->addWidget(m_noteruPTE, 2, 1, 1, 2);
+
+    QVBoxLayout *privateWidgetsLayout = layout();
+    privateWidgetsLayout->addLayout(gridLayout);
+}
+
+void MapperDialog::updatePrivateWidgets()
+{
+    if (state() == Normal)
+    {
+        m_colorW->setEnabled(false);
+        m_activityLE->setReadOnly(true);
+        m_noteruPTE->setReadOnly(true);
+    }
+    else
+    {
+        m_colorW->setEnabled(true);
+        m_activityLE->setReadOnly(false);
+        m_noteruPTE->setReadOnly(false);
+    }
+}

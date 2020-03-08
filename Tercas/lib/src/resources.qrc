@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="arrow-first">images/arrow-first.png</file>
+        <file alias="arrow-last">images/arrow-last.png</file>
+        <file alias="arrow-left">images/arrow-left.png</file>
+        <file alias="arrow-right">images/arrow-right.png</file>
+        <file alias="next">images/mac/next.png</file>
+        <file alias="previous">images/mac/previous.png</file>
+    </qresource>
+</RCC>

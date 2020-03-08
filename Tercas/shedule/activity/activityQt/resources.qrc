@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="aboutImage0">images/about0.jpg</file>
+        <file>qml/EmplActivity.qml</file>
+    </qresource>
+</RCC>

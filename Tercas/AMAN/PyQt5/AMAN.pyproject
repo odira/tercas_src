@@ -1,0 +1,8 @@
+{
+    "files" : [ "AMAN.pyproject",
+                "QueueModel.py",
+                "main.py",
+                "main.qml",
+                "Arrival.qml",
+                "acft_details.py" ]
+}

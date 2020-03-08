@@ -1,0 +1,12 @@
+#ifndef LIBVYBORG_GLOBAL_H
+#define LIBVYBORG_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(LIBVYBORG_LIBRARY)
+#  define LIBVYBORGSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define LIBVYBORGSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // LIBVYBORG_GLOBAL_H

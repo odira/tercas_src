@@ -1,0 +1,6 @@
+module Wiipuri.Process
+
+plugin WiipuriProcess
+# static plugin must use this
+classname ProcessPlugin
+typeinfo Process.qmltypes

@@ -1,0 +1,29 @@
+console.log("new bot app");
+
+var TelegramBot = require('node-telegram-bot-api');
+
+var tg;
+function create() {
+	var token = "410980729:AAHxwviKmHC-DrGUNgGT4AVZLns6Hy9_12g";
+	tg = new TelegramBot(token, {
+		polling: true
+	});
+	tg.on('message', onMessage);
+	tg.on('callback_query', onCallbackQuery);
+}
+
+function onMessage(message) {
+	console.log('message:', message);
+	if (message.text && message.text.toLowerCase() == 'ping') {
+		var options = {
+			parse_mode: 'HTML'
+		};
+		tg.sendMessage(message.chat.id, '<pre>pong</pre>', options);
+		return;
+	}
+}
+function onCallbackQuery(callbackQuery) {
+	console.log('callbackQuery:', callbackQuery);
+}
+
+create();

@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/dashboard.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>qml/Restriction/RestrictionPage.qml</file>
+        <file>qml/Restriction/RestrictionDialog.qml</file>
+        <file>qml/Restriction/RestrictionDelegate.qml</file>
+        <file>qml/Watcher/WatcherPage.qml</file>
+        <file>qml/AddingButton.qml</file>
+        <file>qml/Watcher/WatcherDelegate.qml</file>
+        <file>qml/Watcher/WatcherDialog.qml</file>
+        <file>qml/Watcher/PositionSwitch.qml</file>
+    </qresource>
+</RCC>

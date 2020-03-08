@@ -1,0 +1,9 @@
+{
+    "files" : [
+        "DashboardPy.pyproject",
+        "main.py",
+        "main.qml",
+        "MainPage.qml",
+        "SectionPage.qml"
+    ]
+}

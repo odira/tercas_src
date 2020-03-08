@@ -1,0 +1,4 @@
+CalendarPlugin CalendarPlugin.qml
+DatePicker DatePicker.qml
+internal DirectionButton DirectionButton.qml
+CalendarFunctions ../js/CalendarFuncs.js

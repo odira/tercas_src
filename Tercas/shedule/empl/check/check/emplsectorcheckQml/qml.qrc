@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>qml/SearchComboModel.qml</file>
+        <file>qml/ItemPage.qml</file>
+        <file>qml/ListPage.qml</file>
+        <file>qml/SearchDialog.qml</file>
+        <file alias="arrowImage">../images/arrow.png</file>
+        <file alias="searchImage">../images/search.png</file>
+    </qresource>
+</RCC>

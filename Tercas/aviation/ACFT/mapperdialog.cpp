@@ -1,0 +1,313 @@
+#include <QtWidgets>
+#include <QtSql>
+
+#include "mapperdialog.h"
+#include "declarations.h"
+
+MapperDialog::MapperDialog(QSortFilterProxyModel *proxy, QWidget *parent)
+    : VyborgMapperDialog(proxy, parent)
+{
+    createPrivateWidgets();
+    layoutPrivateWidgets();
+    updatePrivateWidgets();
+}
+
+void MapperDialog::createPrivateWidgets()
+{
+    typeLineEdit                 = new QLineEdit;
+    descriptionLineEdit          = new QLineEdit;
+    classLineEdit                = new QLineEdit;
+    categoryLineEdit             = new QLineEdit;
+    WTClineEdit                  = new QLineEdit;
+    airportReferenceCodeLineEdit = new QLineEdit;
+    TKOFthrustLineEdit           = new QLineEdit;
+    MTOWlineEdit                 = new QLineEdit;
+    maxEmptyWeightLineEdit       = new QLineEdit;
+    MLWlineEdit                  = new QLineEdit;
+    maxPayloadLineEdit           = new QLineEdit;
+    crewLineEdit                 = new QLineEdit;
+    seatsExecutiveLineEdit       = new QLineEdit;
+    minLegroomLineEdit           = new QLineEdit;
+    fuelCapacityLineEdit         = new QLineEdit;
+    FLconsumptionLineEdit        = new QLineEdit;
+    TKOFspeedLineEdit            = new QLineEdit;
+    APPspeedLineEdit             = new QLineEdit;
+    normalCruiseSpeedLineEdit    = new QLineEdit;
+    maxCruiseSpeedLineEdit       = new QLineEdit;
+    longRangeCruiseSpeedLineEdit = new QLineEdit;
+    landingDistanceLineEdit      = new QLineEdit;
+    maxFLlineEdit                = new QLineEdit;
+    maxRangeLineEdit             = new QLineEdit;
+    rangeSeatsFullLineEdit       = new QLineEdit;
+    wheelPlineEdit               = new QLineEdit;
+    headWindLineEdit             = new QLineEdit;
+    crossWindLineEdit            = new QLineEdit;
+    tailWindLineEdit             = new QLineEdit;
+    lengthLineEdit               = new QLineEdit;
+    widthLineEdit                = new QLineEdit;
+    tailHeightLineEdit           = new QLineEdit;
+    wingspanLineEdit             = new QLineEdit;
+    ACNlineEdit                  = new QLineEdit;
+    noteLineEdit                 = new QLineEdit;
+    wingsSquareLineEdit          = new QLineEdit;
+    sourceLineEdit               = new QLineEdit;
+    variableCostPerHourLineEdit  = new QLineEdit;
+    cabinHeightLineEdit          = new QLineEdit;
+    cabinWidthLineEdit           = new QLineEdit;
+    cabinLengthLineEdit          = new QLineEdit;
+    cabinVolumeLineEdit          = new QLineEdit;
+    doorHeightLineEdit           = new QLineEdit;
+    doorWidthLineEdit            = new QLineEdit;
+    baggageVolIntLineEdit        = new QLineEdit;
+    baggageVolExtLineEdit        = new QLineEdit;
+    useableFuelLineEdit          = new QLineEdit;
+    payloadWithFullFuelLineEdit  = new QLineEdit;
+    BOWwithCrewLineEdit          = new QLineEdit;
+    balancedFieldLengthLineEdit  = new QLineEdit;
+    ROCallEnginesLineEdit        = new QLineEdit;
+    ROConeEngineLineEdit         = new QLineEdit;
+    enginesLineEdit              = new QLineEdit;
+    engineModelLineEdit          = new QLineEdit;
+    ACFTmanufactureIdLineEdit    = new QLineEdit;
+
+
+    mapper_->addMapping(typeLineEdit,                 ACFT_type);
+    mapper_->addMapping(descriptionLineEdit,          ACFT_description);
+    mapper_->addMapping(classLineEdit,                ACFT_class);
+    mapper_->addMapping(categoryLineEdit,             ACFT_category);
+    mapper_->addMapping(WTClineEdit,                  ACFT_WTC);
+    mapper_->addMapping(airportReferenceCodeLineEdit, ACFT_airportReferenceCode);
+    mapper_->addMapping(TKOFthrustLineEdit,           ACFT_TKOFthrust);
+    mapper_->addMapping(MTOWlineEdit,                 ACFT_MTOW);
+    mapper_->addMapping(maxEmptyWeightLineEdit,       ACFT_maxEmptyWeight);
+    mapper_->addMapping(MLWlineEdit,                  ACFT_MLW);
+    mapper_->addMapping(maxPayloadLineEdit,           ACFT_maxPayload);
+    mapper_->addMapping(crewLineEdit,                 ACFT_crew);
+    mapper_->addMapping(seatsExecutiveLineEdit,       ACFT_seatsExecutive);
+    mapper_->addMapping(minLegroomLineEdit,           ACFT_minLegroom);
+    mapper_->addMapping(fuelCapacityLineEdit,         ACFT_fuelCapacity);
+    mapper_->addMapping(FLconsumptionLineEdit,        ACFT_FLconsumption);
+    mapper_->addMapping(TKOFspeedLineEdit,            ACFT_TKOFspeed);
+    mapper_->addMapping(APPspeedLineEdit,             ACFT_APPspeed);
+    mapper_->addMapping(normalCruiseSpeedLineEdit,    ACFT_normalCruiseSpeed);
+    mapper_->addMapping(maxCruiseSpeedLineEdit,       ACFT_maxCruiseSpeed);
+    mapper_->addMapping(longRangeCruiseSpeedLineEdit, ACFT_longRangeCruiseSpeed);
+    mapper_->addMapping(landingDistanceLineEdit,      ACFT_landingDistance);
+    mapper_->addMapping(maxFLlineEdit,                ACFT_maxFL);
+    mapper_->addMapping(maxRangeLineEdit,             ACFT_maxRange);
+    mapper_->addMapping(rangeSeatsFullLineEdit,       ACFT_rangeSeatsFull);
+    mapper_->addMapping(wheelPlineEdit,               ACFT_wheelP);
+    mapper_->addMapping(headWindLineEdit,             ACFT_headWind);
+    mapper_->addMapping(crossWindLineEdit,            ACFT_crossWind);
+    mapper_->addMapping(tailWindLineEdit,             ACFT_tailWind);
+    mapper_->addMapping(lengthLineEdit,               ACFT_length);
+    mapper_->addMapping(widthLineEdit,                ACFT_width);
+    mapper_->addMapping(tailHeightLineEdit,           ACFT_tailHeight);
+    mapper_->addMapping(wingspanLineEdit,             ACFT_wingspan);
+    mapper_->addMapping(ACNlineEdit,                  ACFT_ACN);
+    mapper_->addMapping(noteLineEdit,                 ACFT_note);
+    mapper_->addMapping(wingsSquareLineEdit,          ACFT_wingsSquare);
+    mapper_->addMapping(sourceLineEdit,               ACFT_source);
+    mapper_->addMapping(variableCostPerHourLineEdit,  ACFT_variableCostPerHour);
+    mapper_->addMapping(cabinHeightLineEdit,          ACFT_cabinHeight);
+    mapper_->addMapping(cabinWidthLineEdit,           ACFT_cabinWidth);
+    mapper_->addMapping(cabinLengthLineEdit,          ACFT_cabinLength);
+    mapper_->addMapping(cabinVolumeLineEdit,          ACFT_cabinVolume);
+    mapper_->addMapping(doorHeightLineEdit,           ACFT_doorHeight);
+    mapper_->addMapping(doorWidthLineEdit,            ACFT_doorWidth);
+    mapper_->addMapping(baggageVolIntLineEdit,        ACFT_baggageVolInt);
+    mapper_->addMapping(baggageVolExtLineEdit,        ACFT_baggageVolExt);
+    mapper_->addMapping(useableFuelLineEdit,          ACFT_useableFuel);
+    mapper_->addMapping(payloadWithFullFuelLineEdit,  ACFT_payloadWithFullFuel);
+    mapper_->addMapping(BOWwithCrewLineEdit,          ACFT_BOWwithCrew);
+    mapper_->addMapping(balancedFieldLengthLineEdit,  ACFT_balancedFieldLength);
+    mapper_->addMapping(ROCallEnginesLineEdit,        ACFT_ROCallEngines);
+    mapper_->addMapping(ROConeEngineLineEdit,         ACFT_ROConeEngine);
+    mapper_->addMapping(enginesLineEdit,              ACFT_engines);
+    mapper_->addMapping(engineModelLineEdit,          ACFT_engineModel);
+    mapper_->addMapping(ACFTmanufactureIdLineEdit,    ACFT_ACFTmanufacture_id);
+}
+
+void MapperDialog::layoutPrivateWidgets()
+{
+    QWidget *scrollWidget = new QWidget;
+    QFormLayout *formLayout = new QFormLayout(scrollWidget);
+    formLayout->addRow(trUtf8("Type:"),                   typeLineEdit);
+    formLayout->addRow(trUtf8("Description:"),            descriptionLineEdit);
+    formLayout->addRow(trUtf8("Class:"),                  classLineEdit);
+    formLayout->addRow(trUtf8("Category:"),               categoryLineEdit);
+    formLayout->addRow(trUtf8("WTC:"),                    WTClineEdit);
+    formLayout->addRow(trUtf8("Airport Reference Code:"), airportReferenceCodeLineEdit);
+    formLayout->addRow(trUtf8("TKOF thrust"),             TKOFthrustLineEdit);
+    formLayout->addRow(trUtf8("MTOW"),                    MTOWlineEdit);
+    formLayout->addRow(trUtf8("max Empty Weight"),        maxEmptyWeightLineEdit);
+    formLayout->addRow(trUtf8("MLW"),                     MLWlineEdit);
+    formLayout->addRow(trUtf8("max Payload"),             maxPayloadLineEdit);
+    formLayout->addRow(trUtf8("Crew"),                    crewLineEdit);
+    formLayout->addRow(trUtf8("Seats Executive"),         seatsExecutiveLineEdit);
+    formLayout->addRow(trUtf8("min Legroom"),             minLegroomLineEdit);
+    formLayout->addRow(trUtf8("Fuel Capacity"),           fuelCapacityLineEdit);
+    formLayout->addRow(trUtf8("FL Consumption"),          FLconsumptionLineEdit);
+    formLayout->addRow(trUtf8("TKOF Speed"),              TKOFspeedLineEdit);
+    formLayout->addRow(trUtf8("APP speed"),               APPspeedLineEdit);
+    formLayout->addRow(trUtf8("Normal Cruise Speed"),     normalCruiseSpeedLineEdit);
+    formLayout->addRow(trUtf8("max Cruise Speed"),        maxCruiseSpeedLineEdit);
+    formLayout->addRow(trUtf8("Long Range Cruise Speed"), longRangeCruiseSpeedLineEdit);
+    formLayout->addRow(trUtf8("Landing Distance"),        landingDistanceLineEdit);
+    formLayout->addRow(trUtf8("max FL"),                  maxFLlineEdit);
+    formLayout->addRow(trUtf8("max Range"),               maxRangeLineEdit);
+    formLayout->addRow(trUtf8("Range Seats Full"),        rangeSeatsFullLineEdit);
+    formLayout->addRow(trUtf8("Wheel P"),                 wheelPlineEdit);
+    formLayout->addRow(trUtf8("Head Wind"),               headWindLineEdit);
+    formLayout->addRow(trUtf8("Cross Wind"),              crossWindLineEdit);
+    formLayout->addRow(trUtf8("Tail Wind"),               tailWindLineEdit);
+    formLayout->addRow(trUtf8("Length"),                  lengthLineEdit);
+    formLayout->addRow(trUtf8("Width"),                   widthLineEdit);
+    formLayout->addRow(trUtf8("Tail Height"),             tailHeightLineEdit);
+    formLayout->addRow(trUtf8("Wing Span"),               wingspanLineEdit);
+    formLayout->addRow(trUtf8("ACN"),                     ACNlineEdit);
+    formLayout->addRow(trUtf8("Note"),                    noteLineEdit);
+    formLayout->addRow(trUtf8("Wings Square"),            wingsSquareLineEdit);
+    formLayout->addRow(trUtf8("Source"),                  sourceLineEdit);
+    formLayout->addRow(trUtf8("Variable Cost Per Hour"),  variableCostPerHourLineEdit);
+    formLayout->addRow(trUtf8("Cabin Height"),            cabinHeightLineEdit);
+    formLayout->addRow(trUtf8("Cabin Width"),             cabinWidthLineEdit);
+    formLayout->addRow(trUtf8("Cabin Length"),            cabinLengthLineEdit);
+    formLayout->addRow(trUtf8("Cabin Volume"),            cabinVolumeLineEdit);
+    formLayout->addRow(trUtf8("Door Height"),             doorHeightLineEdit);
+    formLayout->addRow(trUtf8("Door Width"),              doorWidthLineEdit);
+    formLayout->addRow(trUtf8("Baggage Volume Int"),      baggageVolIntLineEdit);
+    formLayout->addRow(trUtf8("Baggage Volume Ext"),      baggageVolExtLineEdit);
+    formLayout->addRow(trUtf8("Useable Fuel"),            useableFuelLineEdit);
+    formLayout->addRow(trUtf8("Payload with Full Fuel"),  payloadWithFullFuelLineEdit);
+    formLayout->addRow(trUtf8("BOW with Crew"),           BOWwithCrewLineEdit);
+    formLayout->addRow(trUtf8("Balanced Field Length"),   balancedFieldLengthLineEdit);
+    formLayout->addRow(trUtf8("ROC all Engines"),         ROCallEnginesLineEdit);
+    formLayout->addRow(trUtf8("ROC one Engine"),          ROConeEngineLineEdit);
+    formLayout->addRow(trUtf8("Engines"),                 enginesLineEdit);
+    formLayout->addRow(trUtf8("Engine Model"),            engineModelLineEdit);
+    formLayout->addRow(trUtf8("ACFT manufacturer IDj"),   ACFTmanufactureIdLineEdit);
+
+
+    QScrollArea *scrollArea = new QScrollArea;
+    scrollArea->setWidget(scrollWidget);
+
+    privateWidgetsLayout->addWidget(scrollArea);
+}
+
+void MapperDialog::updatePrivateWidgets()
+{
+    if (dirty_ == true) {
+        typeLineEdit                 ->setReadOnly(false);
+        descriptionLineEdit          ->setReadOnly(false);
+        classLineEdit                ->setReadOnly(false);
+        categoryLineEdit             ->setReadOnly(false);
+        WTClineEdit                  ->setReadOnly(false);
+        airportReferenceCodeLineEdit ->setReadOnly(false);
+        TKOFthrustLineEdit           ->setReadOnly(false);
+        MTOWlineEdit                 ->setReadOnly(false);
+        maxEmptyWeightLineEdit       ->setReadOnly(false);
+        MLWlineEdit                  ->setReadOnly(false);
+        maxPayloadLineEdit           ->setReadOnly(false);
+        crewLineEdit                 ->setReadOnly(false);
+        seatsExecutiveLineEdit       ->setReadOnly(false);
+        minLegroomLineEdit           ->setReadOnly(false);
+        fuelCapacityLineEdit         ->setReadOnly(false);
+        FLconsumptionLineEdit        ->setReadOnly(false);
+        TKOFspeedLineEdit            ->setReadOnly(false);
+        APPspeedLineEdit             ->setReadOnly(false);
+        normalCruiseSpeedLineEdit    ->setReadOnly(false);
+        maxCruiseSpeedLineEdit       ->setReadOnly(false);
+        longRangeCruiseSpeedLineEdit ->setReadOnly(false);
+        landingDistanceLineEdit      ->setReadOnly(false);
+        maxFLlineEdit                ->setReadOnly(false);
+        maxRangeLineEdit             ->setReadOnly(false);
+        rangeSeatsFullLineEdit       ->setReadOnly(false);
+        wheelPlineEdit               ->setReadOnly(false);
+        headWindLineEdit             ->setReadOnly(false);
+        crossWindLineEdit            ->setReadOnly(false);
+        tailWindLineEdit             ->setReadOnly(false);
+        lengthLineEdit               ->setReadOnly(false);
+        widthLineEdit                ->setReadOnly(false);
+        tailHeightLineEdit           ->setReadOnly(false);
+        wingspanLineEdit             ->setReadOnly(false);
+        ACNlineEdit                  ->setReadOnly(false);
+        noteLineEdit                 ->setReadOnly(false);
+        wingsSquareLineEdit          ->setReadOnly(false);
+        sourceLineEdit               ->setReadOnly(false);
+        variableCostPerHourLineEdit  ->setReadOnly(false);
+        cabinHeightLineEdit          ->setReadOnly(false);
+        cabinWidthLineEdit           ->setReadOnly(false);
+        cabinLengthLineEdit          ->setReadOnly(false);
+        cabinVolumeLineEdit          ->setReadOnly(false);
+        doorHeightLineEdit           ->setReadOnly(false);
+        doorWidthLineEdit            ->setReadOnly(false);
+        baggageVolIntLineEdit        ->setReadOnly(false);
+        baggageVolExtLineEdit        ->setReadOnly(false);
+        useableFuelLineEdit          ->setReadOnly(false);
+        payloadWithFullFuelLineEdit  ->setReadOnly(false);
+        BOWwithCrewLineEdit          ->setReadOnly(false);
+        balancedFieldLengthLineEdit  ->setReadOnly(false);
+        ROCallEnginesLineEdit        ->setReadOnly(false);
+        ROConeEngineLineEdit         ->setReadOnly(false);
+        enginesLineEdit              ->setReadOnly(false);
+        engineModelLineEdit          ->setReadOnly(false);
+        ACFTmanufactureIdLineEdit    ->setReadOnly(false);
+    } else {
+        typeLineEdit                 ->setReadOnly(true);
+        descriptionLineEdit          ->setReadOnly(true);
+        classLineEdit                ->setReadOnly(true);
+        categoryLineEdit             ->setReadOnly(true);
+        WTClineEdit                  ->setReadOnly(true);
+        airportReferenceCodeLineEdit ->setReadOnly(true);
+        TKOFthrustLineEdit           ->setReadOnly(true);
+        MTOWlineEdit                 ->setReadOnly(true);
+        maxEmptyWeightLineEdit       ->setReadOnly(true);
+        MLWlineEdit                  ->setReadOnly(true);
+        maxPayloadLineEdit           ->setReadOnly(true);
+        crewLineEdit                 ->setReadOnly(true);
+        seatsExecutiveLineEdit       ->setReadOnly(true);
+        minLegroomLineEdit           ->setReadOnly(true);
+        fuelCapacityLineEdit         ->setReadOnly(true);
+        FLconsumptionLineEdit        ->setReadOnly(true);
+        TKOFspeedLineEdit            ->setReadOnly(true);
+        APPspeedLineEdit             ->setReadOnly(true);
+        normalCruiseSpeedLineEdit    ->setReadOnly(true);
+        maxCruiseSpeedLineEdit       ->setReadOnly(true);
+        longRangeCruiseSpeedLineEdit ->setReadOnly(true);
+        landingDistanceLineEdit      ->setReadOnly(true);
+        maxFLlineEdit                ->setReadOnly(true);
+        maxRangeLineEdit             ->setReadOnly(true);
+        rangeSeatsFullLineEdit       ->setReadOnly(true);
+        wheelPlineEdit               ->setReadOnly(true);
+        headWindLineEdit             ->setReadOnly(true);
+        crossWindLineEdit            ->setReadOnly(true);
+        tailWindLineEdit             ->setReadOnly(true);
+        lengthLineEdit               ->setReadOnly(true);
+        widthLineEdit                ->setReadOnly(true);
+        tailHeightLineEdit           ->setReadOnly(true);
+        wingspanLineEdit             ->setReadOnly(true);
+        ACNlineEdit                  ->setReadOnly(true);
+        noteLineEdit                 ->setReadOnly(true);
+        wingsSquareLineEdit          ->setReadOnly(true);
+        sourceLineEdit               ->setReadOnly(true);
+        variableCostPerHourLineEdit  ->setReadOnly(true);
+        cabinHeightLineEdit          ->setReadOnly(true);
+        cabinWidthLineEdit           ->setReadOnly(true);
+        cabinLengthLineEdit          ->setReadOnly(true);
+        cabinVolumeLineEdit          ->setReadOnly(true);
+        doorHeightLineEdit           ->setReadOnly(true);
+        doorWidthLineEdit            ->setReadOnly(true);
+        baggageVolIntLineEdit        ->setReadOnly(true);
+        baggageVolExtLineEdit        ->setReadOnly(true);
+        useableFuelLineEdit          ->setReadOnly(true);
+        payloadWithFullFuelLineEdit  ->setReadOnly(true);
+        BOWwithCrewLineEdit          ->setReadOnly(true);
+        balancedFieldLengthLineEdit  ->setReadOnly(true);
+        ROCallEnginesLineEdit        ->setReadOnly(true);
+        ROConeEngineLineEdit         ->setReadOnly(true);
+        enginesLineEdit              ->setReadOnly(true);
+        engineModelLineEdit          ->setReadOnly(true);
+        ACFTmanufactureIdLineEdit    ->setReadOnly(true);
+    }
+}

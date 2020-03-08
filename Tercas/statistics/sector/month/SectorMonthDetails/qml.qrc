@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>qml/MonthDelegate.qml</file>
+        <file>py/plotSectorMonthDetails.py</file>
+    </qresource>
+</RCC>

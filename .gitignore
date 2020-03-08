@@ -1,0 +1,12 @@
+*.pro.user*
+*.user*
+*/tmp/*
+*/.build/*
+*/build*/*
+*build*
+*~
+*.o
+.*
+__*
+
+!/.gitignore

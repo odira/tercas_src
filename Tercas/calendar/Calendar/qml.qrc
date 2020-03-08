@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>qml/TerkasCalendar.qml</file>
+        <file>qml/TriangleButton.qml</file>
+        <file>images/triangle.png</file>
+        <file>images/triangle-click.svg</file>
+        <file>qml/ShiftBox.qml</file>
+        <file>qml/OptionsDrawer.qml</file>
+        <file>qml/DateSpin.qml</file>
+        <file>images/arrow.png</file>
+        <file>qml/DatePage.qml</file>
+        <file>qml/MonthPage.qml</file>
+        <file>qml/YearPage.qml</file>
+        <file>qml/SwipeArea.qml</file>
+        <file>images/icon-left-arrow.png</file>
+        <file>images/drawer.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,2 @@
+INCLUDEPATH += /usr/include/vyborg
+LIBS += -L/usr/lib/vyborg -lvyborg
