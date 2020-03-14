@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
-#include "model/SectorYearModel.h"
+#include "model/TotalMonthModel.h"
 #include <connection.h>
 
 int main(int argc, char *argv[])
@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     if (!openConnection())
         return -1;
 
-    qmlRegisterType<SectorMonthModel>("Wiipuri.Models", 1, 0, "SectorMonthModel");
+    qmlRegisterType<TotalMonthModel>("Wiipuri.Models", 1, 0, "TotalMonthModel");
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));

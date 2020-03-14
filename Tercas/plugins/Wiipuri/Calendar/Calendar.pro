@@ -1,11 +1,17 @@
 TEMPLATE = lib
 QT += qml quick
 CONFIG += qt plugin c++11
+TARGET = WiipuriCalendar
+TARGET = $$qtLibraryTarget($$TARGET)
+
 uri = Wiipuri.Calendar
 
 # static plugin must use this
 #CONFIG += static
 #QMAKE_MOC_OPTIONS += -Muri=$$uri
+
+MOC_DIR = tmp
+OBJECTS_DIR = tmp
 
 include(src/files.pri)
 
@@ -22,8 +28,7 @@ RESOURCES = \
 #    js/funcCalendar.js
 #    src/files.pri
 
-TARGET = WiipuriCalendar
-TARGET = $$qtLibraryTarget($$TARGET)
+
 qmldir.files = qmldir
 qmltypes.files = *.qmltypes
 qmlfiles.files = *.qml *.js qml/*.qml js/*.js

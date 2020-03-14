@@ -17,5 +17,5 @@ void ProcessPlugin::registerTypes(const char *uri)
 {
     // @uri Wiipuri.Process
     qmlRegisterType<Process>(uri, 1, 0, "Process");
-    //    qmlRegisterSingletonType<Process>(uri, 1, 0, "Process", Process_singletontype_provider);
+//        qmlRegisterSingletonType<Process>(uri, 1, 0, "Process", Process_singletontype_provider);
 }

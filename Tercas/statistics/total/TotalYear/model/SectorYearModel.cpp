@@ -1,6 +1,6 @@
 #include <QSqlQuery>
 
-#include "SectorMonthModel.h"
+#include "SectorYearModel.h"
 
 #include <QDebug>
 SectorMonthModel::SectorMonthModel(QObject *parent)
