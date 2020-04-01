@@ -45,6 +45,7 @@ class QueueModel(QAbstractTableModel):
             self._fapi.login('odira@mail.ru', 'monrepo1')
             print('Logged in seccesfully...')
             self.update()
+            print('Updated')
         except:
             print('Logged in failed.')
             sys.exit(0)
