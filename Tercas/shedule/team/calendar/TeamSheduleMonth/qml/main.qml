@@ -54,7 +54,7 @@ ApplicationWindow {
                     anchors.fill: parent
                     anchors.margins: 2
                     color: column == 0 ? 'lightgreen' : 'orange'
-                    opacity: background ? 1.0 : 0.2
+                    opacity: model.out_of_month ? 1.0 : 0.2
                     border.color: "gray"
                     Text {
                         anchors.fill: parent

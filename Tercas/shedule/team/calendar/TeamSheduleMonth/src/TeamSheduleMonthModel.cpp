@@ -77,7 +77,13 @@ QVariant TeamSheduleMonthModel::data(const QModelIndex &idx, int role) const
     else
         item_date = QDate(m_date.year(), m_date.month(), daysInMonth).addDays(col - 3 - daysInMonth);
 
-    bool out_current_month = item_date.month() == m_date.month() ? true : false;
+    // Calculate date opacity (out of month)
+    bool out_of_month = (
+                item_date.month() == m_date.month()
+                ? true : false
+    );
+    if (col == 0)
+        out_of_month = true;
 
     switch (role)
     {
@@ -92,17 +98,18 @@ QVariant TeamSheduleMonthModel::data(const QModelIndex &idx, int role) const
     case Qt::BackgroundRole:
         if (col == 0)
             return true;
-        return out_current_month;
+        return out_of_month;
         break;
     }
 
     if (role > Qt::UserRole)
     {
-//        col = role - Qt::UserRole - 1;
-//        if (col == 0)
-//            return QString("Person" + QString::number(idx.row()));
-//        else
-//            return "Date";
+//        int _role = role - Qt::UserRole - 1;
+        switch (role - Qt::UserRole - 1) {
+        case 0: // out_of_month
+            return out_of_month;
+            break;
+        }
     }
 
     return QSqlTableModel::data(idx, role);
@@ -126,6 +133,8 @@ void TeamSheduleMonthModel::generateRoleNames()
 
     m_roleNames[Qt::DisplayRole] = QVariant(QString("display").toUtf8()).toByteArray();
     m_roleNames[Qt::BackgroundRole] = QVariant(QString("background").toUtf8()).toByteArray();
+
+    m_roleNames[Qt::UserRole + 1] = QVariant(QString("out_of_month").toUtf8()).toByteArray();
 
 //    // First role is 'person' role
 //    m_roleNames[Qt::UserRole + 1] = QVariant(QString("person").toUtf8()).toByteArray();
