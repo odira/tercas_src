@@ -7,7 +7,7 @@
 #include <QQmlContext>
 
 // Здесь важен порядок следования файлов - connection.h за хедером модели!
-#include "src/EmplSheduleMonthModel.h"
+#include "TeamSheduleMonthModel.h"
 #include <connection.h>
 
 int main(int argc, char *argv[])
@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
 
-    QLockFile lockFile(QDir::temp().absoluteFilePath("dashboard.lock"));
+    QLockFile lockFile(QDir::temp().absoluteFilePath("EmplSheduleMonth.lock"));
 
     /* Пытаемся закрыть Lock File, если попытка безуспешна в течение 100 миллисекунд,
      * значит уже существует Lock File созданный другим процессом.
@@ -37,10 +37,12 @@ int main(int argc, char *argv[])
     /*
      * Defining models
      * */
-    EmplSheduleMonthModel *emplSheduleMonthModel = new EmplSheduleMonthModel;
+//    EmplSheduleMonthModel *emplSheduleMonthModel = new EmplSheduleMonthModel;
+    TeamSheduleMonthModel *model = new TeamSheduleMonthModel;
 
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("emplSheduleMonthModel", QVariant::fromValue(emplSheduleMonthModel));
+//    engine.rootContext()->setContextProperty("emplSheduleMonthModel", QVariant::fromValue(emplSheduleMonthModel));
+    engine.rootContext()->setContextProperty("teamSheduleMonthModel", QVariant::fromValue(model));
     engine.load(QUrl(QLatin1String("qrc:/qml/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

@@ -7,4 +7,3 @@ typeinfo Calendar.qmltypes
 
 DatePicker 1.0 DatePicker.qml
 CalendarFunctions 1.0 CalendarFuncs.js
-

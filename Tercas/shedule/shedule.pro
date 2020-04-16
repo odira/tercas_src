@@ -2,4 +2,5 @@ TEMPLATE = subdirs
 SUBDIRS = \
     Holiday \
     activity \
-    empl 
+    empl \
+    team

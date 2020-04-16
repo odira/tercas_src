@@ -4,7 +4,7 @@
         <file>qml/DatePicker.qml</file>
         <file>qml/DirectionButton.qml</file>
         <file>qml/CalendarPlugin.qml</file>
-        <file>js/CalendarFuncs.js</file>
+        <file>qml/CalendarFuncs.js</file>
         <file>Calendar.qmltypes</file>
     </qresource>
 </RCC>

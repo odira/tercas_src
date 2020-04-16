@@ -31,7 +31,7 @@ RESOURCES = \
 
 qmldir.files = qmldir
 qmltypes.files = *.qmltypes
-qmlfiles.files = *.qml *.js qml/*.qml js/*.js
+qmlfiles.files = *.qml qml/*.qml qml/*.js *.js js/*.js
 unix {
     installPath = $$[QT_INSTALL_QML]/$$replace(uri, \\., /)
     target.path = $$installPath

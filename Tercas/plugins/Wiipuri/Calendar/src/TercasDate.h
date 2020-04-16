@@ -12,7 +12,7 @@ public:
     TercasDate(QObject *parent = Q_NULLPTR);
     TercasDate(int year, int month, int day, QObject *parent = Q_NULLPTR);
 
-    ~TercasDate() {}
+    ~TercasDate() { }
 
     Q_INVOKABLE qint64 julianDay();
     Q_INVOKABLE bool isShiftWorking(QDate date, int shift);

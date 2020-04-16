@@ -1,22 +1,27 @@
-// pragma Singleton
-
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
 import "CalendarFuncs.js" as Func
-//import "../js/funcCalendar.js" as Func
 
 Item {
     id: root
     width: mainLayout.width; height: mainLayout.height
 
     property var pickerDate: new Date()
+    signal pickerDateUpdated(date newDate)
+
+    property int date: pickerDate.getDate()
+    property int month: pickerDate.getMonth()
+    property int year: pickerDate.getFullYear()
+
+    function daysInMonth (month, year) {
+        return new Date(year, month, 0).getDate();
+    }
+
     property bool showYear: true
     property bool showMonth: true
     property bool showDate: true
-
-    signal pickerDateUpdated(date newDate)
 
     TextMetrics {
         id: textMetrics
@@ -24,16 +29,6 @@ Item {
      }
     property var textSize: textMetrics.font.pixelSize * 2
     property var charWidth: (textMetrics.width + textMetrics.advanceWidth) * 2
-
-
-    property int date: pickerDate.getDate()
-    property int month: pickerDate.getMonth()
-    property int year: pickerDate.getFullYear()
-
-    function daysInMonth (month, year) {
-        return new Date(year, month + 1, 0).getDate();
-    }
-
 
     RowLayout {
         id: mainLayout
@@ -46,6 +41,7 @@ Item {
                 border.color: "black"
             }
 
+            // Date block
             RowLayout {
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Previous
@@ -54,8 +50,8 @@ Item {
                         date--
                         if (date === 0) {
                             month--
-                            if (month === -1) {
-                                month = 11
+                            if (month === 0) {
+                                month = 12
                                 year--
                                 pickerDate.setFullYear(year)
                             }
@@ -64,6 +60,7 @@ Item {
                             date = maxDateInMonth
                         }
                         pickerDate.setDate(date)
+
                         pickerDateUpdated(pickerDate)
                     }
                 }
@@ -92,12 +89,14 @@ Item {
                             pickerDate.setMonth(month)
                         }
                         pickerDate.setDate(date)
+
                         pickerDateUpdated(pickerDate)
                     }
                 }
             }
         }
 
+        // Month block
         Frame {
             visible: showMonth
             background: Rectangle {
@@ -116,11 +115,13 @@ Item {
                             pickerDate.setFullYear(year)
                         }
                         pickerDate.setMonth(month)
+
                         var maxDateInMonth = daysInMonth(month, year)
                         if (date > maxDateInMonth) {
                             date = maxDateInMonth
                             pickerDate.setDate(date)
                         }
+
                         pickerDateUpdated(pickerDate)
                     }
                 }
@@ -130,7 +131,7 @@ Item {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     readOnly: true
-                    text: Func.getMonthName0(month) + ' - ' + (month + 1)
+                    text: Func.getMonthName0(month) + ' - (' + (month +1) + ')'
                 }
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Next
@@ -141,18 +142,21 @@ Item {
                             year++
                             pickerDate.setFullYear(year)
                         }
+
                         pickerDate.setMonth(month)
                         var maxDateInMonth = daysInMonth(month, year)
                         if (date > maxDateInMonth) {
                             date = maxDateInMonth
                             pickerDate.setDate(date)
                         }
+
                         pickerDateUpdated(pickerDate)
                     }
                 }
             }
         }
 
+        // Year block
         Frame {
             visible: showYear
             background: Rectangle {
@@ -166,11 +170,13 @@ Item {
                     onClicked: {
                         year--
                         pickerDate.setFullYear(year)
+
                         var maxDateInMonth = daysInMonth(month, year)
                         if (date > maxDateInMonth) {
                             date = maxDateInMonth
                             pickerDate.setDate(date)
                         }
+
                         pickerDateUpdated(pickerDate)
                     }
                 }
@@ -187,11 +193,13 @@ Item {
                     onClicked: {
                         year++
                         pickerDate.setFullYear(year)
+
                         var maxDateInMonth = daysInMonth(month, year)
                         if (date > maxDateInMonth) {
                             date = maxDateInMonth
                             pickerDate.setDate(date)
                         }
+
                         pickerDateUpdated(pickerDate)
                     }
                 }

@@ -8,7 +8,6 @@ import Wiipuri.Calendar 1.0
 ApplicationWindow {
     id: root
     title: qsTr("Месячный Календарь Работников")
-//    modality: Qt.ApplicationModal
     visible: true
     width: Screen.width
     height: Screen.height
@@ -24,7 +23,6 @@ ApplicationWindow {
             onPickerDateUpdated: {
                 emplSheduleMonthModel.date = pickerDate
                 listView.daysInMonth = emplSheduleMonthModel.columnCount() - 1
-//                listView.forceLayout()
             }
         }
     }
