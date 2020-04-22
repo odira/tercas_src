@@ -37,13 +37,25 @@ ApplicationWindow {
         anchors.fill: parent
         anchors.margins: 10
 
+
+
+        Row {
+            Layout.fillWidth: true; height: 50
+
+            Rectangle {
+                anchors.fill: parent
+                anchors.margins: 2
+                color: "red"
+            }
+        }
+
         TableView {
             id: table
             Layout.fillWidth: true; Layout.fillHeight: true
             model: teamSheduleMonthModel
+            clip: true
 
             delegate: Item {
-
                 property int personColumnWidth: 250
                 property int dateColumnWidth: (table.width - personColumnWidth) / 37 // 37 - number of days in calendar
 

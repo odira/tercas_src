@@ -104,7 +104,6 @@ QVariant TeamSheduleMonthModel::data(const QModelIndex &idx, int role) const
 
     if (role > Qt::UserRole)
     {
-//        int _role = role - Qt::UserRole - 1;
         switch (role - Qt::UserRole - 1) {
         case 0: // out_of_month
             return out_of_month;
