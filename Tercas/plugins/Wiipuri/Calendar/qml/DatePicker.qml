@@ -8,12 +8,12 @@ Item {
     id: root
     width: mainLayout.width; height: mainLayout.height
 
-    property var pickerDate: new Date()
-    signal pickerDateUpdated(date newDate)
+    property var datePicker: new Date()
+    signal datePickerUpdated(date newDate)
 
-    property int date: pickerDate.getDate()
-    property int month: pickerDate.getMonth()
-    property int year: pickerDate.getFullYear()
+    property int date: datePicker.getDate()
+    property int month: datePicker.getMonth()
+    property int year: datePicker.getFullYear()
 
     function daysInMonth (month, year) {
         return new Date(year, month, 0).getDate();
@@ -26,8 +26,8 @@ Item {
     TextMetrics {
         id: textMetrics
         text: 'A'
-     }
-    property var textSize: textMetrics.font.pixelSize * 2
+    }
+    property var textSize: textMetrics.font.pixelSize * 1.5
     property var charWidth: (textMetrics.width + textMetrics.advanceWidth) * 2
 
     RowLayout {
@@ -41,8 +41,9 @@ Item {
                 border.color: "black"
             }
 
-            // Date block
+            // DATE block
             RowLayout {
+
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Previous
                     font: textMetrics.font
@@ -53,17 +54,18 @@ Item {
                             if (month === 0) {
                                 month = 12
                                 year--
-                                pickerDate.setFullYear(year)
+                                datePicker.setFullYear(year)
                             }
-                            pickerDate.setMonth(month)
+                            datePicker.setMonth(month)
                             var maxDateInMonth = daysInMonth(month, year)
                             date = maxDateInMonth
                         }
-                        pickerDate.setDate(date)
+                        datePicker.setDate(date)
 
-                        pickerDateUpdated(pickerDate)
+                        datePickerUpdated(datePicker)
                     }
                 }
+
                 TextArea {
                     id: textDate
                     implicitWidth: charWidth * 1.5
@@ -73,6 +75,7 @@ Item {
                     readOnly: true
                     text: date
                 }
+
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Next
                     onClicked: {
@@ -84,47 +87,54 @@ Item {
                             if (month === 12) {
                                 month = 0
                                 year++
-                                pickerDate.setFullYear(year)
+                                datePicker.setFullYear(year)
                             }
-                            pickerDate.setMonth(month)
+                            datePicker.setMonth(month)
                         }
-                        pickerDate.setDate(date)
+                        datePicker.setDate(date)
 
-                        pickerDateUpdated(pickerDate)
+                        datePickerUpdated(datePicker)
                     }
                 }
             }
         }
 
-        // Month block
+        // MONTH block
         Frame {
+            id: monthFrame
+
+            property var frameColor: "blue"
+
             visible: showMonth
             background: Rectangle {
-                border.color: "black"
+                border.color: monthFrame.frameColor
+                radius: 2
             }
 
             RowLayout {
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Previous
                     font: textMetrics.font
+                    buttonColor: monthFrame.frameColor
                     onClicked: {
                         month--
                         if (month === -1) {
                             month = 11
                             year--
-                            pickerDate.setFullYear(year)
+                            datePicker.setFullYear(year)
                         }
-                        pickerDate.setMonth(month)
+                        datePicker.setMonth(month)
 
                         var maxDateInMonth = daysInMonth(month, year)
                         if (date > maxDateInMonth) {
                             date = maxDateInMonth
-                            pickerDate.setDate(date)
+                            datePicker.setDate(date)
                         }
 
-                        pickerDateUpdated(pickerDate)
+                        datePickerUpdated(datePicker)
                     }
                 }
+
                 TextArea {
                     implicitWidth: charWidth * 6
                     font.pixelSize: textSize
@@ -133,24 +143,26 @@ Item {
                     readOnly: true
                     text: Func.getMonthName0(month) + ' - (' + (month +1) + ')'
                 }
+
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Next
+                    buttonColor: monthFrame.frameColor
                     onClicked: {
                         month++
                         if (month === 12) {
                             month = 0
                             year++
-                            pickerDate.setFullYear(year)
+                            datePicker.setFullYear(year)
                         }
 
-                        pickerDate.setMonth(month)
+                        datePicker.setMonth(month)
                         var maxDateInMonth = daysInMonth(month, year)
                         if (date > maxDateInMonth) {
                             date = maxDateInMonth
-                            pickerDate.setDate(date)
+                            datePicker.setDate(date)
                         }
 
-                        pickerDateUpdated(pickerDate)
+                        datePickerUpdated(datePicker)
                     }
                 }
             }
@@ -158,28 +170,35 @@ Item {
 
         // Year block
         Frame {
+            id: yearFrame
+
+            property var frameColor: "green"
+
             visible: showYear
             background: Rectangle {
-                border.color: "black"
+                border.color: yearFrame.frameColor
+                radius: 2
             }
 
             RowLayout {
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Previous
                     font: textMetrics.font
+                    buttonColor: yearFrame.frameColor
                     onClicked: {
                         year--
-                        pickerDate.setFullYear(year)
+                        datePicker.setFullYear(year)
 
                         var maxDateInMonth = daysInMonth(month, year)
                         if (date > maxDateInMonth) {
                             date = maxDateInMonth
-                            pickerDate.setDate(date)
+                            datePicker.setDate(date)
                         }
 
-                        pickerDateUpdated(pickerDate)
+                        datePickerUpdated(datePicker)
                     }
                 }
+
                 TextArea {
                     implicitWidth: charWidth * 2.5
                     font.pixelSize: textSize
@@ -188,19 +207,21 @@ Item {
                     readOnly: true
                     text: year
                 }
+
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Next
+                    buttonColor: yearFrame.frameColor
                     onClicked: {
                         year++
-                        pickerDate.setFullYear(year)
+                        datePicker.setFullYear(year)
 
                         var maxDateInMonth = daysInMonth(month, year)
                         if (date > maxDateInMonth) {
                             date = maxDateInMonth
-                            pickerDate.setDate(date)
+                            datePicker.setDate(date)
                         }
 
-                        pickerDateUpdated(pickerDate)
+                        datePickerUpdated(datePicker)
                     }
                 }
             }
