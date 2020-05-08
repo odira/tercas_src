@@ -35,6 +35,6 @@ RoundButton {
         implicitWidth: button.width; implicitHeight: button.height
         color: "transparent"
         border.color: button.color
-        radius: 3
+        radius: 1
     }
 }

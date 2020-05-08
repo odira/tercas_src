@@ -7,8 +7,6 @@ import "CalendarFuncs.js" as Func
 Item {
     id: datePicker
 
-//    /*width: 1000; */height: 60
-
     // Variables for calendar
     property var dpDate: new Date()
     signal dpDateUpdated(date newDate)
@@ -54,12 +52,9 @@ Item {
 
     Row {
         id: root
+        spacing: 2
 
-//        anchors.fill: parent
-//        anchors.margins: 2
-        spacing: 10
-
-        Loader { Layout.fillHeight: true; sourceComponent: spacer }
+        Loader { height: datePicker.height; sourceComponent: spacer }
 
 //        // DATE block
 //        Frame {
@@ -129,13 +124,13 @@ Item {
 //        }
 
         // MONTH block
-        RowLayout {
+        Frame {
             id: monthBlock
-
-            Layout.fillHeight: true
             visible: showMonth
 
-//            RowLayout {
+            RowLayout {
+                anchors.fill: parent
+
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Previous
                     color: monthBlockColor
@@ -160,19 +155,17 @@ Item {
 
                 TextArea {
                     Layout.fillHeight: true
-
-                    background: Rectangle {
-                        height: 50
-                        color: "transparent"
-                        border.color: monthBlockColor
-                    }
-
                     implicitWidth: charWidth * 6
                     font.pixelSize: textSize
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     readOnly: true
                     text: Func.getMonthName0(month) + ' - (' + (month +1) + ')'
+                    background: Rectangle {
+                        height: 50
+                        color: "transparent"
+                        border.color: monthBlockColor
+                    }
                 }
 
                 DirectionButton {
@@ -195,21 +188,21 @@ Item {
 
                         dpDateUpdated(dpDate)
                     }
-//                }
+                }
             }
         }
 
-        // Year block
-        Rectangle {
+        // YEAR block
+        Frame {
             id: yearFrame
-
-            Layout.fillHeight: true
             visible: showYear
 
             RowLayout {
+                anchors.fill: parent
+
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Previous
-                    color: yearFrame.frameColor
+                    color: yearBlockColor
                     onClicked: {
                         year--
                         dpDate.setFullYear(year)
@@ -225,17 +218,23 @@ Item {
                 }
 
                 TextArea {
-                    implicitWidth: charWidth * 2.5
+                    Layout.fillHeight: true
+                    implicitWidth: charWidth * 3
                     font.pixelSize: textSize
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     readOnly: true
                     text: year
+                    background: Rectangle {
+                        height: 50
+                        color: "transparent"
+                        border.color: yearBlockColor
+                    }
                 }
 
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Next
-                    color: yearFrame.frameColor
+                    color: yearBlockColor
                     onClicked: {
                         year++
                         dpDate.setFullYear(year)
