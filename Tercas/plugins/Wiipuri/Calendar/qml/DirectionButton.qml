@@ -17,12 +17,12 @@ RoundButton {
 
     flat: true
     font: directionButtonFont
-//    font.bold: true
 
     contentItem: Text {
         color: color
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        font.bold: true
         text: {
             if (orientation === DirectionButton.Orientation.Previous)
                 return '<';

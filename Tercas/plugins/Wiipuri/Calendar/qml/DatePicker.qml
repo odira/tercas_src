@@ -7,9 +7,9 @@ import "CalendarFuncs.js" as Func
 Item {
     id: datePicker
 
-    width: mainLayout.width
-    height: mainLayout.height
+//    /*width: 1000; */height: 60
 
+    // Variables for calendar
     property var dpDate: new Date()
     signal dpDateUpdated(date newDate)
 
@@ -21,6 +21,7 @@ Item {
         return new Date(year, month, 0).getDate();
     }
 
+    // Variables for graphics
     property bool showYear: true
     property bool showMonth: true
     property bool showDate: true
@@ -32,13 +33,16 @@ Item {
     property var textSize: textMetrics.font.pixelSize * 1.3
     property var charWidth: (textMetrics.width + textMetrics.advanceWidth) * 1.3
 
+    // Variables for DirectionButton items
     property int directionButtonWidth: 50
     property int directionButtonHeight: directionButtonWidth
     property var directionButtonFont: textMetrics.font
 
+    // Variables for blocks
     property color monthBlockColor: Qt.lighter("blue")
     property color yearBlockColor: Qt.lighter("green")
 
+    // Spacer item
     Component {
         id: spacer
         Rectangle {
@@ -48,92 +52,90 @@ Item {
         }
     }
 
-    RowLayout {
-        id: mainLayout
+    Row {
+        id: root
 
-        anchors.margins: 2
+//        anchors.fill: parent
+//        anchors.margins: 2
         spacing: 10
 
-        Loader {
-            Layout.fillHeight: true
-            sourceComponent: spacer
-        }
+        Loader { Layout.fillHeight: true; sourceComponent: spacer }
 
-        // DATE block
-        Frame {
-            id: dateFrame
+//        // DATE block
+//        Frame {
+//            id: dateFrame
 
-            Layout.fillHeight: true
-            visible: showDate
+//            Layout.fillHeight: true
+//            visible: showDate
 
-            RowLayout {
-                DirectionButton {
-                    orientation: DirectionButton.Orientation.Previous
-                    onClicked: {
-                        date--
-                        if (date === 0) {
-                            month--
-                            if (month === 0) {
-                                month = 12
-                                year--
-                                dpDate.setFullYear(year)
-                            }
-                            dpDate.setMonth(month)
-                            var maxDateInMonth = daysInMonth(month, year)
-                            date = maxDateInMonth
-                        }
-                        dpDate.setDate(date)
+//            RowLayout {
+//                DirectionButton {
+//                    orientation: DirectionButton.Orientation.Previous
+//                    onClicked: {
+//                        date--
+//                        if (date === 0) {
+//                            month--
+//                            if (month === 0) {
+//                                month = 12
+//                                year--
+//                                dpDate.setFullYear(year)
+//                            }
+//                            dpDate.setMonth(month)
+//                            var maxDateInMonth = daysInMonth(month, year)
+//                            date = maxDateInMonth
+//                        }
+//                        dpDate.setDate(date)
 
-                        dpDateUpdated(dpDate)
-                    }
-                }
+//                        dpDateUpdated(dpDate)
+//                    }
+//                }
 
-                TextArea {
-                    id: textDate
+//                TextArea {
+//                    id: textDate
 
-                    background: Rectangle {
-                        color: "yellow"
-                    }
+//                    background: Rectangle {
+//                        color: "yellow"
+//                    }
 
-                    implicitWidth: charWidth * 1.5
-                    font.pixelSize: textSize
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                    readOnly: true
-                    text: date
-                }
+//                    implicitWidth: charWidth * 1.5
+//                    font.pixelSize: textSize
+//                    verticalAlignment: Text.AlignVCenter
+//                    horizontalAlignment: Text.AlignHCenter
+//                    readOnly: true
+//                    text: date
+//                }
 
-                DirectionButton {
-                    orientation: DirectionButton.Orientation.Next
-                    onClicked: {
-                        date++
-                        var maxDateInMonth = daysInMonth(month, year)
-                        if (date > maxDateInMonth) {
-                            date = 1
-                            month++
-                            if (month === 12) {
-                                month = 0
-                                year++
-                                dpDate.setFullYear(year)
-                            }
-                            dpDate.setMonth(month)
-                        }
-                        dpDate.setDate(date)
+//                DirectionButton {
+//                    orientation: DirectionButton.Orientation.Next
+//                    onClicked: {
+//                        date++
+//                        var maxDateInMonth = daysInMonth(month, year)
+//                        if (date > maxDateInMonth) {
+//                            date = 1
+//                            month++
+//                            if (month === 12) {
+//                                month = 0
+//                                year++
+//                                dpDate.setFullYear(year)
+//                            }
+//                            dpDate.setMonth(month)
+//                        }
+//                        dpDate.setDate(date)
 
-                        dpDateUpdated(dpDate)
-                    }
-                }
-            }
-        }
+//                        dpDateUpdated(dpDate)
+//                    }
+//                }
+//            }
+//        }
 
         // MONTH block
-        Rectangle {
+        RowLayout {
             id: monthBlock
 
-            Layout.fillHeight: true; /*Layout.fillWidth: true*/
+            Layout.fillHeight: true
             visible: showMonth
 
-            RowLayout {
+//            RowLayout {
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Previous
                     color: monthBlockColor
@@ -193,7 +195,7 @@ Item {
 
                         dpDateUpdated(dpDate)
                     }
-                }
+//                }
             }
         }
 
@@ -201,7 +203,7 @@ Item {
         Rectangle {
             id: yearFrame
 
-            /*Layout.fillWidth: true;*/ Layout.fillHeight: true
+            Layout.fillHeight: true
             visible: showYear
 
             RowLayout {
@@ -250,10 +252,6 @@ Item {
             }
         }
 
-        Loader {
-            Layout.fillHeight: true
-            sourceComponent: spacer
-        }
-
+        Loader { Layout.fillHeight: true; sourceComponent: spacer }
     }
 }
