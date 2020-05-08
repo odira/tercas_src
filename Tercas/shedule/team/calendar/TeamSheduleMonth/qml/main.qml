@@ -25,8 +25,8 @@ ApplicationWindow {
             showDate:  false
             showMonth: true
             showYear:  true
-            datePicker: calDate
-            onDatePickerUpdated: {
+            dpDate: calDate
+            onDpDateUpdated: {
                 teamSheduleMonthModel.date = pickerDate
 //                listView.daysInMonth = emplSheduleMonthModel.columnCount() - 1
             }

@@ -20,7 +20,7 @@ ApplicationWindow {
             id: datePicker
             Layout.alignment: Qt.AlignHCenter
             showDate: false
-            onPickerDateUpdated: {
+            onDpDateUpdated: {
                 emplSheduleMonthModel.date = pickerDate
                 listView.daysInMonth = emplSheduleMonthModel.columnCount() - 1
             }

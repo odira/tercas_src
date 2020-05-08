@@ -10,14 +10,19 @@ RoundButton {
         Next
     }
     property int orientation: DirectionButton.Orientation.Previous
-    property var buttonColor: "gray"
+    property color color: "transparent"
 
-    Layout.fillHeight: true
+    width: datePicker.directionButtonWidth
+    height: datePicker.directionButtonHeight
+
     flat: true
-    font.bold: true
+    font: directionButtonFont
+//    font.bold: true
 
     contentItem: Text {
-        color: buttonColor
+        color: color
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
         text: {
             if (orientation === DirectionButton.Orientation.Previous)
                 return '<';
@@ -27,9 +32,9 @@ RoundButton {
     }
 
     background: Rectangle {
+        implicitWidth: button.width; implicitHeight: button.height
         color: "transparent"
-        border.color: buttonColor
-        height: width
-        radius: (width > height) ? width / 10 : height / 10
+        border.color: button.color
+        radius: 3
     }
 }

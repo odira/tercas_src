@@ -5,15 +5,17 @@ import QtQuick.Layouts 1.12
 import "CalendarFuncs.js" as Func
 
 Item {
-    id: root
-    width: mainLayout.width; height: mainLayout.height
+    id: datePicker
 
-    property var datePicker: new Date()
-    signal datePickerUpdated(date newDate)
+    width: mainLayout.width
+    height: mainLayout.height
 
-    property int date: datePicker.getDate()
-    property int month: datePicker.getMonth()
-    property int year: datePicker.getFullYear()
+    property var dpDate: new Date()
+    signal dpDateUpdated(date newDate)
+
+    property int date: dpDate.getDate()
+    property int month: dpDate.getMonth()
+    property int year: dpDate.getFullYear()
 
     function daysInMonth (month, year) {
         return new Date(year, month, 0).getDate();
@@ -27,26 +29,46 @@ Item {
         id: textMetrics
         text: 'A'
     }
-    property var textSize: textMetrics.font.pixelSize * 1.5
-    property var charWidth: (textMetrics.width + textMetrics.advanceWidth) * 2
+    property var textSize: textMetrics.font.pixelSize * 1.3
+    property var charWidth: (textMetrics.width + textMetrics.advanceWidth) * 1.3
+
+    property int directionButtonWidth: 50
+    property int directionButtonHeight: directionButtonWidth
+    property var directionButtonFont: textMetrics.font
+
+    property color monthBlockColor: Qt.lighter("blue")
+    property color yearBlockColor: Qt.lighter("green")
+
+    Component {
+        id: spacer
+        Rectangle {
+            width: 2
+            Layout.fillHeight: true
+            color: "gray"
+        }
+    }
 
     RowLayout {
         id: mainLayout
-        anchors.margins: 5
-        spacing: 3
 
+        anchors.margins: 2
+        spacing: 10
+
+        Loader {
+            Layout.fillHeight: true
+            sourceComponent: spacer
+        }
+
+        // DATE block
         Frame {
+            id: dateFrame
+
+            Layout.fillHeight: true
             visible: showDate
-            background: Rectangle {
-                border.color: "black"
-            }
 
-            // DATE block
             RowLayout {
-
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Previous
-                    font: textMetrics.font
                     onClicked: {
                         date--
                         if (date === 0) {
@@ -54,20 +76,25 @@ Item {
                             if (month === 0) {
                                 month = 12
                                 year--
-                                datePicker.setFullYear(year)
+                                dpDate.setFullYear(year)
                             }
-                            datePicker.setMonth(month)
+                            dpDate.setMonth(month)
                             var maxDateInMonth = daysInMonth(month, year)
                             date = maxDateInMonth
                         }
-                        datePicker.setDate(date)
+                        dpDate.setDate(date)
 
-                        datePickerUpdated(datePicker)
+                        dpDateUpdated(dpDate)
                     }
                 }
 
                 TextArea {
                     id: textDate
+
+                    background: Rectangle {
+                        color: "yellow"
+                    }
+
                     implicitWidth: charWidth * 1.5
                     font.pixelSize: textSize
                     verticalAlignment: Text.AlignVCenter
@@ -87,55 +114,57 @@ Item {
                             if (month === 12) {
                                 month = 0
                                 year++
-                                datePicker.setFullYear(year)
+                                dpDate.setFullYear(year)
                             }
-                            datePicker.setMonth(month)
+                            dpDate.setMonth(month)
                         }
-                        datePicker.setDate(date)
+                        dpDate.setDate(date)
 
-                        datePickerUpdated(datePicker)
+                        dpDateUpdated(dpDate)
                     }
                 }
             }
         }
 
         // MONTH block
-        Frame {
-            id: monthFrame
+        Rectangle {
+            id: monthBlock
 
-            property var frameColor: "blue"
-
+            Layout.fillHeight: true; /*Layout.fillWidth: true*/
             visible: showMonth
-            background: Rectangle {
-                border.color: monthFrame.frameColor
-                radius: 2
-            }
 
             RowLayout {
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Previous
-                    font: textMetrics.font
-                    buttonColor: monthFrame.frameColor
+                    color: monthBlockColor
                     onClicked: {
                         month--
                         if (month === -1) {
                             month = 11
                             year--
-                            datePicker.setFullYear(year)
+                            dpDate.setFullYear(year)
                         }
-                        datePicker.setMonth(month)
+                        dpDate.setMonth(month)
 
                         var maxDateInMonth = daysInMonth(month, year)
                         if (date > maxDateInMonth) {
                             date = maxDateInMonth
-                            datePicker.setDate(date)
+                            dpDate.setDate(date)
                         }
 
-                        datePickerUpdated(datePicker)
+                        dpDateUpdated(dpDate)
                     }
                 }
 
                 TextArea {
+                    Layout.fillHeight: true
+
+                    background: Rectangle {
+                        height: 50
+                        color: "transparent"
+                        border.color: monthBlockColor
+                    }
+
                     implicitWidth: charWidth * 6
                     font.pixelSize: textSize
                     verticalAlignment: Text.AlignVCenter
@@ -146,56 +175,50 @@ Item {
 
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Next
-                    buttonColor: monthFrame.frameColor
+                    color: monthBlockColor
                     onClicked: {
                         month++
                         if (month === 12) {
                             month = 0
                             year++
-                            datePicker.setFullYear(year)
+                            dpDate.setFullYear(year)
                         }
 
-                        datePicker.setMonth(month)
+                        dpDate.setMonth(month)
                         var maxDateInMonth = daysInMonth(month, year)
                         if (date > maxDateInMonth) {
                             date = maxDateInMonth
-                            datePicker.setDate(date)
+                            dpDate.setDate(date)
                         }
 
-                        datePickerUpdated(datePicker)
+                        dpDateUpdated(dpDate)
                     }
                 }
             }
         }
 
         // Year block
-        Frame {
+        Rectangle {
             id: yearFrame
 
-            property var frameColor: "green"
-
+            /*Layout.fillWidth: true;*/ Layout.fillHeight: true
             visible: showYear
-            background: Rectangle {
-                border.color: yearFrame.frameColor
-                radius: 2
-            }
 
             RowLayout {
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Previous
-                    font: textMetrics.font
-                    buttonColor: yearFrame.frameColor
+                    color: yearFrame.frameColor
                     onClicked: {
                         year--
-                        datePicker.setFullYear(year)
+                        dpDate.setFullYear(year)
 
                         var maxDateInMonth = daysInMonth(month, year)
                         if (date > maxDateInMonth) {
                             date = maxDateInMonth
-                            datePicker.setDate(date)
+                            dpDate.setDate(date)
                         }
 
-                        datePickerUpdated(datePicker)
+                        dpDateUpdated(dpDate)
                     }
                 }
 
@@ -210,21 +233,27 @@ Item {
 
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Next
-                    buttonColor: yearFrame.frameColor
+                    color: yearFrame.frameColor
                     onClicked: {
                         year++
-                        datePicker.setFullYear(year)
+                        dpDate.setFullYear(year)
 
                         var maxDateInMonth = daysInMonth(month, year)
                         if (date > maxDateInMonth) {
                             date = maxDateInMonth
-                            datePicker.setDate(date)
+                            dpDate.setDate(date)
                         }
 
-                        datePickerUpdated(datePicker)
+                        dpDateUpdated(dpDate)
                     }
                 }
             }
         }
+
+        Loader {
+            Layout.fillHeight: true
+            sourceComponent: spacer
+        }
+
     }
 }
