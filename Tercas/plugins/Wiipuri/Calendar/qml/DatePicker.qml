@@ -19,6 +19,8 @@ Item {
         return new Date(year, month, 0).getDate();
     }
 
+    // GRAPHICS
+
     // Variables for graphics
     property bool showYear: true
     property bool showMonth: true
