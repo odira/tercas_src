@@ -14,14 +14,15 @@ ApplicationWindow {
 
     header: RowLayout {
         Layout.fillWidth: true
-        height: 80
+        height: 70
 
         DatePicker {
             id: datePicker
-            Layout.alignment: Qt.AlignHCenter
+            Layout.fillHeight: true
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             showDate: false
             onDpDateUpdated: {
-                emplSheduleMonthModel.date = pickerDate
+                emplSheduleMonthModel.date = dpDate
                 listView.daysInMonth = emplSheduleMonthModel.columnCount() - 1
             }
         }

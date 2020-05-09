@@ -10,7 +10,7 @@ EmplSheduleMonthModel::EmplSheduleMonthModel(QObject *parent, QSqlDatabase db)
     : QSqlTableModel(parent, db)
 {
     m_date = QDate::currentDate();
-    m_date.setDate(2020, 6, 1);
+//    m_date.setDate(2020, 6, 1);
     m_shiftnum = 4;
     m_personPidArray.clear();
     QString queryString("SELECT pid "
@@ -440,6 +440,7 @@ void EmplSheduleMonthModel::setDate(const QDate &date)
 {
     if (date != m_date) {
         m_date = date;
+        m_date.setDate(m_date.year(), m_date.month(), m_date.day());
         emit dateChanged(m_date);
         update();
     }

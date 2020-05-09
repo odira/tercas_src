@@ -7,6 +7,9 @@ import "CalendarFuncs.js" as Func
 Item {
     id: datePicker
 
+    width: yearBlock.width + monthBlock.width + 4
+    height: directionButtonHeight
+
     // Variables for calendar
     property var dpDate: new Date()
     signal dpDateUpdated(date newDate)
@@ -39,6 +42,7 @@ Item {
     property var directionButtonFont: textMetrics.font
 
     // Variables for blocks
+    property color dateBlockColor: "orange"
     property color monthBlockColor: Qt.lighter("blue")
     property color yearBlockColor: Qt.lighter("green")
 
@@ -52,81 +56,79 @@ Item {
         }
     }
 
-    Row {
+    RowLayout {
         id: root
         spacing: 2
 
-        Loader { height: datePicker.height; sourceComponent: spacer }
+        Loader { Layout.fillHeight: true; sourceComponent: spacer }
 
-//        // DATE block
-//        Frame {
-//            id: dateFrame
+        // DATE block
+        Pane {
+            id: dateBlock
+            visible: showDate
 
-//            Layout.fillHeight: true
-//            visible: showDate
+            RowLayout {
+                DirectionButton {
+                    orientation: DirectionButton.Orientation.Previous
+                    onClicked: {
+                        date--
+                        if (date === 0) {
+                            month--
+                            if (month === 0) {
+                                month = 12
+                                year--
+                                dpDate.setFullYear(year)
+                            }
+                            dpDate.setMonth(month)
+                            var maxDateInMonth = daysInMonth(month, year)
+                            date = maxDateInMonth
+                        }
+                        dpDate.setDate(date)
 
-//            RowLayout {
-//                DirectionButton {
-//                    orientation: DirectionButton.Orientation.Previous
-//                    onClicked: {
-//                        date--
-//                        if (date === 0) {
-//                            month--
-//                            if (month === 0) {
-//                                month = 12
-//                                year--
-//                                dpDate.setFullYear(year)
-//                            }
-//                            dpDate.setMonth(month)
-//                            var maxDateInMonth = daysInMonth(month, year)
-//                            date = maxDateInMonth
-//                        }
-//                        dpDate.setDate(date)
+                        dpDateUpdated(dpDate)
+                    }
+                }
 
-//                        dpDateUpdated(dpDate)
-//                    }
-//                }
+                TextArea {
+                    id: textDate
+                    implicitWidth: charWidth * 1.5
+                    font.pixelSize: textSize
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    readOnly: true
+                    text: date
+                    background: Rectangle {
+                        height: 50
+                        color: "transparent"
+                        border.color: dateBlockColor
+                    }
+                }
 
-//                TextArea {
-//                    id: textDate
+                DirectionButton {
+                    orientation: DirectionButton.Orientation.Next
+                    onClicked: {
+                        date++
+                        var maxDateInMonth = daysInMonth(month, year)
+                        if (date > maxDateInMonth) {
+                            date = 1
+                            month++
+                            if (month === 12) {
+                                month = 0
+                                year++
+                                dpDate.setFullYear(year)
+                            }
+                            dpDate.setMonth(month)
+                        }
+                        dpDate.setDate(date)
 
-//                    background: Rectangle {
-//                        color: "yellow"
-//                    }
-
-//                    implicitWidth: charWidth * 1.5
-//                    font.pixelSize: textSize
-//                    verticalAlignment: Text.AlignVCenter
-//                    horizontalAlignment: Text.AlignHCenter
-//                    readOnly: true
-//                    text: date
-//                }
-
-//                DirectionButton {
-//                    orientation: DirectionButton.Orientation.Next
-//                    onClicked: {
-//                        date++
-//                        var maxDateInMonth = daysInMonth(month, year)
-//                        if (date > maxDateInMonth) {
-//                            date = 1
-//                            month++
-//                            if (month === 12) {
-//                                month = 0
-//                                year++
-//                                dpDate.setFullYear(year)
-//                            }
-//                            dpDate.setMonth(month)
-//                        }
-//                        dpDate.setDate(date)
-
-//                        dpDateUpdated(dpDate)
-//                    }
-//                }
-//            }
-//        }
+                        dpDateUpdated(dpDate)
+                    }
+                }
+            }
+        }
 
         // MONTH block
-        Frame {
+        Pane {
             id: monthBlock
             visible: showMonth
 
@@ -162,7 +164,7 @@ Item {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     readOnly: true
-                    text: Func.getMonthName0(month) + ' - (' + (month +1) + ')'
+                    text: Func.getMonthName0(month) + ' - (' + (month+1) + ')'
                     background: Rectangle {
                         height: 50
                         color: "transparent"
@@ -195,8 +197,8 @@ Item {
         }
 
         // YEAR block
-        Frame {
-            id: yearFrame
+        Pane {
+            id: yearBlock
             visible: showYear
 
             RowLayout {
