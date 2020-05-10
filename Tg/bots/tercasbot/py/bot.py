@@ -1,96 +1,81 @@
 import telebot
-import bs4
+import os
+from flask import Flask, request
 
-from Task import Task
-import parser
-import markups as m
+#from telebot import apihelper
+#PROXY = 'socks5://208.97.31.229:53124'
+#apihelper.proxy = {'https': PROXY}
 
-TOKEN = '1113430903:AAHokCKvymVRH1aM9nmNViZLNeIlE20VrW0'
+# BOT
+#TOKEN = '1113430903:AAHokCKvymVRH1aM9nmNViZLNeIlE20VrW0'  # TercasTestBot token
+TOKEN = '1200961315:AAG-p5ZFEesMzcFoq20834iJ82sKfWCUqNQ' # TercasBot token
+
 bot = telebot.TeleBot(TOKEN)
-task = Task()
 
-@bot.message_handler(commands=['start', 'go'])
-def start_handler(message):
-    if not task.isRunning:
-        chat_id = message.chat.id
-        text = message.text
-        msg = bot.send_message(chat_id, 'Откуда парсить?', reply_markup=m.source_markup)
-        bot.register_next_step_handler(msg, askSource)
-        task.isRunning = True
+HEROKU_WEB_URL = 'https://serene-everglades-02368.herokuapp.com/'
 
-def askSource(message):
-    chat_id = message.chat.id
-    text = message.text.lower()
-    if text in task.names[0]:
-        task.mySource = 'top'
-        msg = bot.send_message(chat_id, 'За какой временной промежуток?', reply_markup=m.age_markup)
-        bot.register_next_step_handler(msg, askAge)
-    elif text in task.names[1]:
-        task.mySource = 'all'
-        msg = bot.send_message(chat_id, 'Какой минимальный порог рейтинга?', reply_markup=m.rating_markup)
-        bot.register_next_step_handler(msg, askRating)
-    else:
-        msg = bot.send_message(chat_id, 'Такого раздела нет. Введите раздел корректно.')
-        bot.register_next_step_handler(msg, askSource)
-        return
 
-def askAge(message):
-    chat_id = message.chat.id
-    text = message.text.lower()
-    filters = task.filters[0]
-    if text not in filters:
-        msg = bot.send_message(chat_id, 'Такого временного промежутка нет. Введите порог корректно.')
-        bot.register_next_step_handler(msg, askAge)
-        return
-    task.myFilter = task.filters_code_names[0][filters.index(text)]
-    msg = bot.send_message(chat_id, 'Сколько страниц парсить?', reply_markup=m.amount_markup)
-    bot.register_next_step_handler(msg, askAmount)
+server = Flask(__name__)
 
-def askRating(message):
-    chat_id = message.chat.id
-    text = message.text.lower()
-    filters = task.filters[1]
-    if text not in filters:
-        msg = bot.send_message(chat_id, 'Такого порога нет. Введите порог корректно.')
-        bot.register_next_step_handler(msg, askRating)
-        return
-    task.myFilter = task.filters_code_names[1][filters.index(text)]
-    msg = bot.send_message(chat_id, 'Сколько страниц парсить?', reply_markup=m.amount_markup)
-    bot.register_next_step_handler(msg, askAmount)
+# SERVER SIDE
+@server.route('/' + TOKEN, methods=['POST'])
+def getMessage():
+    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+    return "!", 200
 
-def askAmount(message):
-    chat_id = message.chat.id
-    text = message.text.lower()
-    if not text.isdigit():
-        msg = bot.send_message(chat_id, 'Количество страниц должно быть числом. Введите корректно.')
-        bot.register_next_step_handler(msg, askAmount)
-        return
-    if int(text) < 1 or int(text) > 11:
-        msg = bot.send_message(chat_id, 'Количество страниц должно быть >0 и <11. Введите корректно.')
-        bot.register_next_step_handler(msg, askAmount)
-        return
-    task.isRunning = False
-    output = ''
-    if task.mySource == 'top':
-        output = parser.getTitlesFromTop(int(text), task.myFilter)
-    else:
-        output = parser.getTitlesFromAll(int(text), task.myFilter)
-    msg = bot.send_message(chat_id, output, reply_markup=m.start_markup)
-    
-@bot.message_handler(context_types=['text'])
-def text_handler(message):
-    text = message.text.lower()
-    chat_id = message.chat.id
-    if text == "привет":
-        bot.send_message(chat_id, 'Привет, я бот - парсер хабра.')
-    elif text == "как дела?":
-        bot.send_message(chat_id, 'Хорошо, а у тебя?')
-    else:
-        bot.send_message(chat_id, 'Простите, я вас не понял :(')
-        
-@bot.message_handler(content_types=['photo'])
-def text_hander(message):
-    chat_id = message.chat.id
-    bot.send_message(chat_id, 'Красиво.')
+@server.route("/")
+def wibhook():
+    bot.remove_webhook()
+    bot.set_webhook(url=HEROKU_WEB_URL + TOKEN)
+    return "!", 200
 
-bot.polling(none_stop=True)
+
+keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
+keyboard1.row('Привет', 'Пока')
+
+
+def sendMessage(message, text):
+    bot.send_message(message.chat.id, str(text))
+
+
+@bot.message_handler(commands=['start'])
+def send_info(message):
+    text = ("<b>Welcome to the Medium 🤖!</b>\n"
+            "Say Hello to the bot to get a reply from it!")
+    bot.send_message(message.chat.id, text, parse_mode='HTML', reply_markup=keyboard1)
+
+@bot.message_handler(func=lambda msg: msg.text is not None)
+def reply_to_message(message):
+    if 'hello' in message.text.lower():
+        sendMessage(message, 'Hello! How are you doing today?')
+    elif 'привет' in message.text.lower():
+        sendMessage(message, 'Привет друг')
+
+@bot.message_handler(content_types=['text'])
+def send_text(message):
+
+    if message.text.lower() == 'привет':
+        bot.send_message(message.chat.id, 'Привет, мой создатель!')
+
+    elif message.text.lower() == 'пока':
+        bot.send_message(message.chat.id, 'Прощай, создатель!')
+
+    elif message.text.lower() == 'abc':
+        sticker_id = 'CAACAgIAAxkBAAMdXqWECAGYEbwtl7xgM9tT3jf8u4wAAgYAA9_KShIkA-AxY0DBnhkE'
+        bot.send_sticker(message.chat.id, sticker_id)
+
+
+@bot.message_handler(content_types=['sticker'])
+def send_text(message):
+    bot.send_message(message.chat.id, message.chat.username)
+
+
+#if __name__ == "__main__":
+#    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
+
+if __name__ == "__main__":
+    while True:
+        try:
+            bot.polling()
+        except(BaseException):
+            pass
