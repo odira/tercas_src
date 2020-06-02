@@ -15,7 +15,7 @@ EmplSheduleMonthModel::EmplSheduleMonthModel(QObject *parent, QSqlDatabase db)
     m_personPidArray.clear();
     QString queryString("SELECT pid "
                         "FROM person.vw_person "
-                        "WHERE uservalid=true AND sectorspool='Пенза' AND shiftnum='Смена № 4' "
+                        "WHERE valid=true AND sectors_pool='Пенза' AND shift_num=4 "
                         "ORDER BY surname");
     QSqlQuery query(queryString);
     while (query.next()) {
