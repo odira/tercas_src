@@ -7,4 +7,22 @@ Window {
     width: 1024
     height: 800
     title: qsTr("Person Database")
+
+    TableView {
+        anchors.fill: parent
+        anchors.margins: 10
+        columnSpacing: 2
+        rowSpacing: 2
+        model: personModel
+
+        delegate: Rectangle {
+            implicitWidth: 100
+            implicitHeight: 50
+
+            Text {
+                anchors.centerIn: parent
+                text: display
+            }
+        }
+    }
 }
