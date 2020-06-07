@@ -8,6 +8,7 @@ PersonModel::PersonModel(QObject *parent, QSqlDatabase db)
     setTable("person.vw_person");
     setEditStrategy(QSqlTableModel::OnManualSubmit);
     generateRoleNames();
+    setFilter("valid IS true");
     select();
 }
 
@@ -61,9 +62,9 @@ QVariant PersonModel::data(const QModelIndex &idx, int role) const
 
     if (role == Qt::DisplayRole)
     {
-//        if (col == holiday_date)
-//            return QSqlTableModel::data(idx).toDate().toString("yyyy MMM dd");
-//        else
+        if (col == Columns::person_birthday)
+            return QSqlTableModel::data(idx).toDate().toString("yyyy MMM dd");
+        else
             return QSqlTableModel::data(idx);
     }
     else if (role > Qt::UserRole)
