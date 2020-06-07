@@ -2,25 +2,36 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
+import QtQml.Models 2.12
 
 Window {
+    id: root
     visible: true
     width: 1024
     height: 800
     title: qsTr("Person Database")
 
+    DelegateModel {
+        id: visualModel
+        delegate: Delegate {}
+        model: personModel
+    }
 
     ListView {
+        id: listView
         anchors.fill: parent
-        model: personModel
-        delegate: Rectangle {
-            width: 200
-            height: 50
-            Text {
+        model: visualModel.parts.list
+        snapMode: ListView.SnapOneItem
+        visible: false
+    }
 
-                text: surname
-            }
-        }
+    ListView {
+        id: singleView
+        anchors.fill: parent
+        model: visualModel.parts.single
+        snapMode: ListView.SnapOneItem
+        orientation: ListView.Horizontal
+        visible: true
     }
 
 //    Column {
