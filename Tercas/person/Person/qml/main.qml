@@ -30,19 +30,12 @@ ApplicationWindow {
             spacing: 10
 
             RoundButton {
+                id: listButton
                 implicitWidth: 100
                 height: parent.height
                 radius: 0
                 text: qsTr("List")
                 onClicked: view.state = 'inList'
-            }
-
-            RoundButton {
-                implicitWidth: 100
-                height: parent.height
-                radius: 0
-                text: qsTr("Single")
-                onClicked: view.state = 'inSingle'
             }
         }
 
@@ -71,6 +64,7 @@ ApplicationWindow {
                 orientation: ListView.Horizontal
                 visible: true
                 clip: true
+                highlightMoveDuration: 0
             }
 
             state: 'inList'
@@ -79,11 +73,13 @@ ApplicationWindow {
                     name: 'inList'
                     PropertyChanges { target: listView; visible: true; focus: true }
                     PropertyChanges { target: singleView; visible: false; focus: false }
+                    PropertyChanges { target: listButton; enabled: false }
                 },
                 State {
                     name: 'inSingle'
                     PropertyChanges { target: listView; visible: false; focus: false }
                     PropertyChanges { target: singleView; visible: true; focus: true }
+                    PropertyChanges { target: listButton; enabled: true }
                 }
             ]
         }

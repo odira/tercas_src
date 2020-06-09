@@ -63,7 +63,8 @@ QVariant PersonModel::data(const QModelIndex &idx, int role) const
     if (role == Qt::DisplayRole)
     {
         if (col == Columns::person_birthday)
-            return QSqlTableModel::data(idx).toDate().toString("yyyy MMM dd");
+//            return QSqlTableModel::data(idx).toDate().toString("yyyy MMM dd");
+            return QSqlTableModel::data(idx).toDate();
         else
             return QSqlTableModel::data(idx);
     }
@@ -71,7 +72,8 @@ QVariant PersonModel::data(const QModelIndex &idx, int role) const
     {
         int colIndex = role - Qt::UserRole - 1;
         QModelIndex index = this->index(row, colIndex);
-        return QSqlTableModel::data(index, Qt::DisplayRole);
+//        return QSqlTableModel::data(index, Qt::DisplayRole);
+        return this->data(index, Qt::DisplayRole);
     }
     else {
         return QSqlTableModel::data(idx, role);
