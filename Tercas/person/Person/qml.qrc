@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>qml/main.qml</file>
         <file>qml/Delegate.qml</file>
+        <file>qml/DelegateSingle.qml</file>
+        <file>qml/DelegateList.qml</file>
     </qresource>
 </RCC>
