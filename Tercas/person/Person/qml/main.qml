@@ -53,6 +53,7 @@ ApplicationWindow {
                 snapMode: ListView.SnapOneItem
                 visible: false
                 clip: true
+                spacing: 20
             }
 
             ListView {

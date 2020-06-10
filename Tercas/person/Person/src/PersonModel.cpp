@@ -63,8 +63,14 @@ QVariant PersonModel::data(const QModelIndex &idx, int role) const
     if (role == Qt::DisplayRole)
     {
         if (col == Columns::person_birthday)
-//            return QSqlTableModel::data(idx).toDate().toString("yyyy MMM dd");
             return QSqlTableModel::data(idx).toDate();
+        else if (col == Columns::person_mobile_phone) {
+            QString number = QSqlTableModel::data(idx).toString().trimmed();
+            return QVariant::fromValue(QString("+7 (" + number[0] + number[1] + number[2] + ") " +
+                    number[3] + number[4] + number[5] + " - " +
+                    number[6] + number[7] + " - " +
+                    number[8] + number[9]));
+        }
         else
             return QSqlTableModel::data(idx);
     }
@@ -72,7 +78,6 @@ QVariant PersonModel::data(const QModelIndex &idx, int role) const
     {
         int colIndex = role - Qt::UserRole - 1;
         QModelIndex index = this->index(row, colIndex);
-//        return QSqlTableModel::data(index, Qt::DisplayRole);
         return this->data(index, Qt::DisplayRole);
     }
     else {
