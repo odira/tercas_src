@@ -12,63 +12,31 @@ Package {
         RowLayout {
             Layout.fillWidth: true
             Layout.fillHeight: true
+            spacing: 5
 
             Rectangle {
-//                Layout.fillHeight: true
-                height: listDelegate.height
-                Layout.preferredWidth: 200
-                border.color: "red"
-
-            ColumnLayout {
-                id: nameBox
                 Layout.fillHeight: true
-//                Layout.preferredWidth: 200
-                Layout.fillWidth: true
-                spacing: 0
+                Layout.preferredWidth: 200
+                border.color: "transparent"
 
-                TextField {
-                    font.bold: true
-                    font.pixelSize: 20
-                    text: surname
-                    background: Rectangle { border.color: "transparent" }
-                }
-                TextField {
-                    font.pixelSize: 16
-                    text: name + " " + middlename
-                    background: Rectangle { border.color: "transparent" }
+                Column {
+                    id: nameBox
+                    anchors.fill: parent
+                    anchors.margins: 1
+                    spacing: 0
+
+                    Text {
+                        font.bold: true
+                        font.pixelSize: 16
+                        color: "brown"
+                        text: surname
+                    }
+                    Text {
+                        font.pixelSize: 12
+                        text: name + " " + middlename
+                    }
                 }
             }
-            }
-//            ColumnLayout {
-//                id: birthdayBox
-//                Layout.fillHeight: true
-//                Layout.preferredWidth: 130
-//                spacing: 0
-
-//                TextField {
-//                    font.bold: true
-//                    text: birthday.getFullYear()
-//                    background: Rectangle { border.color: "transparent" }
-//                }
-//                TextField {
-//                    text: birthday.toLocaleString(Qt.locale("ru_RU"), "dd MMMM")
-//                    background: Rectangle { border.color: "transparent" }
-//                }
-//            }
-//            ColumnLayout {
-//                id: mobile_phoneBox
-//                Layout.fillHeight: true
-//                Layout.preferredWidth: 160
-//                spacing: 0
-
-//                TextField {
-//                    text: mobile_phone
-//                    background: Rectangle { border.color: "transparent" }
-//                }
-//            }
-
-//            TextField { text: tab_num }
-
             ColumnLayout {
                 id: positionBox
                 Layout.fillHeight: true
@@ -80,24 +48,24 @@ Package {
                     horizontalAlignment: TextField.AlignHCenter
                     verticalAlignment: TextField.AlignVCenter
                     text: position
-//                    background: Rectangle { border.color: "transparent" }
                 }
             }
-
             ColumnLayout {
                 id: classBox
                 Layout.fillHeight: true
-                Layout.preferredWidth: 150
+                Layout.preferredWidth: 200
                 spacing: 0
 
                 TextField {
                     Layout.fillHeight: true
                     horizontalAlignment: TextField.AlignHCenter
                     verticalAlignment: TextField.AlignVCenter
-                    text: qsTr(model.class + " класс")
+                    text: {
+                        var text = model.class + " класс"
+                        return text
+                    }
                 }
             }
-
             ColumnLayout {
                 id: shift_numBox
                 Layout.fillHeight: true
@@ -111,9 +79,6 @@ Package {
                     text: qsTr("Смена № " + shift_num)
                 }
             }
-//            TextField { text: sectors_pool }
-//            TextField { text: admission }
-//            TextField { text: note }
         }
         MouseArea {
             anchors.fill: parent
@@ -127,10 +92,24 @@ Package {
     Item {
         id: singleDelegate
         Package.name: 'single'
-        width: root.width; height: root.height
+        width: view.width; height: view.height
 
-        TextField {
-            text: surname
+        ColumnLayout {
+            anchors.fill: parent
+
+            TextField { text: surname }
+            TextField { text: name }
+            TextField { text: middlename }
+            TextField { text: birthday }
+            TextField { text: mobile_phone }
+            TextField { text: tab_num }
+            TextField { text: position }
+            TextField { text: model.class }
+            TextField { text: shift_num }
+            TextField { text: sectors_pool }
+            TextField { text: service_period }
+            TextField { text: admission }
+            TextField { text: note }
         }
     }
 }

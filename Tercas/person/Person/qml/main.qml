@@ -48,18 +48,18 @@ ApplicationWindow {
             ListView {
                 id: listView
                 anchors.fill: parent
-                anchors.margins: 1
+                anchors.margins: 10
                 model: visualModel.parts.list
                 snapMode: ListView.SnapOneItem
                 visible: false
                 clip: true
-                spacing: 20
+                spacing: 5
             }
 
             ListView {
                 id: singleView
                 anchors.fill: parent
-                anchors.margins: 1
+                anchors.margins: 10
                 model: visualModel.parts.single
                 snapMode: ListView.SnapOneItem
                 orientation: ListView.Horizontal
