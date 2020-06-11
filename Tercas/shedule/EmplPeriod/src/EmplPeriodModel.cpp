@@ -2,11 +2,9 @@
 #include <QtSql>
 #include <QLocale>
 
+#include "EmplPeriodModel.h"
 
-#include "EmplSheduleIntervalModel.h"
-
-
-EmplSheduleIntervalModel::EmplSheduleIntervalModel(QObject *parent, QSqlDatabase db)
+EmplPeriodModel::EmplPeriodModel(QObject *parent, QSqlDatabase db)
     : QSqlTableModel(parent, db)
 {
     setTable(PGSQL_TABLENAME);
@@ -14,7 +12,7 @@ EmplSheduleIntervalModel::EmplSheduleIntervalModel(QObject *parent, QSqlDatabase
     select();
 }
 
-QVariant EmplSheduleIntervalModel::data(const QModelIndex &idx, int role) const
+QVariant EmplPeriodModel::data(const QModelIndex &idx, int role) const
 {
     if (!idx.isValid())
         return QVariant();
@@ -192,80 +190,80 @@ QVariant EmplSheduleIntervalModel::data(const QModelIndex &idx, int role) const
     return QSqlTableModel::data(idx, role);
 }
 
-QVariant EmplSheduleIntervalModel::headerData(int section, Qt::Orientation orientation, int role) const
-{
-    if (orientation == Qt::Horizontal)
-    {
-        if (section < 0 || section >= columnCount()) {
-            return QVariant();
-        }
+//QVariant EmplPeriodModel::headerData(int section, Qt::Orientation orientation, int role) const
+//{
+//    if (orientation == Qt::Horizontal)
+//    {
+//        if (section < 0 || section >= columnCount()) {
+//            return QVariant();
+//        }
 
-        if (role == Qt::DisplayRole)
-        {
-            switch (section)
-            {
+//        if (role == Qt::DisplayRole)
+//        {
+//            switch (section)
+//            {
 
-            case column_person_fullname:
-                return QString(QObject::tr("Работник"));
-                // break;
+//            case column_person_fullname:
+//                return QString(QObject::tr("Работник"));
+//                // break;
 
-            case column_person_shiftnum:
-                return QString(tr("Смена"));
-                // break;
+//            case column_person_shiftnum:
+//                return QString(tr("Смена"));
+//                // break;
 
-            case column_activity_abbr:
-                return QVariant();
-                // break;
+//            case column_activity_abbr:
+//                return QVariant();
+//                // break;
 
-            case column_activity_activity:
-                return QString(QObject::tr("Вид деятельности"));
-                // break;
+//            case column_activity_activity:
+//                return QString(QObject::tr("Вид деятельности"));
+//                // break;
 
-            case column_period:
-                return QString(QObject::tr("Период"));
-                // break;
+//            case column_period:
+//                return QString(QObject::tr("Период"));
+//                // break;
 
-            case column_start_date:
-                return QString(QObject::tr("Дата начала"));
-                // break;
+//            case column_start_date:
+//                return QString(QObject::tr("Дата начала"));
+//                // break;
 
-            case column_end_date:
-                return QString(QObject::tr("Дата окончания"));
-                // break;
+//            case column_end_date:
+//                return QString(QObject::tr("Дата окончания"));
+//                // break;
 
-            case column_duration:
-                return QString(QObject::tr("Кол-во\nдней"));
-                // break;
+//            case column_duration:
+//                return QString(QObject::tr("Кол-во\nдней"));
+//                // break;
 
-            case column_note:
-                return QString(QObject::tr(("Примечание")));
-                // break;
-            }
-        }
-        else if (role == Qt::TextAlignmentRole)
-        {
-            if (section == column_period) {
-                return Qt::AlignHCenter;
-            }
-        }
-        else if (role == Qt::BackgroundColorRole)
-        {
-            return QColor("green");
-        }
+//            case column_note:
+//                return QString(QObject::tr(("Примечание")));
+//                // break;
+//            }
+//        }
+//        else if (role == Qt::TextAlignmentRole)
+//        {
+//            if (section == column_period) {
+//                return Qt::AlignHCenter;
+//            }
+//        }
+//        else if (role == Qt::BackgroundColorRole)
+//        {
+//            return QColor("green");
+//        }
 
-    }
-    else if (orientation == Qt::Vertical)
-    {
-        if (section >= rowCount())
-        {
-            return QVariant();
-        }
+//    }
+//    else if (orientation == Qt::Vertical)
+//    {
+//        if (section >= rowCount())
+//        {
+//            return QVariant();
+//        }
 
-        if (role == Qt::DisplayRole)
-        {
-            return section + 1;
-        }
-    }
+//        if (role == Qt::DisplayRole)
+//        {
+//            return section + 1;
+//        }
+//    }
 
-    return QSqlTableModel::headerData(section, orientation, role);
-}
+//    return QSqlTableModel::headerData(section, orientation, role);
+//}
