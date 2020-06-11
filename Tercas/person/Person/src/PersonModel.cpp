@@ -62,9 +62,9 @@ QVariant PersonModel::data(const QModelIndex &idx, int role) const
 
     if (role == Qt::DisplayRole)
     {
-        if (col == Columns::person_birthday)
+        if (col == Columns::column_birthday)
             return QSqlTableModel::data(idx).toDate();
-        else if (col == Columns::person_mobile_phone) {
+        else if (col == Columns::column_mobile_phone) {
             QString number = QSqlTableModel::data(idx).toString().trimmed();
             return QVariant::fromValue(QString("+7 (" + number[0] + number[1] + number[2] + ") " +
                     number[3] + number[4] + number[5] + " - " +

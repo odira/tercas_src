@@ -13,6 +13,8 @@ class EmplPeriodModel : public QSqlTableModel
 public:
     EmplPeriodModel(QObject *parent = Q_NULLPTR, QSqlDatabase db = QSqlDatabase());
 
+    QHash<int, QByteArray> roleNames() const { return m_roleNames; }
+
     QVariant data(const QModelIndex &idx, int role = Qt::DisplayRole) const;
 //    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
@@ -36,4 +38,10 @@ public:
         ColumnsNumber
     };
     Q_ENUM(Columns)
+
+private:
+    void generateRoleNames();
+
+private:
+    QHash<int, QByteArray> m_roleNames;
 };

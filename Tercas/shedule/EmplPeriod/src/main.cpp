@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     EmplPeriodModel * periodModel = new EmplPeriodModel();
 
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("personModel", QVariant::fromValue(periodModel));
+    engine.rootContext()->setContextProperty("periodModel", QVariant::fromValue(periodModel));
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

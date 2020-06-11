@@ -9,4 +9,18 @@ ApplicationWindow {
     width: Screen.width * 2/3
     height: Screen.height * 2/3
     title: qsTr("Период активности")
+
+    TableView {
+        anchors.fill: parent
+        anchors.margins: 10
+        model: periodModel
+        delegate: Rectangle {
+            implicitWidth: 100
+            implicitHeight: 30
+            Text {
+                anchors.centerIn: parent
+                text: display
+            }
+        }
+    }
 }

@@ -12,21 +12,22 @@ class PersonModel : public QSqlTableModel
 
 public:
     enum Columns {
-        person_pid = 0,
-        person_valid,
-        person_surname,
-        person_name,
-        person_middlename,
-        person_birthday,
-        person_mobile_phone,
-        person_tab_num,
-        person_position,
-        person_class,
-        person_shift_num,
-        person_sectors_pool,
-        person_service_period,
-        person_admission,
-        person_note,
+        column_pid = 0,
+        column_valid,
+        column_surname,
+        column_name,
+        column_middlename,
+        column_birthday,
+        column_mobile_phone,
+        column_tab_num,
+        column_position,
+        column_class,
+        column_shift_num,
+        column_sectors_pool,
+        column_service_period,
+        column_admission,
+        column_note,
+
         ColumnsNumber
     };
     Q_ENUM(Columns)
@@ -55,5 +56,6 @@ public:
 private:
     void generateRoleNames();
 
+private:
     QHash<int, QByteArray> m_roleNames;
 };

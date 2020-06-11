@@ -9,7 +9,29 @@ EmplPeriodModel::EmplPeriodModel(QObject *parent, QSqlDatabase db)
 {
     setTable(PGSQL_TABLENAME);
     setEditStrategy(QSqlTableModel::OnManualSubmit);
+    generateRoleNames();
     select();
+}
+
+void EmplPeriodModel::generateRoleNames()
+{
+    m_roleNames.clear();
+    m_roleNames[Qt::DisplayRole] = QVariant(QString("display").toUtf8()).toByteArray();
+
+    m_roleNames[Qt::UserRole + 1 + 0]  = QVariant(QString("pid").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + 1]  = QVariant(QString("person_pid").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + 2]  = QVariant(QString("person_fullname").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + 3]  = QVariant(QString("person_shiftnum").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + 4]  = QVariant(QString("activity_pid").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + 5]  = QVariant(QString("activity_abbr").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + 6]  = QVariant(QString("activity_activity").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + 7]  = QVariant(QString("activity_color").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + 8]  = QVariant(QString("activity_note").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + 9]  = QVariant(QString("period").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + 10] = QVariant(QString("start_date").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + 11] = QVariant(QString("end_date").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + 12] = QVariant(QString("duration").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + 14] = QVariant(QString("note").toUtf8()).toByteArray();
 }
 
 QVariant EmplPeriodModel::data(const QModelIndex &idx, int role) const
@@ -17,177 +39,31 @@ QVariant EmplPeriodModel::data(const QModelIndex &idx, int role) const
     if (!idx.isValid())
         return QVariant();
 
+    int row = idx.row();
     int col = idx.column();
-    switch (col)
+
+    if (col < 0 || col > columnCount())
+        return QVariant();
+
+    if (row < 0 || row > rowCount())
+        return QVariant();
+
+    if (role == Qt::DisplayRole)
     {
-
-    case column_person_fullname:
+        if (col == Columns::column_start_date || col == Columns::column_end_date)
+            return QSqlTableModel::data(idx).toDate();
+        else
+            return QSqlTableModel::data(idx);
+    }
+    else if (role > Qt::UserRole)
     {
-        if (role == Qt::FontRole)
-        {
-            QFont currentFont;
-            currentFont.setBold(true);
-            return currentFont;
-        }
-
-        break;
+        int colIndex = role - Qt::UserRole - 1;
+        QModelIndex index = this->index(row, colIndex);
+        return this->data(index, Qt::DisplayRole);
     }
-//    case column_personpid:
-//    {
-//        if (role == Qt::DisplayRole)
-//        {
-//            int personpid = QSqlTableModel::data(idx).toInt();
-//            QString queryString = QString("SELECT (surname || ' ' || LEFT(name, 1) || '.' || LEFT(middlename, 1) || '.') person_fullname "
-//                                                               "FROM person.vw_person WHERE pid=%1").arg(personpid);
-//            QSqlQuery query(queryString);
-//            while (query.next()) {
-//                QString person_fullname = query.value(0).toString();
-//                return person_fullname;
-//            }
-//        }
-
-//        break;
-//    }
-//    case column_activitypid:
-//    {
-//        if (role == Qt::DisplayRole)
-//        {
-//            int activitypid = QSqlTableModel::data(idx).toInt();
-//            QString queryString = QString("SELECT activity FROM shedule.vw_activity WHERE pid=%1").arg(activitypid);
-//            QSqlQuery query(queryString);
-//            while (query.next()) {
-//                QString activity = query.value(0).toString();
-//                return activity;
-//            }
-//        }
-
-//        break;
-//    }
-
-    case column_activity_abbr:
-    {
-        if (role == Qt::TextAlignmentRole)
-        {
-            return Qt::AlignCenter;
-        }
-        else if (role == Qt::ForegroundRole)
-        {
-            return QColor("black");
-        }
-        else if (role == Qt::BackgroundRole)
-        {
-            QModelIndex bgIndex = createIndex(idx.row(), column_activity_color);
-            QString bgColorString = QSqlTableModel::data(bgIndex, Qt::DisplayRole).toString();
-            return QColor(bgColorString);
-        }
-        else if (role == Qt::SizeHintRole)
-        {
-            return QSize(38, 20);
-        }
-
-        break;
+    else {
+        return QSqlTableModel::data(idx, role);
     }
-
-    case column_start_date:
-    {
-        if (role == Qt::DisplayRole)
-        {
-            QDate date = QSqlTableModel::data(idx).toDate();
-            QLocale ruLocale(QLocale::Russian);
-            QString data = ruLocale.toString(date, QString("dd MMMM yyyy"));
-
-            return data;
-        }
-        else if (role == Qt::TextAlignmentRole) {
-            return Qt::AlignCenter;
-        }
-
-        break;
-    }
-
-    case column_end_date:
-    {
-        if (role == Qt::DisplayRole)
-        {
-            QDate date = QSqlTableModel::data(idx).toDate();
-            QLocale ruLocale(QLocale::Russian);
-            QString data = ruLocale.toString(date, QString("dd MMMM yyyy"));
-
-            QModelIndex startIdx = index(idx.row(), column_start_date);
-            QDate startDate = QSqlTableModel::data(startIdx).toDate();
-            if (startDate == date)
-                return QVariant();
-
-            return data;
-        } else if (role == Qt::TextAlignmentRole) {
-            return Qt::AlignCenter;
-        }
-
-        break;
-    }
-
-    case column_duration:
-    {
-        if (role == Qt::TextAlignmentRole)
-        {
-            return Qt::AlignCenter;
-        }
-        else if (role == Qt::ForegroundRole)
-        {
-            return QColor("blue");
-        }
-
-        break;
-    }
-
-//    case additional_activityabbrcolor:
-//    {
-//        if (role == Qt::DisplayRole)
-//        {
-//            int row = idx.row();
-//            int col = fieldIndex("activitypid");
-//            int activitypid = QSqlTableModel::data(index(row, col)).toInt();
-//            QString queryString = QString("SELECT abbr FROM shedule.vw_activity WHERE pid=%1").arg(activitypid);
-//            QSqlQuery query(queryString);
-//            while (query.next()) {
-//                QString abbrString = query.value(0).toString();
-//                return abbrString;
-//            }
-//        }
-//        else if (role == Qt::TextAlignmentRole)
-//        {
-//            return Qt::AlignCenter;
-//        }
-//        else if (role == Qt::ForegroundRole)
-//        {
-//            return QColor("black");
-//        }
-//        else if (role == Qt::BackgroundRole)
-//        {
-//            int row = idx.row();
-//            int col = fieldIndex("activitypid");
-//            int activitypid = QSqlTableModel::data(index(row, col)).toInt();
-//            QString queryString = QString("SELECT color FROM shedule.vw_activity WHERE pid=%1").arg(activitypid);
-//            QSqlQuery query(queryString);
-//            while (query.next()) {
-//                QString colorString = query.value(0).toString();
-//                if (!colorString.isEmpty()) {
-//                    return QColor(colorString);
-//                } else {
-//                    return QVariant();
-//                }
-//            }
-//        }
-//        else if (role == Qt::SizeHintRole)
-//        {
-//            return QSize(38, 20);
-//        }
-
-//        break;
-//    }
-    }
-
-    return QSqlTableModel::data(idx, role);
 }
 
 //QVariant EmplPeriodModel::headerData(int section, Qt::Orientation orientation, int role) const
