@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
         return -1;
 
     EmplPeriodModel * periodModel = new EmplPeriodModel();
+//    qmlRegisterType<EmplPeriodModel>("ColumnsEnums", 1, 0, "Columns");
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("periodModel", QVariant::fromValue(periodModel));

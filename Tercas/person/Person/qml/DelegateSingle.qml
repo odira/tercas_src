@@ -10,7 +10,7 @@ Item {
             anchors.fill: parent
 
             TextField { text: surname }
-            TextField { text: name }
+            TextField { text: model.name }
             TextField { text: middlename }
             TextField { text: birthday }
             TextField { text: mobile_phone }

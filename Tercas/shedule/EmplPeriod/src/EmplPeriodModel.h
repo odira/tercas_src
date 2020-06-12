@@ -2,7 +2,7 @@
 
 #define PGSQL
 #define PGSQL_DATABASE "terkas"
-#define PGSQL_TABLENAME "shedule.vw_empl_shedule"
+#define PGSQL_TABLENAME "shedule.vw_empl_period"
 
 #include <QSqlTableModel>
 
@@ -14,30 +14,30 @@ public:
     EmplPeriodModel(QObject *parent = Q_NULLPTR, QSqlDatabase db = QSqlDatabase());
 
     QHash<int, QByteArray> roleNames() const { return m_roleNames; }
-
     QVariant data(const QModelIndex &idx, int role = Qt::DisplayRole) const;
-//    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
     enum Columns
     {
-        column_pid,
-        column_person_pid,
-        column_person_fullname,
-        column_person_shiftnum,
-        column_activity_pid,
-        column_activity_abbr,
-        column_activity_activity,
-        column_activity_color,
-        column_activity_note,
-        column_period,
-        column_start_date,
-        column_end_date,
-        column_duration,
-        column_note,
+        column_pid = 0,
+        column_person_pid,          // 1
+        column_person_surname,      // 2
+        column_person_name,         // 3
+        column_person_middlename,   // 4
+        column_person_position,     // 5
+        column_person_shift_num,    // 6
+        column_person_sectors_pool, // 7
+        column_activity_pid,        // 8
+        column_activity_abbr,       // 9
+        column_activity_activity,   // 10
+        column_activity_color,      // 11
+        column_activity_note,       // 12
+        column_start_date,          // 13
+        column_end_date,            // 14
+        column_note,                // 15
 
         ColumnsNumber
     };
-    Q_ENUM(Columns)
+    Q_ENUMS(Columns)
 
 private:
     void generateRoleNames();
