@@ -33,7 +33,8 @@ public:
         column_activity_note,       // 12
         column_start_date,          // 13
         column_end_date,            // 14
-        column_note,                // 15
+        column_duration,            // 15
+        column_note,                // 16
 
         ColumnsNumber
     };

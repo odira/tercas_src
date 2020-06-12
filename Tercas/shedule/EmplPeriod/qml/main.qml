@@ -23,7 +23,7 @@ ApplicationWindow {
                 column === 9 ||
                 column === 11 ||
                 column === 12 ||
-                column === 15)
+                column === 16)
                 return 0;
             else if (column === 2 ||
                      column === 3 ||
@@ -33,6 +33,8 @@ ApplicationWindow {
                 return 200;
             else if (column === 6)
                 return 20;
+            else if (column === 15)
+                return 30;
             else
                 return 150;
         }

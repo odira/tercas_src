@@ -33,6 +33,7 @@ void EmplPeriodModel::generateRoleNames()
     m_roleNames[Qt::UserRole + 1 + Columns::column_activity_note]       = QVariant(QString("activity_note").toUtf8()).toByteArray();
     m_roleNames[Qt::UserRole + 1 + Columns::column_start_date]          = QVariant(QString("start_date").toUtf8()).toByteArray();
     m_roleNames[Qt::UserRole + 1 + Columns::column_end_date]            = QVariant(QString("end_date").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + Columns::column_duration]            = QVariant(QString("duration").toUtf8()).toByteArray();
     m_roleNames[Qt::UserRole + 1 + Columns::column_note]                = QVariant(QString("note").toUtf8()).toByteArray();
 }
 
@@ -55,6 +56,8 @@ QVariant EmplPeriodModel::data(const QModelIndex &idx, int role) const
         if (col == Columns::column_start_date ||
             col == Columns::column_end_date)
             return QSqlTableModel::data(idx).toDate();
+        else if (col == Columns::column_duration)
+            return QSqlTableModel::data(idx).toInt();
         else
             return QSqlTableModel::data(idx);
     }
