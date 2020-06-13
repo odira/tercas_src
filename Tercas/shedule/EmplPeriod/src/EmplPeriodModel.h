@@ -18,27 +18,27 @@ public:
 
     enum Columns
     {
-        column_pid = 0,
-        column_person_pid,          // 1
-        column_person_surname,      // 2
-        column_person_name,         // 3
-        column_person_middlename,   // 4
-        column_person_position,     // 5
-        column_person_shift_num,    // 6
-        column_person_sectors_pool, // 7
-        column_activity_pid,        // 8
-        column_activity_abbr,       // 9
-        column_activity_activity,   // 10
-        column_activity_color,      // 11
-        column_activity_note,       // 12
-        column_start_date,          // 13
-        column_end_date,            // 14
-        column_duration,            // 15
-        column_note,                // 16
+        Column_pid = 0,
+        Column_person_pid,          // 1
+        Column_person_surname,      // 2
+        Column_person_name,         // 3
+        Column_person_middlename,   // 4
+        Column_person_position,     // 5
+        Column_person_shift_num,    // 6
+        Column_person_sectors_pool, // 7
+        Column_activity_pid,        // 8
+        Column_activity_abbr,       // 9
+        Column_activity_activity,   // 10
+        Column_activity_color,      // 11
+        Column_activity_note,       // 12
+        Column_start_date,          // 13
+        Column_end_date,            // 14
+        Column_duration,            // 15
+        Column_note,                // 16
 
         ColumnsNumber
     };
-    Q_ENUMS(Columns)
+    Q_ENUM(Columns)
 
 private:
     void generateRoleNames();

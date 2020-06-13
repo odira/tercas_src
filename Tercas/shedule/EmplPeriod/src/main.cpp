@@ -14,7 +14,8 @@ int main(int argc, char *argv[])
         return -1;
 
     EmplPeriodModel * periodModel = new EmplPeriodModel();
-//    qmlRegisterType<EmplPeriodModel>("ColumnsEnums", 1, 0, "Columns");
+    qmlRegisterUncreatableType<EmplPeriodModel>("ColumnsEnum", 1, 0, "ColumnsEnum",
+                                                "Not creatable as it is an enum type");
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("periodModel", QVariant::fromValue(periodModel));
