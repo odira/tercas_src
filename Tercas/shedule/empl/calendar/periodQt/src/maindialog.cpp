@@ -29,10 +29,9 @@ void MainDialog::setupView()
 
     m_view->setColumnHidden(EmplSheduleIntervalModel::Columns::column_pid, true);
     m_view->setColumnHidden(EmplSheduleIntervalModel::Columns::column_person_pid, true);
-    m_view->setColumnHidden(EmplSheduleIntervalModel::Columns::column_person_shiftnum, true);
+    m_view->setColumnHidden(EmplSheduleIntervalModel::Columns::column_person_shift_num, true);
     m_view->setColumnHidden(EmplSheduleIntervalModel::Columns::column_activity_pid, true);
     m_view->setColumnHidden(EmplSheduleIntervalModel::Columns::column_activity_color, true);
-    m_view->setColumnHidden(EmplSheduleIntervalModel::Columns::column_period, true);
     m_view->setColumnHidden(EmplSheduleIntervalModel::Columns::column_activity_note, true);
     m_view->horizontalHeader()->setStretchLastSection(true);
 

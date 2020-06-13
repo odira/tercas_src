@@ -23,7 +23,7 @@ QVariant EmplSheduleIntervalModel::data(const QModelIndex &idx, int role) const
     switch (col)
     {
 
-    case column_person_fullname:
+    case column_person_surname:
     {
         if (role == Qt::FontRole)
         {
@@ -205,11 +205,11 @@ QVariant EmplSheduleIntervalModel::headerData(int section, Qt::Orientation orien
             switch (section)
             {
 
-            case column_person_fullname:
+            case column_person_surname:
                 return QString(QObject::tr("Работник"));
                 // break;
 
-            case column_person_shiftnum:
+            case column_person_shift_num:
                 return QString(tr("Смена"));
                 // break;
 
@@ -219,10 +219,6 @@ QVariant EmplSheduleIntervalModel::headerData(int section, Qt::Orientation orien
 
             case column_activity_activity:
                 return QString(QObject::tr("Вид деятельности"));
-                // break;
-
-            case column_period:
-                return QString(QObject::tr("Период"));
                 // break;
 
             case column_start_date:
@@ -240,12 +236,6 @@ QVariant EmplSheduleIntervalModel::headerData(int section, Qt::Orientation orien
             case column_note:
                 return QString(QObject::tr(("Примечание")));
                 // break;
-            }
-        }
-        else if (role == Qt::TextAlignmentRole)
-        {
-            if (section == column_period) {
-                return Qt::AlignHCenter;
             }
         }
         else if (role == Qt::BackgroundColorRole)

@@ -8,8 +8,8 @@ import QtQml.Models 2.12
 ApplicationWindow {
     id: root
     visible: true
-    width: Screen.width * 2/3
-    height: Screen.height * 2/3
+    width: Screen.width
+    height: Screen.height
     title: qsTr("Период активности")
 
     TableView {
