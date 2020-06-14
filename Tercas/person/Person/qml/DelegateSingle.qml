@@ -3,13 +3,27 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
 ScrollView {
-    anchors.fill: parent
+    id: root
+//    width: view.width
+//    height: view.height
+//    Layout.fillWidth: true
+//    Layout.fillHeight: true
+//        anchors.fill: view
+//        anchors.margins: 10
+//    width: 800
+//    height: 300
+    ScrollBar.vertical.policy: ScrollBar.AlwaysOn
 
     ColumnLayout {
-        anchors.fill: parent
+//        Layout.preferredWidth: parent.width
+
+        Layout.fillWidth: true
+//        width: 500
+        Layout.fillHeight: true
+//        anchors.fill: parent
 
         TextField {
-            Layout.preferredWidth: 500
+            Layout.fillWidth: true
             text: surname
         }
         TextField { text: model.name }

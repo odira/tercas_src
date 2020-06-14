@@ -3,6 +3,7 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 import QtQml.Models 2.12
+import QtGraphicalEffects 1.12
 
 ApplicationWindow {
     id: root
@@ -17,25 +18,44 @@ ApplicationWindow {
         model: personModel
     }
 
+    function showList() {
+        listView.currentIndex = singleView.currentIndex
+        view.state = 'inList';
+    }
+    function showSingle() {
+        singleView.currentIndex = listView.currentIndex
+        view.state = 'inSingle'
+    }
+
     ColumnLayout {
         id: rootLayout
         anchors.fill: parent
-        anchors.margins: 10
-        spacing: 10
+        anchors.margins: 5
 
         RowLayout {
             id: toolbar
             Layout.fillWidth: true
-            height: 60
-            spacing: 10
+            Layout.preferredHeight: 70
 
-            RoundButton {
+            Button {
                 id: listButton
-                implicitWidth: 100
-                height: parent.height
-                radius: 0
-                text: qsTr("List")
+                Layout.preferredWidth: 70
+                Layout.preferredHeight: 70
                 onClicked: view.state = 'inList'
+
+                Image {
+                    id: image
+                    fillMode: Image.PreserveAspectFit
+                    anchors.centerIn: parent
+                    sourceSize.width: listButton.width
+                    sourceSize.height: listButton.height
+                    source: "qrc:images/arrow.jpg"
+                }
+                ColorOverlay {
+                    anchors.fill: parent
+                    source: image
+                    color: "#efffffff"
+                }
             }
         }
 
@@ -43,17 +63,24 @@ ApplicationWindow {
             id: view
             Layout.fillWidth: true
             Layout.fillHeight: true
-            border.color: "black"
+            border.color: "pink"
 
-            ListView {
-                id: listView
+            ScrollView {
+                id: scroll
                 anchors.fill: parent
-                anchors.margins: 10
-                model: visualModel.parts.list
-                snapMode: ListView.SnapOneItem
-                visible: false
-                clip: true
-                spacing: 5
+                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                ScrollBar.vertical.policy: ScrollBar.AlwaysOn
+                visible: listView.visible
+
+                ListView {
+                    id: listView
+                    anchors.fill: parent
+                    anchors.margins: 10
+                    model: visualModel.parts.list
+                    snapMode: ListView.SnapOneItem
+                    visible: true
+                    clip: true
+                }
             }
 
             ListView {
@@ -73,6 +100,7 @@ ApplicationWindow {
                 State {
                     name: 'inList'
                     PropertyChanges { target: listView; visible: true; focus: true }
+                    PropertyChanges { target: scroll; visible: true }
                     PropertyChanges { target: singleView; visible: false; focus: false }
                     PropertyChanges { target: listButton; enabled: false }
                 },

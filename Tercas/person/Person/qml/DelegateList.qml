@@ -6,7 +6,6 @@ Item {
     RowLayout {
         Layout.fillWidth: true
         Layout.fillHeight: true
-        spacing: 5
 
         TextField {
             Layout.preferredWidth: 150
@@ -21,7 +20,7 @@ Item {
         TextField {
             Layout.preferredWidth: 150
             Layout.fillHeight: true
-            text: name
+            text: model.name
             background: Rectangle {
                 border.color: 'pink'
             }
@@ -81,8 +80,8 @@ Item {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            singleView.currentIndex = index
-            view.state = 'inSingle'
+            listView.currentIndex = index
+            showSingle()
         }
     }
 }
