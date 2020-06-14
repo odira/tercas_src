@@ -17,9 +17,13 @@ ApplicationWindow {
     }
 
     ListView {
-        id: view
+        id: listView
         anchors.fill: parent
         anchors.margins: 10
-        model: visualModel
+        model: visualModel.parts.list
+        snapMode: ListView.SnapOneItem
+        visible: true
+        clip: true
+        spacing: 5
     }
 }

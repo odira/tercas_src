@@ -8,72 +8,76 @@ Item {
         Layout.fillHeight: true
         spacing: 5
 
-        Rectangle {
-            Layout.fillHeight: true
-            Layout.preferredWidth: 200
-            border.color: "transparent"
-
-            Column {
-                id: nameBox
-                anchors.fill: parent
-                anchors.margins: 1
-                spacing: 0
-
-                Text {
-                    font.bold: true
-                    font.pixelSize: 16
-                    color: "brown"
-                    text: surname
-                }
-                Text {
-                    font.pixelSize: 12
-                    text: name + " " + middlename
-                }
-            }
-        }
-        ColumnLayout {
-            id: positionBox
-            Layout.fillHeight: true
-            Layout.preferredWidth: 200
-            spacing: 0
-
-            TextField {
-                Layout.fillHeight: true
-                horizontalAlignment: TextField.AlignHCenter
-                verticalAlignment: TextField.AlignVCenter
-                text: position
-            }
-        }
-        ColumnLayout {
-            id: classBox
-            Layout.fillHeight: true
-            Layout.preferredWidth: 200
-            spacing: 0
-
-            TextField {
-                Layout.fillHeight: true
-                horizontalAlignment: TextField.AlignHCenter
-                verticalAlignment: TextField.AlignVCenter
-                text: {
-                    var text = model.class + " класс"
-                    return text
-                }
-            }
-        }
-        ColumnLayout {
-            id: shift_numBox
-            Layout.fillHeight: true
+        TextField {
             Layout.preferredWidth: 150
-            spacing: 0
-
-            TextField {
-                Layout.fillHeight: true
-                horizontalAlignment: TextField.AlignHCenter
-                verticalAlignment: TextField.AlignVCenter
-                text: qsTr("Смена № " + shift_num)
+            Layout.fillHeight: true
+            text: surname
+            font.bold: true
+            background: Rectangle {
+                implicitHeight: 40
+                border.color: 'pink'
+            }
+        }
+        TextField {
+            Layout.preferredWidth: 150
+            Layout.fillHeight: true
+            text: name
+            background: Rectangle {
+                border.color: 'pink'
+            }
+        }
+        TextField {
+            Layout.preferredWidth: 150
+            Layout.fillHeight: true
+            text: middlename
+            background: Rectangle {
+                border.color: 'pink'
+            }
+        }
+        TextField {
+            Layout.preferredWidth: 50
+            Layout.fillHeight: true
+            text: birthday.toLocaleDateString(Qt.locale("ru_RU"), "yyyy")
+            background: Rectangle {
+                border.color: 'pink'
+            }
+        }
+        TextField {
+            Layout.preferredWidth: 250
+            Layout.fillHeight: true
+            text: position
+            background: Rectangle {
+                border.color: 'pink'
+            }
+        }
+        TextField {
+            Layout.preferredWidth: 40
+            Layout.fillHeight: true
+            text: model.class
+            horizontalAlignment: TextField.AlignHCenter
+            background: Rectangle {
+                border.color: 'pink'
+            }
+        }
+        TextField {
+            Layout.preferredWidth: 40
+            Layout.fillHeight: true
+            text: shift_num
+            horizontalAlignment: TextField.AlignHCenter
+            background: Rectangle {
+                border.color: 'pink'
+            }
+        }
+        TextField {
+            Layout.preferredWidth: 250
+            Layout.fillHeight: true
+            text: sectors_pool
+            background: Rectangle {
+                border.color: 'pink'
             }
         }
     }
+
     MouseArea {
         anchors.fill: parent
         onClicked: {

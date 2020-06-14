@@ -67,8 +67,8 @@ QVariant PersonModel::data(const QModelIndex &idx, int role) const
         else if (col == Columns::column_mobile_phone) {
             QString number = QSqlTableModel::data(idx).toString().trimmed();
             return QVariant::fromValue(QString("+7 (" + number[0] + number[1] + number[2] + ") " +
-                    number[3] + number[4] + number[5] + " - " +
-                    number[6] + number[7] + " - " +
+                    number[3] + number[4] + number[5] + " " +
+                    number[6] + number[7] + " " +
                     number[8] + number[9]));
         }
         else
