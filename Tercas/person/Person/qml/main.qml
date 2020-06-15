@@ -37,27 +37,50 @@ ApplicationWindow {
             anchors.fill: parent
             anchors.margins: 5
 
-        Button {
-            id: listButton
-            Layout.fillHeight: true
-            Layout.preferredWidth: height
-            onClicked: view.state = 'inList'
+            RoundButton {
+                id: listButton
+                Layout.fillHeight: true
+                Layout.preferredWidth: height
+                radius: 0
+                onClicked: view.state = 'inList'
+                background: Rectangle { color: 'white'; border.color: 'pink' }
 
-            Image {
-                id: image
-                fillMode: Image.PreserveAspectFit
-                anchors.centerIn: parent
-                sourceSize.width: listButton.width
-                sourceSize.height: listButton.height
-                source: "qrc:images/arrow.jpg"
+                Image {
+                    id: image
+                    fillMode: Image.PreserveAspectFit
+                    anchors.centerIn: parent
+                    sourceSize.width: listButton.width
+                    sourceSize.height: listButton.height
+                    source: "qrc:images/arrow.jpg"
+                    opacity: 0.1
+                }
+//                ColorOverlay {
+//                    anchors.fill: parent
+//                    source: image
+//                    color: "#efffffff"
+//                }
             }
-            ColorOverlay {
-                anchors.fill: parent
-                source: image
-                color: "#efffffff"
+            Rectangle {
+                id: space
+                Layout.fillWidth: true
             }
+            RoundButton {
+                implicitWidth: 200
+                Layout.fillHeight: true
+                radius: 0
+                text: qsTr("Quit")
+                background: Rectangle { border.color: 'pink' }
+                onClicked: Qt.quit()
+            }
+
         }
-        }
+    }
+
+    header: Rectangle {
+        width: root.width
+        height: 50
+        anchors.margins: 5
+        border.color: 'pink'
     }
 
     ColumnLayout {
@@ -117,22 +140,6 @@ ApplicationWindow {
                     PropertyChanges { target: listButton; enabled: true }
                 }
             ]
-        }
-
-        RowLayout {
-            id: bottonBox
-            Layout.fillWidth: true
-            height: 60
-            layoutDirection: Qt.RightToLeft
-            spacing: 10
-
-            RoundButton {
-                implicitWidth: 200
-                height: parent.height
-                radius: 0
-                text: qsTr("Quit")
-                onClicked: Qt.quit()
-            }
         }
     }
 }
