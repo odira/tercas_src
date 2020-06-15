@@ -27,37 +27,43 @@ ApplicationWindow {
         view.state = 'inSingle'
     }
 
+    menuBar: Rectangle {
+        id: menuBar
+        width: root.width
+        height: 70
+        border.color: 'pink'
+
+        RowLayout {
+            anchors.fill: parent
+            anchors.margins: 5
+
+        Button {
+            id: listButton
+            Layout.fillHeight: true
+            Layout.preferredWidth: height
+            onClicked: view.state = 'inList'
+
+            Image {
+                id: image
+                fillMode: Image.PreserveAspectFit
+                anchors.centerIn: parent
+                sourceSize.width: listButton.width
+                sourceSize.height: listButton.height
+                source: "qrc:images/arrow.jpg"
+            }
+            ColorOverlay {
+                anchors.fill: parent
+                source: image
+                color: "#efffffff"
+            }
+        }
+        }
+    }
+
     ColumnLayout {
         id: rootLayout
         anchors.fill: parent
         anchors.margins: 5
-
-        RowLayout {
-            id: toolbar
-            Layout.fillWidth: true
-            Layout.preferredHeight: 70
-
-            Button {
-                id: listButton
-                Layout.preferredWidth: 70
-                Layout.preferredHeight: 70
-                onClicked: view.state = 'inList'
-
-                Image {
-                    id: image
-                    fillMode: Image.PreserveAspectFit
-                    anchors.centerIn: parent
-                    sourceSize.width: listButton.width
-                    sourceSize.height: listButton.height
-                    source: "qrc:images/arrow.jpg"
-                }
-                ColorOverlay {
-                    anchors.fill: parent
-                    source: image
-                    color: "#efffffff"
-                }
-            }
-        }
 
         Rectangle {
             id: view
