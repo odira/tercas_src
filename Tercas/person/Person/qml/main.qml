@@ -61,7 +61,7 @@ ApplicationWindow {
 //                }
             }
             Rectangle {
-                id: space
+                id: spacingi
                 Layout.fillWidth: true
             }
             RoundButton {
