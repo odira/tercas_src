@@ -114,6 +114,12 @@ ApplicationWindow {
                 visible: true
                 clip: true
                 spacing: 10
+
+                header: Rectangle {
+                    width: view.width
+                    height: 60
+                    color: 'red'
+                }
             }
         }
 
