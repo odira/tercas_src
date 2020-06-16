@@ -42,11 +42,15 @@ ApplicationWindow {
                 Layout.fillHeight: true
                 Layout.preferredWidth: height
                 radius: 0
+
                 onClicked: view.state = 'inList'
-                background: Rectangle { color: 'white'; border.color: 'pink' }
+
+                background: Rectangle {
+                    color: 'white'
+                    border.color: 'pink'
+                }
 
                 Image {
-                    id: image
                     fillMode: Image.PreserveAspectFit
                     anchors.centerIn: parent
                     sourceSize.width: listButton.width
@@ -65,12 +69,25 @@ ApplicationWindow {
                 Layout.fillWidth: true
             }
             RoundButton {
-                implicitWidth: 200
+                id: quitButton
                 Layout.fillHeight: true
+                Layout.preferredWidth: height
                 radius: 0
-                text: qsTr("Quit")
-                background: Rectangle { border.color: 'pink' }
+
                 onClicked: Qt.quit()
+
+                background: Rectangle {
+                    color: 'white'
+                    border.color: 'pink'
+                }
+
+                Image {
+                    fillMode: Image.PreserveAspectFit
+                    anchors.centerIn: parent
+                    sourceSize.width: quitButton.width
+                    sourceSize.height: quitButton.height
+                    source: "qrc:images/quit.png"
+                }
             }
 
         }

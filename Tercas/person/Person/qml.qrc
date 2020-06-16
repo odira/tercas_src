@@ -5,5 +5,6 @@
         <file>qml/DelegateSingle.qml</file>
         <file>qml/DelegateList.qml</file>
         <file>images/arrow.jpg</file>
+        <file>images/quit.png</file>
     </qresource>
 </RCC>
