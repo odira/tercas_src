@@ -56,7 +56,7 @@ ApplicationWindow {
                     sourceSize.width: listButton.width
                     sourceSize.height: listButton.height
                     source: "qrc:images/arrow.jpg"
-                    opacity: 0.1
+//                    opacity: 0.1
                 }
 //                ColorOverlay {
 //                    anchors.fill: parent
@@ -148,13 +148,13 @@ ApplicationWindow {
                     PropertyChanges { target: listView; visible: true; focus: true }
                     PropertyChanges { target: scroll; visible: true }
                     PropertyChanges { target: singleView; visible: false; focus: false }
-                    PropertyChanges { target: listButton; enabled: false }
+                    PropertyChanges { target: listButton; enabled: false; opacity: 0.1 }
                 },
                 State {
                     name: 'inSingle'
                     PropertyChanges { target: listView; visible: false; focus: false }
                     PropertyChanges { target: singleView; visible: true; focus: true }
-                    PropertyChanges { target: listButton; enabled: true }
+                    PropertyChanges { target: listButton; enabled: true; opacity: 0.9 }
                 }
             ]
         }
