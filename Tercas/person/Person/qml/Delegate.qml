@@ -8,7 +8,7 @@ Package {
         id: listDelegate
         Package.name: 'list'
         width: parent.width
-        height: 60
+        height: 50
     }
 
     DelegateSingle {

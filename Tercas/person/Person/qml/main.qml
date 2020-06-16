@@ -87,17 +87,18 @@ ApplicationWindow {
         }
     }
 
+    // HEADER
     header: Rectangle {
         width: root.width
         height: 50
         border.color: 'pink'
     }
 
-    Rectangle {
+    // CONTENT ITEM
+    contentData:  Rectangle {
         id: view
         anchors.fill: parent
         anchors.margins: 5
-        border.color: "pink"
 
         ScrollView {
             id: scrollList
@@ -108,11 +109,11 @@ ApplicationWindow {
             ListView {
                 id: listView
                 anchors.fill: parent
-                anchors.margins: 10
                 model: visualModel.parts.list
                 snapMode: ListView.SnapOneItem
                 visible: true
                 clip: true
+                spacing: 10
             }
         }
 
@@ -134,7 +135,7 @@ ApplicationWindow {
             }
         }
 
-        state: 'inSingle'
+        state: 'inList'
         states: [
             State {
                 name: 'inList'
