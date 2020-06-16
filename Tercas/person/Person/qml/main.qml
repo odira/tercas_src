@@ -56,13 +56,7 @@ ApplicationWindow {
                     sourceSize.width: listButton.width
                     sourceSize.height: listButton.height
                     source: "qrc:images/arrow.jpg"
-//                    opacity: 0.1
                 }
-//                ColorOverlay {
-//                    anchors.fill: parent
-//                    source: image
-//                    color: "#efffffff"
-//                }
             }
             Rectangle {
                 id: spacingi
@@ -96,43 +90,41 @@ ApplicationWindow {
     header: Rectangle {
         width: root.width
         height: 50
-        anchors.margins: 5
         border.color: 'pink'
     }
 
-    ColumnLayout {
-        id: rootLayout
+    Rectangle {
+        id: view
         anchors.fill: parent
         anchors.margins: 5
+        border.color: "pink"
 
-        Rectangle {
-            id: view
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            border.color: "pink"
+        ScrollView {
+            id: scrollList
+            anchors.fill: parent
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+            ScrollBar.vertical.policy: ScrollBar.AlwaysOn
 
-            ScrollView {
-                id: scroll
+            ListView {
+                id: listView
                 anchors.fill: parent
-                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-                ScrollBar.vertical.policy: ScrollBar.AlwaysOn
-                visible: listView.visible
-
-                ListView {
-                    id: listView
-                    anchors.fill: parent
-                    anchors.margins: 10
-                    model: visualModel.parts.list
-                    snapMode: ListView.SnapOneItem
-                    visible: true
-                    clip: true
-                }
+                anchors.margins: 10
+                model: visualModel.parts.list
+                snapMode: ListView.SnapOneItem
+                visible: true
+                clip: true
             }
+        }
+
+        ScrollView {
+            id: scrollSingle
+            anchors.fill: parent
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+            ScrollBar.vertical.policy: ScrollBar.AlwaysOn
 
             ListView {
                 id: singleView
                 anchors.fill: parent
-                anchors.margins: 10
                 model: visualModel.parts.single
                 snapMode: ListView.SnapOneItem
                 orientation: ListView.Horizontal
@@ -140,23 +132,26 @@ ApplicationWindow {
                 clip: true
                 highlightMoveDuration: 0
             }
-
-            state: 'inList'
-            states: [
-                State {
-                    name: 'inList'
-                    PropertyChanges { target: listView; visible: true; focus: true }
-                    PropertyChanges { target: scroll; visible: true }
-                    PropertyChanges { target: singleView; visible: false; focus: false }
-                    PropertyChanges { target: listButton; enabled: false; opacity: 0.1 }
-                },
-                State {
-                    name: 'inSingle'
-                    PropertyChanges { target: listView; visible: false; focus: false }
-                    PropertyChanges { target: singleView; visible: true; focus: true }
-                    PropertyChanges { target: listButton; enabled: true; opacity: 0.9 }
-                }
-            ]
         }
+
+        state: 'inSingle'
+        states: [
+            State {
+                name: 'inList'
+                PropertyChanges { target: listView; visible: true; focus: true }
+                PropertyChanges { target: scrollList; visible: true }
+                PropertyChanges { target: scrollSingle; visible: false }
+                PropertyChanges { target: singleView; visible: false; focus: false }
+                PropertyChanges { target: listButton; enabled: false; opacity: 0.1 }
+            },
+            State {
+                name: 'inSingle'
+                PropertyChanges { target: listView; visible: false; focus: false }
+                PropertyChanges { target: scrollList; visible: false }
+                PropertyChanges { target: scrollSingle; visible: true }
+                PropertyChanges { target: singleView; visible: true; focus: true }
+                PropertyChanges { target: listButton; enabled: true; opacity: 0.9 }
+            }
+        ]
     }
 }
