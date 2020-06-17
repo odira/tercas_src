@@ -15,7 +15,6 @@ Item {
             text: surname
             font.bold: true
             background: Rectangle {
-                implicitHeight: 40
                 border.color: 'pink'
             }
         }

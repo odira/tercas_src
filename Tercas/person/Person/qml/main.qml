@@ -59,7 +59,7 @@ ApplicationWindow {
                 }
             }
             Rectangle {
-                id: spacingi
+                id: spacing
                 Layout.fillWidth: true
             }
             RoundButton {
@@ -87,15 +87,15 @@ ApplicationWindow {
         }
     }
 
-    // HEADER
-    header: Rectangle {
-        width: root.width
-        height: 50
-        border.color: 'pink'
-    }
+//    // HEADER
+//    header: Rectangle {
+//        width: root.width
+//        height: 50
+//        border.color: 'pink'
+//    }
 
     // CONTENT ITEM
-    contentData:  Rectangle {
+    contentData:  Item {
         id: view
         anchors.fill: parent
         anchors.margins: 5
@@ -103,38 +103,135 @@ ApplicationWindow {
         ScrollView {
             id: scrollList
             anchors.fill: parent
-//            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-//            ScrollBar.vertical.policy: ScrollBar.AlwaysOn
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+            ScrollBar.vertical.policy: ScrollBar.AlwaysOn
 
             ListView {
                 id: listView
                 anchors.fill: parent
                 model: visualModel.parts.list
-                snapMode: ListView.SnapOneItem
+                snapMode: ListView.SnapToItem
                 visible: true
                 clip: true
-                spacing: 10
+                spacing: 5
 
-                header: Rectangle {
+                headerPositioning: ListView.OverlayHeader
+                header: Item {
                     width: view.width
                     height: 60
-                    color: 'red'
-                }
+                    z: 2
 
-                ScrollBar.vertical: ScrollBar {
-                    id: listScrollBar
-                    active: true
-                    orientation: Qt.Vertical
-                    opacity: active ? 1:0
-                    Behavior on opacity { NumberAnimation { duration: 500 }}
+                    ColumnLayout {
+                        anchors.fill: parent
+                        spacing: 0
 
-                    contentItem: Rectangle {
-                        implicitWidth: 10
-                        implicitHeight: listView.contentItem.height
-                        radius: 1
-                        color: 'blue'
+                    RowLayout {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+//                        anchors.fill: parent
+
+                        TextField {
+                            Layout.preferredWidth: 200
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            text: qsTr('Фамилия')
+                            font.bold: true
+                            background: Rectangle {
+                                border.color: 'pink'
+                            }
+                        }
+                        TextField {
+                            Layout.preferredWidth: 150
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            text: qsTr('Имя')
+                            background: Rectangle {
+                                border.color: 'pink'
+                            }
+                        }
+                        TextField {
+                            Layout.preferredWidth: 150
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            text: qsTr('Отчество')
+                            background: Rectangle {
+                                border.color: 'pink'
+                            }
+                        }
+                        TextField {
+                            Layout.preferredWidth: 50
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            wrapMode: TextInput.WordWrap
+                            text: qsTr('Год рожд')
+
+                            background: Rectangle {
+                                border.color: 'pink'
+                            }
+                        }
+                        TextField {
+                            Layout.preferredWidth: 200
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            text: qsTr('Должность')
+                            background: Rectangle {
+                                border.color: 'pink'
+                            }
+                        }
+                        TextField {
+                            Layout.preferredWidth: 40
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            text: qsTr('Класс')
+                            horizontalAlignment: TextField.AlignHCenter
+                            background: Rectangle {
+                                border.color: 'pink'
+                            }
+                        }
+                        TextField {
+                            Layout.preferredWidth: 40
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            text: qsTr('Смена')
+                            horizontalAlignment: TextField.AlignHCenter
+                            background: Rectangle {
+                                border.color: 'pink'
+                            }
+                        }
+                        TextField {
+                            Layout.preferredWidth: 200
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            text: qsTr('Направление')
+                            background: Rectangle {
+                                border.color: 'pink'
+                            }
+                        }
                     }
+
+                    Rectangle {
+                        id: spacing2
+                        Layout.fillWidth: true
+                        height: 10
+                    }
+                    }
+
                 }
+
+//                ScrollBar.vertical: ScrollBar {
+//                    id: listScrollBar
+//                    active: true
+//                    orientation: Qt.Vertical
+//                    opacity: active ? 1:0
+//                    Behavior on opacity { NumberAnimation { duration: 500 }}
+
+//                    contentItem: Rectangle {
+//                        implicitWidth: 10
+//                        implicitHeight: listView.contentItem.height
+//                        radius: 1
+//                        color: 'blue'
+//                    }
+//                }
             }
         }
 
