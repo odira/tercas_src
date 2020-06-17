@@ -41,6 +41,7 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
             text: birthday.toLocaleDateString(Qt.locale("ru_RU"), "yyyy")
+            horizontalAlignment: TextField.AlignHCenter
             background: Rectangle {
                 border.color: 'pink'
             }
@@ -55,7 +56,7 @@ Item {
             }
         }
         TextField {
-            Layout.preferredWidth: 40
+            Layout.preferredWidth: 45
             Layout.fillWidth: true
             Layout.fillHeight: true
             text: model.class
@@ -65,7 +66,7 @@ Item {
             }
         }
         TextField {
-            Layout.preferredWidth: 40
+            Layout.preferredWidth: 45
             Layout.fillWidth: true
             Layout.fillHeight: true
             text: shift_num

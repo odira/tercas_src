@@ -125,97 +125,102 @@ ApplicationWindow {
                         anchors.fill: parent
                         spacing: 0
 
-                    RowLayout {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-//                        anchors.fill: parent
+                        RowLayout {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
 
-                        TextField {
-                            Layout.preferredWidth: 200
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            text: qsTr('Фамилия')
-                            font.bold: true
-                            background: Rectangle {
-                                border.color: 'pink'
+                            TextField {
+                                Layout.preferredWidth: 200
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                text: qsTr('Фамилия')
+                                font.bold: true
+                                horizontalAlignment: TextField.AlignHCenter
+                                background: Rectangle {
+                                    border.color: 'pink'
+                                }
+                            }
+                            TextField {
+                                Layout.preferredWidth: 150
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                text: qsTr('Имя')
+                                horizontalAlignment: TextField.AlignHCenter
+                                background: Rectangle {
+                                    border.color: 'pink'
+                                }
+                            }
+                            TextField {
+                                Layout.preferredWidth: 150
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                text: qsTr('Отчество')
+                                horizontalAlignment: TextField.AlignHCenter
+                                background: Rectangle {
+                                    border.color: 'pink'
+                                }
+                            }
+                            TextField {
+                                Layout.preferredWidth: 50
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                wrapMode: TextInput.WordWrap
+                                text: qsTr('Год рожд')
+                                horizontalAlignment: TextField.AlignHCenter
+                                background: Rectangle {
+                                    border.color: 'pink'
+                                }
+                            }
+                            TextField {
+                                Layout.preferredWidth: 200
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                text: qsTr('Должность')
+                                horizontalAlignment: TextField.AlignHCenter
+                                background: Rectangle {
+                                    border.color: 'pink'
+                                }
+                            }
+                            TextField {
+                                Layout.preferredWidth: 45
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                font.pixelSize: 11
+                                text: qsTr('Класс')
+                                horizontalAlignment: TextField.AlignHCenter
+                                background: Rectangle {
+                                    border.color: 'pink'
+                                }
+                            }
+                            TextField {
+                                Layout.preferredWidth: 45
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                font.pixelSize: 11
+                                text: qsTr('Смена')
+                                horizontalAlignment: TextField.AlignHCenter
+                                background: Rectangle {
+                                    border.color: 'pink'
+                                }
+                            }
+                            TextField {
+                                Layout.preferredWidth: 200
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                text: qsTr('Направление')
+                                horizontalAlignment: TextField.AlignHCenter
+                                background: Rectangle {
+                                    border.color: 'pink'
+                                }
                             }
                         }
-                        TextField {
-                            Layout.preferredWidth: 150
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            text: qsTr('Имя')
-                            background: Rectangle {
-                                border.color: 'pink'
-                            }
-                        }
-                        TextField {
-                            Layout.preferredWidth: 150
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            text: qsTr('Отчество')
-                            background: Rectangle {
-                                border.color: 'pink'
-                            }
-                        }
-                        TextField {
-                            Layout.preferredWidth: 50
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            wrapMode: TextInput.WordWrap
-                            text: qsTr('Год рожд')
 
-                            background: Rectangle {
-                                border.color: 'pink'
-                            }
-                        }
-                        TextField {
-                            Layout.preferredWidth: 200
+                        Rectangle {
+                            id: spacing2
                             Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            text: qsTr('Должность')
-                            background: Rectangle {
-                                border.color: 'pink'
-                            }
-                        }
-                        TextField {
-                            Layout.preferredWidth: 40
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            text: qsTr('Класс')
-                            horizontalAlignment: TextField.AlignHCenter
-                            background: Rectangle {
-                                border.color: 'pink'
-                            }
-                        }
-                        TextField {
-                            Layout.preferredWidth: 40
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            text: qsTr('Смена')
-                            horizontalAlignment: TextField.AlignHCenter
-                            background: Rectangle {
-                                border.color: 'pink'
-                            }
-                        }
-                        TextField {
-                            Layout.preferredWidth: 200
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            text: qsTr('Направление')
-                            background: Rectangle {
-                                border.color: 'pink'
-                            }
+                            height: 10
                         }
                     }
-
-                    Rectangle {
-                        id: spacing2
-                        Layout.fillWidth: true
-                        height: 10
-                    }
-                    }
-
                 }
 
 //                ScrollBar.vertical: ScrollBar {
