@@ -103,8 +103,8 @@ ApplicationWindow {
         ScrollView {
             id: scrollList
             anchors.fill: parent
-//            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-//            ScrollBar.vertical.policy: ScrollBar.AlwaysOn
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+            ScrollBar.vertical.policy: ScrollBar.AlwaysOn
 
             ListView {
                 id: listView
@@ -121,20 +121,20 @@ ApplicationWindow {
                     color: 'red'
                 }
 
-                ScrollBar.vertical: ScrollBar {
-                    id: listScrollBar
-                    active: true
-                    orientation: Qt.Vertical
-                    opacity: active ? 1:0
-                    Behavior on opacity { NumberAnimation { duration: 500 }}
+//                ScrollBar.vertical: ScrollBar {
+//                    id: listScrollBar
+//                    active: true
+//                    orientation: Qt.Vertical
+//                    opacity: active ? 1:0
+//                    Behavior on opacity { NumberAnimation { duration: 500 }}
 
-                    contentItem: Rectangle {
-                        implicitWidth: 10
-                        implicitHeight: listView.contentItem.height
-                        radius: 1
-                        color: 'blue'
-                    }
-                }
+//                    contentItem: Rectangle {
+//                        implicitWidth: 10
+//                        implicitHeight: listView.contentItem.height
+//                        radius: 1
+//                        color: 'blue'
+//                    }
+//                }
             }
         }
 
