@@ -137,6 +137,7 @@ ApplicationWindow {
                                 font.bold: true
                                 horizontalAlignment: TextField.AlignHCenter
                                 background: Rectangle {
+                                    color: 'lightblue'
                                     border.color: 'pink'
                                 }
                             }
@@ -147,6 +148,7 @@ ApplicationWindow {
                                 text: qsTr('Имя')
                                 horizontalAlignment: TextField.AlignHCenter
                                 background: Rectangle {
+                                    color: 'lightblue'
                                     border.color: 'pink'
                                 }
                             }
@@ -157,6 +159,7 @@ ApplicationWindow {
                                 text: qsTr('Отчество')
                                 horizontalAlignment: TextField.AlignHCenter
                                 background: Rectangle {
+                                    color: 'lightblue'
                                     border.color: 'pink'
                                 }
                             }
@@ -168,6 +171,7 @@ ApplicationWindow {
                                 text: qsTr('Год рожд')
                                 horizontalAlignment: TextField.AlignHCenter
                                 background: Rectangle {
+                                    color: 'lightblue'
                                     border.color: 'pink'
                                 }
                             }
@@ -178,6 +182,7 @@ ApplicationWindow {
                                 text: qsTr('Должность')
                                 horizontalAlignment: TextField.AlignHCenter
                                 background: Rectangle {
+                                    color: 'lightblue'
                                     border.color: 'pink'
                                 }
                             }
@@ -189,6 +194,7 @@ ApplicationWindow {
                                 text: qsTr('Класс')
                                 horizontalAlignment: TextField.AlignHCenter
                                 background: Rectangle {
+                                    color: 'lightblue'
                                     border.color: 'pink'
                                 }
                             }
@@ -200,6 +206,7 @@ ApplicationWindow {
                                 text: qsTr('Смена')
                                 horizontalAlignment: TextField.AlignHCenter
                                 background: Rectangle {
+                                    color: 'lightblue'
                                     border.color: 'pink'
                                 }
                             }
@@ -210,6 +217,7 @@ ApplicationWindow {
                                 text: qsTr('Направление')
                                 horizontalAlignment: TextField.AlignHCenter
                                 background: Rectangle {
+                                    color: 'lightblue'
                                     border.color: 'pink'
                                 }
                             }
