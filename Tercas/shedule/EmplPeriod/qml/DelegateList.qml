@@ -6,22 +6,21 @@ import ColumnsEnum 1.0
 
 Item {
     RowLayout {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        spacing: 5
+        anchors.fill: parent
 
         TextField {
-            Layout.preferredWidth: 150
+            Layout.preferredWidth: 200
+            Layout.fillWidth: true
             Layout.fillHeight: true
             text: person_surname
             font.bold: true
             background: Rectangle {
-                implicitHeight: 40
                 border.color: 'pink'
             }
         }
         TextField {
             Layout.preferredWidth: 150
+            Layout.fillWidth: true
             Layout.fillHeight: true
             text: person_name
             background: Rectangle {
@@ -30,6 +29,7 @@ Item {
         }
         TextField {
             Layout.preferredWidth: 150
+            Layout.fillWidth: true
             Layout.fillHeight: true
             text: person_middlename
             background: Rectangle {
@@ -37,7 +37,8 @@ Item {
             }
         }
         TextField {
-            Layout.preferredWidth: 250
+            Layout.preferredWidth: 200
+            Layout.fillWidth: true
             Layout.fillHeight: true
             text: person_position
             background: Rectangle {
@@ -46,6 +47,7 @@ Item {
         }
         TextField {
             Layout.preferredWidth: 40
+            Layout.fillWidth: true
             Layout.fillHeight: true
             text: person_shift_num
             horizontalAlignment: TextField.AlignHCenter
@@ -55,6 +57,7 @@ Item {
         }
         TextField {
             Layout.preferredWidth: 250
+            Layout.fillWidth: true
             Layout.fillHeight: true
             text: person_sectors_pool
             background: Rectangle {
@@ -63,6 +66,7 @@ Item {
         }
         TextField {
             Layout.preferredWidth: 50
+            Layout.fillWidth: true
             Layout.fillHeight: true
             font.bold: true
             text: activity_abbr
@@ -74,6 +78,7 @@ Item {
         }
         TextField {
             Layout.preferredWidth: 150
+            Layout.fillWidth: true
             Layout.fillHeight: true
             text: activity_activity
             background: Rectangle {
@@ -82,6 +87,7 @@ Item {
         }
         TextField {
             Layout.preferredWidth: 150
+            Layout.fillWidth: true
             Layout.fillHeight: true
             text: start_date.toLocaleDateString(Qt.locale("ru_RU"), "dd MMMM yyyy")
             background: Rectangle {
@@ -90,6 +96,7 @@ Item {
         }
         TextField {
             Layout.preferredWidth: 150
+            Layout.fillWidth: true
             Layout.fillHeight: true
             text: end_date.toLocaleDateString(Qt.locale("ru_RU"), "dd MMMM yyyy")
             background: Rectangle {
@@ -98,12 +105,20 @@ Item {
         }
         TextField {
             Layout.preferredWidth: 40
+            Layout.fillWidth: true
             Layout.fillHeight: true
             text: duration
             horizontalAlignment: TextField.AlignHCenter
             background: Rectangle {
                 border.color: 'pink'
             }
+        }
+    }
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            listView.currentIndex = index
+            showSingle()
         }
     }
 }

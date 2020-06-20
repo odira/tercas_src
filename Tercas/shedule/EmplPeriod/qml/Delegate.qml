@@ -7,13 +7,13 @@ Package {
     DelegateList {
         id: listDelegate
         Package.name: 'list'
-        width: parent.width; height: 60
+        width: parent.width
+        height: 50
     }
-
-//    DelegateSingle {
-//        id: singleDelegate
-//        Package.name: 'single'
-//        width: view.width
-//        height: view.height
-//    }
+    DelegateSingle {
+        id: singleDelegate
+        Package.name: 'single'
+        width: view.width
+        height: view.height
+    }
 }

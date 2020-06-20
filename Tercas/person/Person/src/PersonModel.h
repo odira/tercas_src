@@ -12,21 +12,21 @@ class PersonModel : public QSqlTableModel
 
 public:
     enum Columns {
-        column_pid = 0,
-        column_valid,
-        column_surname,
-        column_name,
-        column_middlename,
-        column_birthday,
-        column_mobile_phone,
-        column_tab_num,
-        column_position,
-        column_class,
-        column_shift_num,
-        column_sectors_pool,
-        column_service_period,
-        column_admission,
-        column_note,
+        Column_pid = 0,
+        Column_valid,
+        Column_surname,
+        Column_name,
+        Column_middlename,
+        Column_birthday,
+        Column_mobile_phone,
+        Column_tab_num,
+        Column_position,
+        Column_class,
+        Column_shift_num,
+        Column_sectors_pool,
+        Column_service_period,
+        Column_admission,
+        Column_note,
 
         ColumnsNumber
     };

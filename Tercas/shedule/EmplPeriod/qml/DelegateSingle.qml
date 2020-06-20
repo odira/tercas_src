@@ -10,51 +10,59 @@ Item {
 
         TextField {
             Layout.fillWidth: true
-            text: surname
+            text: person_surname
         }
         TextField {
             Layout.fillWidth: true
-            text: model.name
+            text: person_name
         }
         TextField {
             Layout.fillWidth: true
-            text: middlename
+            text: person_middlename
         }
         TextField {
             Layout.fillWidth: true
-            text: birthday
+            text: person_position
         }
         TextField {
             Layout.fillWidth: true
-            text: mobile_phone
+            text: person_shift_num
         }
         TextField {
             Layout.fillWidth: true
-            text: tab_num
+            text: person_sectors_pool
         }
         TextField {
             Layout.fillWidth: true
-            text: position
+            text: activity_pid
         }
         TextField {
             Layout.fillWidth: true
-            text: model.class
+            text: activity_abbr
         }
         TextField {
             Layout.fillWidth: true
-            text: shift_num
+            text: activity_activity
         }
         TextField {
             Layout.fillWidth: true
-            text: sectors_pool
+            text: activity_color
         }
         TextField {
             Layout.fillWidth: true
-            text: service_period
+            text: activity_note
         }
         TextField {
             Layout.fillWidth: true
-            text: admission
+            text: start_date
+        }
+        TextField {
+            Layout.fillWidth: true
+            text: start_end
+        }
+        TextField {
+            Layout.fillWidth: true
+            text: duration
         }
         TextField {
             Layout.fillWidth: true

@@ -1,37 +1,36 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
-import QtQuick.Controls 2.5
+import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import QtQml.Models 2.12
-import QtGraphicalEffects 1.12
 
 ApplicationWindow {
     id: root
     visible: true
-    width: Screen.width * 3/4
-    height: Screen.height * 3/4
-    title: qsTr("Person Database")
+    width: Screen.width * 4/5
+    height: Screen.height * 4/5
+    title: qsTr("Период активности")
 
     DelegateModel {
         id: visualModel
+        model: periodModel
         delegate: Delegate {}
-        model: personModel
     }
 
     function showList() {
         listView.currentIndex = singleView.currentIndex
         view.state = 'inList';
     }
-    function showSingle() {
-        singleView.currentIndex = listView.currentIndex
-        view.state = 'inSingle'
-    }
+    function showSingle() 
 
     menuBar: Rectangle {
         id: menuBar
         width: root.width
         height: 70
-        border.color: 'pink'
+        border.color: 'pink'{
+                          singleView.currentIndex = listView.currentIndex
+                          view.state = 'inSingle'
+                      }
 
         RowLayout {
             anchors.fill: parent
@@ -164,18 +163,6 @@ ApplicationWindow {
                                 }
                             }
                             TextField {
-                                Layout.preferredWidth: 50
-                                Layout.fillWidth: true
-                                Layout.fillHeight: true
-                                wrapMode: TextInput.WordWrap
-                                text: qsTr('Год рожд')
-                                horizontalAlignment: TextField.AlignHCenter
-                                background: Rectangle {
-                                    color: 'lightblue'
-                                    border.color: 'pink'
-                                }
-                            }
-                            TextField {
                                 Layout.preferredWidth: 200
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
@@ -187,19 +174,7 @@ ApplicationWindow {
                                 }
                             }
                             TextField {
-                                Layout.preferredWidth: 45
-                                Layout.fillWidth: true
-                                Layout.fillHeight: true
-                                font.pixelSize: 11
-                                text: qsTr('Класс')
-                                horizontalAlignment: TextField.AlignHCenter
-                                background: Rectangle {
-                                    color: 'lightblue'
-                                    border.color: 'pink'
-                                }
-                            }
-                            TextField {
-                                Layout.preferredWidth: 45
+                                Layout.preferredWidth: 40
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
                                 font.pixelSize: 11
@@ -211,10 +186,74 @@ ApplicationWindow {
                                 }
                             }
                             TextField {
-                                Layout.preferredWidth: 200
+                                Layout.preferredWidth: 250
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
                                 text: qsTr('Направление')
+                                horizontalAlignment: TextField.AlignHCenter
+                                background: Rectangle {
+                                    color: 'lightblue'
+                                    border.color: 'pink'
+                                }
+                            }
+                            TextField {
+                                Layout.preferredWidth: 50
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                wrapMode: TextInput.WordWrap
+                                text: qsTr('abbr')
+                                horizontalAlignment: TextField.AlignHCenter
+                                background: Rectangle {
+                                    color: 'lightblue'
+                                    border.color: 'pink'
+                                }
+                            }
+                            TextField {
+                                Layout.preferredWidth: 150
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                font.pixelSize: 11
+                                wrapMode: TextInput.WordWrap
+                                text: qsTr('Вид деятельности')
+                                horizontalAlignment: TextField.AlignHCenter
+                                background: Rectangle {
+                                    color: 'lightblue'
+                                    border.color: 'pink'
+                                }
+                            }
+                            TextField {
+                                Layout.preferredWidth: 150
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                font.pixelSize: 11
+                                wrapMode: TextInput.WordWrap
+                                text: qsTr('Дата начала')
+                                horizontalAlignment: TextField.AlignHCenter
+                                background: Rectangle {
+                                    color: 'lightblue'
+                                    border.color: 'pink'
+                                }
+                            }
+                            TextField {
+                                Layout.preferredWidth: 150
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                font.pixelSize: 11
+                                wrapMode: TextInput.WordWrap
+                                text: qsTr('Дата окончания')
+                                horizontalAlignment: TextField.AlignHCenter
+                                background: Rectangle {
+                                    color: 'lightblue'
+                                    border.color: 'pink'
+                                }
+                            }
+                            TextField {
+                                Layout.preferredWidth: 40
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                font.pixelSize: 11
+                                wrapMode: TextInput.WordWrap
+                                text: qsTr('Период')
                                 horizontalAlignment: TextField.AlignHCenter
                                 background: Rectangle {
                                     color: 'lightblue'

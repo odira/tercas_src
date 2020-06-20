@@ -3,5 +3,8 @@
         <file>qml/main.qml</file>
         <file>qml/Delegate.qml</file>
         <file>qml/DelegateList.qml</file>
+        <file>images/arrow.jpg</file>
+        <file>images/quit.png</file>
+        <file>qml/DelegateSingle.qml</file>
     </qresource>
 </RCC>
