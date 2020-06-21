@@ -2,12 +2,10 @@
 
 #include "HolidayModel.h"
 
-#include <QDebug>
-
 HolidayModel::HolidayModel(QObject *parent, QSqlDatabase db)
     : QSqlTableModel(parent, db)
 {
-    setTable("calendar.vw_holiday");
+    setTable(PGSQL_TABLE);
     setEditStrategy(QSqlTableModel::OnManualSubmit);
     generateRoleNames();
     select();
@@ -24,17 +22,17 @@ void HolidayModel::generateRoleNames()
     m_roleNames[Qt::UserRole + 1 + 3] = QVariant(QString("note_ru").toUtf8()).toByteArray();
 }
 
-QStringList HolidayModel::roleNamesList() const
-{
-    QMap<int, QString> res;
-    QHashIterator<int, QByteArray> i(m_roleNames);
-    while (i.hasNext()) {
-        i.next();
-        if (i.key() > Qt::UserRole)
-            res[i.key()] = i.value();
-    }
-    return res.values();
-}
+//QStringList HolidayModel::roleNamesList() const
+//{
+//    QMap<int, QString> res;
+//    QHashIterator<int, QByteArray> i(m_roleNames);
+//    while (i.hasNext()) {
+//        i.next();
+//        if (i.key() > Qt::UserRole)
+//            res[i.key()] = i.value();
+//    }
+//    return QStringList(res.values());
+//}
 
 QVariant HolidayModel::data(const QModelIndex &idx, int role) const
 {
@@ -52,7 +50,7 @@ QVariant HolidayModel::data(const QModelIndex &idx, int role) const
 
     if (role == Qt::DisplayRole)
     {
-        if (col == holiday_date)
+        if (col == Column_date)
             return QSqlTableModel::data(idx).toDate().toString("yyyy MMM dd");
         else
             return QSqlTableModel::data(idx);
@@ -61,7 +59,8 @@ QVariant HolidayModel::data(const QModelIndex &idx, int role) const
     {
         int colIndex = role - Qt::UserRole - 1;
         QModelIndex index = this->index(row, colIndex);
-        return QSqlTableModel::data(index, Qt::DisplayRole);
+//        return QSqlTableModel::data(index, Qt::DisplayRole);
+        return this->data(index, Qt::DisplayRole);
     }
     else {
         return QSqlTableModel::data(idx, role);

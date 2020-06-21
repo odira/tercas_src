@@ -2,6 +2,7 @@
 
 #define PGSQL
 #define PGSQL_DATABASE "terkas"
+#define PGSQL_TABLE "calendar.vw_holiday"
 
 #include <QDate>
 #include <QSqlTableModel>
@@ -12,10 +13,11 @@ class HolidayModel : public QSqlTableModel
 
 public:
     enum Columns {
-        holiday_pid = 0,
-        holiday_date,
-        holiday_type,
-        holiday_note_ru,
+        Column_pid       = 0,
+        Column_date,    // 1
+        Column_type,    // 2
+        Column_note_ru, // 3
+
         ColumnsNumber
     };
     Q_ENUM(Columns)
@@ -24,7 +26,7 @@ public:
     HolidayModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
 
     virtual QHash<int, QByteArray> roleNames() const { return m_roleNames; }
-    QStringList roleNamesList() const;
+//    QStringList roleNamesList() const;
 
     QVariant data(const QModelIndex &idx, int role = Qt::DisplayRole) const;
     bool setData(const QModelIndex &idx, const QVariant &value, int role = Qt::EditRole);

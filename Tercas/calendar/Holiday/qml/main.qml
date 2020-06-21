@@ -17,10 +17,11 @@ ApplicationWindow {
     contentData: TableView {
         id: view
         anchors.fill: parent
-        anchors.topMargin: 2
+//        anchors.topMargin: 2
+        anchors.margins: 5
         model: holidayModel
-        columnSpacing: 1
-        rowSpacing: 1
+        columnSpacing: 2
+        rowSpacing: 5
         clip: true
         reuseItems: false
 
