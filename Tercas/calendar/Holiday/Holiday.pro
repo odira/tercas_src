@@ -4,6 +4,9 @@ TEMPLATE = app
 TARGET = Holiday
 DESTDIR = /usr/local/bin/vyborg
 
+MOC_DIR = tmp
+OBJECTS_DIR = tmp
+
 include(src/files.pri)
 
 RESOURCES += qml.qrc

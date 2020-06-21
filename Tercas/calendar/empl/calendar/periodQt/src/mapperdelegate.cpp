@@ -56,7 +56,7 @@ void MapperDelegate::setEditorData(QWidget *editor, const QModelIndex &index) co
     case EmplSheduleIntervalModel::Columns::column_activity_activity:
     {
         QSqlQueryModel *model = new QSqlQueryModel;
-        model->setQuery("SELECT activity FROM shedule.vw_activity");
+        model->setQuery("SELECT activity FROM calendar.vw_activity");
 
         QComboBox *combo = qobject_cast<QComboBox *>(editor);
         Q_ASSERT(combo);
@@ -130,7 +130,7 @@ void MapperDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, co
         QComboBox *combo = qobject_cast<QComboBox *>(editor);
         QString activity = combo->currentText();
 
-        QString queryString = QString("SELECT pid FROM shedule.vw_activity WHERE activity = '%1' ")
+        QString queryString = QString("SELECT pid FROM calendar.vw_activity WHERE activity = '%1' ")
                 .arg(activity);
         QSqlQuery query(queryString);
         while (query.next()) {

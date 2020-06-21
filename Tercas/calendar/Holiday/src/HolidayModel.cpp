@@ -7,7 +7,7 @@
 HolidayModel::HolidayModel(QObject *parent, QSqlDatabase db)
     : QSqlTableModel(parent, db)
 {
-    setTable("shedule.vw_holiday");
+    setTable("calendar.vw_holiday");
     setEditStrategy(QSqlTableModel::OnManualSubmit);
     generateRoleNames();
     select();

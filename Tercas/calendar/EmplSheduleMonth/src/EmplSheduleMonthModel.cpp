@@ -90,7 +90,7 @@ QVariant EmplSheduleMonthModel::data(const QModelIndex &idx, int role) const
 
                 int personPid = m_personPidArray.at(row);
                 QDate date = QDate(m_date.year(), m_date.month(), col + 1);
-                QString queryString = QString("SELECT activity_abbr FROM shedule.vw_empl_period "
+                QString queryString = QString("SELECT activity_abbr FROM calendar.vw_empl_period "
                                               "WHERE person_pid='%1' AND '%2' BETWEEN start_date AND end_date")
                         .arg(personPid)
                         .arg(date.toString("yyyy-MM-dd"));
@@ -112,7 +112,7 @@ QVariant EmplSheduleMonthModel::data(const QModelIndex &idx, int role) const
             {
                 int personPid = m_personPidArray.at(row);
                 QDate date = QDate(m_date.year(), m_date.month(), col + 1);
-                QString queryStr = QString("SELECT emplshedulenoteru FROM shedule.f_get_emplactivity(%1, '%2')")
+                QString queryStr = QString("SELECT emplshedulenoteru FROM calendar.f_get_emplactivity(%1, '%2')")
                         .arg(personPid)
                         .arg(date.toString("yyyy-MM-dd"));
                 QSqlQuery query(queryStr);
@@ -161,7 +161,7 @@ QVariant EmplSheduleMonthModel::data(const QModelIndex &idx, int role) const
         else // dayOfMonth role
         {
             QDate date = QDate(m_date.year(), m_date.month(), col - 1);
-            QString queryStr = QString("SELECT pid FROM shedule.vw_empl_period WHERE person_pid='%1' AND '%2' BETWEEN start_date AND end_date")
+            QString queryStr = QString("SELECT pid FROM calendar.vw_empl_period WHERE person_pid='%1' AND '%2' BETWEEN start_date AND end_date")
                     .arg(personPid)
                     .arg(date.toString("yyyy-MM-dd"));
             QSqlQuery query(queryStr);
@@ -280,7 +280,7 @@ QVariant EmplSheduleMonthModel::getPersonPid(int row) const
 QVariant EmplSheduleMonthModel::get(int personpid, int day) const
 {
     QDate date = QDate(m_date.year(), m_date.month(), day);
-    QString queryStr = QString("SELECT activity_abbr FROM shedule.vw_empl_period "
+    QString queryStr = QString("SELECT activity_abbr FROM calendar.vw_empl_period "
                                "WHERE person_pid='%1' AND '%2' BETWEEN start_date AND end_date")
             .arg(personpid)
             .arg(date.toString("yyyy-MM-dd"));
@@ -292,7 +292,7 @@ QVariant EmplSheduleMonthModel::get(int personpid, int day) const
 
     queryStr.clear();
     query.clear();
-    queryStr = QString("SELECT entactivityabbr FROM shedule.vw_entshedule "
+    queryStr = QString("SELECT entactivityabbr FROM calendar.vw_entshedule "
                        "WHERE date='%1'")
             .arg(date.toString("yyyy-MM-dd"));
     query.exec(queryStr);
@@ -308,7 +308,7 @@ bool EmplSheduleMonthModel::isHoliday(QDate date) const
 {
     date = date.addDays(1);
     bool isholiday = false;
-    QString queryStr = QString("SELECT shedule.f_isholiday('%1')")
+    QString queryStr = QString("SELECT calendar.f_isholiday('%1')")
             .arg(date.toString("yyyy-MM-dd"));
     QSqlQuery query(queryStr);
     while (query.next()) {
@@ -325,7 +325,7 @@ bool EmplSheduleMonthModel::isDayOff(QDate date) const
     if (date.dayOfWeek() == 6 || date.dayOfWeek() == 7)
         isdayoff = true;
 
-    QString queryStr = QString("SELECT shedule.f_isdayoff('%1')")
+    QString queryStr = QString("SELECT calendar.f_isdayoff('%1')")
             .arg(date.toString("yyyy-MM-dd"));
     QSqlQuery query(queryStr);
     while (query.next()) {
@@ -333,7 +333,7 @@ bool EmplSheduleMonthModel::isDayOff(QDate date) const
         if (check) isdayoff = true;
     }
 
-    queryStr = QString("SELECT shedule.f_isworkingday('%1')")
+    queryStr = QString("SELECT calendar.f_isworkingday('%1')")
             .arg(date.toString("yyyy-MM-dd"));
     query.clear();
     query = QSqlQuery(queryStr);
@@ -354,7 +354,7 @@ QVariant EmplSheduleMonthModel::getColor(int row, int column) const
     QDate date = QDate(m_date.year(), m_date.month(), column);
 
     QString queryStr = QString("SELECT activity_color "
-                               "FROM shedule.vw_empl_period "
+                               "FROM calendar.vw_empl_period "
                                "WHERE person_pid='%1' AND '%2' BETWEEN start_date AND end_date")
             .arg(personpid)
             .arg(date.toString("yyyy-MM-dd"));
@@ -367,7 +367,7 @@ QVariant EmplSheduleMonthModel::getColor(int row, int column) const
     queryStr.clear();
     query.clear();
 
-    queryStr = QString("SELECT entactivitycolor FROM shedule.vw_entshedule "
+    queryStr = QString("SELECT entactivitycolor FROM calendar.vw_entshedule "
                        "WHERE date='%1'")
             .arg(date.toString("yyyy-MM-dd"));
     query.exec(queryStr);
@@ -383,7 +383,7 @@ QVariant EmplSheduleMonthModel::getColor(int row, int column) const
 QVariant EmplSheduleMonthModel::getAbbr(int personpid, int day) const
 {
     QDate date = QDate(m_date.year(), m_date.month(), day);
-    QString queryStr = QString("SELECT activity_abbr FROM shedule.vw_empl_period "
+    QString queryStr = QString("SELECT activity_abbr FROM calendar.vw_empl_period "
                                "WHERE person_pid='%1' AND '%2' BETWEEN start_date AND end_date")
             .arg(personpid)
             .arg(date.toString("yyyy-MM-dd"));
@@ -395,7 +395,7 @@ QVariant EmplSheduleMonthModel::getAbbr(int personpid, int day) const
 
     queryStr.clear();
     query.clear();
-    queryStr = QString("SELECT activityabbr FROM shedule.vw_ent_shedule "
+    queryStr = QString("SELECT activityabbr FROM calendar.vw_ent_shedule "
                        "WHERE date='%1'")
             .arg(date.toString("yyyy-MM-dd"));
     query.exec(queryStr);
@@ -411,7 +411,7 @@ QVariant EmplSheduleMonthModel::getToolTip(int personpid, int day) const
 {
     QDate date = QDate(m_date.year(), m_date.month(), day);
 
-    QString queryStr = QString("SELECT activity_note FROM shedule.vw_empl_period "
+    QString queryStr = QString("SELECT activity_note FROM calendar.vw_empl_period "
                                "WHERE person_pid='%1' AND '%2' BETWEEN start_date AND end_date")
                                .arg(personpid)
                                .arg(date.toString("yyyy-MM-dd"));

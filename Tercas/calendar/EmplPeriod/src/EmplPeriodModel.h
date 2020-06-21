@@ -2,7 +2,7 @@
 
 #define PGSQL
 #define PGSQL_DATABASE "terkas"
-#define PGSQL_TABLENAME "shedule.vw_empl_period"
+#define PGSQL_TABLENAME "calendar.vw_empl_period"
 
 #include <QSqlTableModel>
 

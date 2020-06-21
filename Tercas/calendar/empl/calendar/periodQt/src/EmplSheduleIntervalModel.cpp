@@ -55,7 +55,7 @@ QVariant EmplSheduleIntervalModel::data(const QModelIndex &idx, int role) const
 //        if (role == Qt::DisplayRole)
 //        {
 //            int activitypid = QSqlTableModel::data(idx).toInt();
-//            QString queryString = QString("SELECT activity FROM shedule.vw_activity WHERE pid=%1").arg(activitypid);
+//            QString queryString = QString("SELECT activity FROM calendar.vw_activity WHERE pid=%1").arg(activitypid);
 //            QSqlQuery query(queryString);
 //            while (query.next()) {
 //                QString activity = query.value(0).toString();
@@ -149,7 +149,7 @@ QVariant EmplSheduleIntervalModel::data(const QModelIndex &idx, int role) const
 //            int row = idx.row();
 //            int col = fieldIndex("activitypid");
 //            int activitypid = QSqlTableModel::data(index(row, col)).toInt();
-//            QString queryString = QString("SELECT abbr FROM shedule.vw_activity WHERE pid=%1").arg(activitypid);
+//            QString queryString = QString("SELECT abbr FROM calendar.vw_activity WHERE pid=%1").arg(activitypid);
 //            QSqlQuery query(queryString);
 //            while (query.next()) {
 //                QString abbrString = query.value(0).toString();
@@ -169,7 +169,7 @@ QVariant EmplSheduleIntervalModel::data(const QModelIndex &idx, int role) const
 //            int row = idx.row();
 //            int col = fieldIndex("activitypid");
 //            int activitypid = QSqlTableModel::data(index(row, col)).toInt();
-//            QString queryString = QString("SELECT color FROM shedule.vw_activity WHERE pid=%1").arg(activitypid);
+//            QString queryString = QString("SELECT color FROM calendar.vw_activity WHERE pid=%1").arg(activitypid);
 //            QSqlQuery query(queryString);
 //            while (query.next()) {
 //                QString colorString = query.value(0).toString();
