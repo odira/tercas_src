@@ -18,8 +18,9 @@ void HolidayModel::generateRoleNames()
 
     m_roleNames[Qt::UserRole + 1 + 0] = QVariant(QString("pid").toUtf8()).toByteArray();
     m_roleNames[Qt::UserRole + 1 + 1] = QVariant(QString("date").toUtf8()).toByteArray();
-    m_roleNames[Qt::UserRole + 1 + 2] = QVariant(QString("type").toUtf8()).toByteArray();
-    m_roleNames[Qt::UserRole + 1 + 3] = QVariant(QString("note_ru").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + 2] = QVariant(QString("type_pid").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + 3] = QVariant(QString("type").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + 4] = QVariant(QString("note").toUtf8()).toByteArray();
 }
 
 //QStringList HolidayModel::roleNamesList() const
@@ -51,7 +52,7 @@ QVariant HolidayModel::data(const QModelIndex &idx, int role) const
     if (role == Qt::DisplayRole)
     {
         if (col == Column_date)
-            return QSqlTableModel::data(idx).toDate().toString("yyyy MMM dd");
+            return QSqlTableModel::data(idx).toDate();
         else
             return QSqlTableModel::data(idx);
     }

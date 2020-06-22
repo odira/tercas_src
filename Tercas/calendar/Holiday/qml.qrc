@@ -1,7 +1,14 @@
 <RCC>
     <qresource prefix="/">
-        <file alias="main.qml">qml/main.qml</file>
+        <file>qml/main.qml</file>
         <file alias="HolidayDialog.qml">qml/HolidayDialog.qml</file>
         <file alias="CalendarDialog.qml">qml/CalendarDialog.qml</file>
+        <file alias="MenuDialog.qml">qml/MenuDialog.qml</file>
+        <file alias="YesNoDialog.qml">qml/YesNoDialog.qml</file>
+        <file>images/arrow.jpg</file>
+        <file>images/quit.png</file>
+        <file>qml/DelegateList.qml</file>
+        <file>qml/DelegateSingle.qml</file>
+        <file>qml/Delegate.qml</file>
     </qresource>
 </RCC>

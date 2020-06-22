@@ -6,6 +6,7 @@ Dialog {
     id: holidayDialog
     title: qsTr("Детальная Информация")
     anchors.centerIn: parent
+    height: 500
     modal: true
     spacing: 10
 
@@ -55,7 +56,7 @@ Dialog {
             TextField {
                 id: dateField
                 Layout.fillWidth: true
-                text: holidayModel.get(currentRow).date
+                text: date //holidayModel.get(currentRow).date
             }
             RoundButton {
                 id: calendarButton
@@ -70,30 +71,35 @@ Dialog {
         ComboBox {
             id: typeCombo
             Layout.fillWidth: true
-            model:  [ 'Нерабочий праздничный день',
+            model:  [
+                'Нерабочий праздничный день',
                 'Выходной день',
                 'Рабочий день'
             ]
-            currentIndex: find(holidayModel.get(currentRow).holiday_type)
+            currentIndex: type_pid  // find(holidayModel.get(currentRow).type_pid)
         }
         TextArea {
-            id: noteRuField
+            id: noteField
             implicitWidth: 1100
             implicitHeight: 200
             background: Rectangle {
                 border.color: "black"
             }
             wrapMode: TextEdit.WordWrap
-            text: holidayModel.get(currentRow).note_ru
+            text: holidayModel.get(currentRow).note
         }
     }
 
-    footer: RowLayout {
-        Layout.fillWidth: true
+    footer: Item {
+//        Layout.fillWidth: true
+        width: holidayDialog.width
+        height: 70
 
         RowLayout {
-            Layout.fillHeight: true
-            Layout.alignment: Qt.AlignCenter
+//            Layout.fillHeight: true
+//            Layout.alignment: Qt.AlignCenter
+            anchors.fill: parent
+            anchors.margins: 10
 
             RoundButton {
                 id: editButton

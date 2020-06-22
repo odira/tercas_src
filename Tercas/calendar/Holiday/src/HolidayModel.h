@@ -13,10 +13,11 @@ class HolidayModel : public QSqlTableModel
 
 public:
     enum Columns {
-        Column_pid       = 0,
-        Column_date,    // 1
-        Column_type,    // 2
-        Column_note_ru, // 3
+        Column_pid        = 0,
+        Column_date,     // 1
+        Column_type_pid, // 2
+        Column_type,     // 3
+        Column_note,     // 4
 
         ColumnsNumber
     };

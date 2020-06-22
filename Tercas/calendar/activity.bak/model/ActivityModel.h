@@ -2,7 +2,7 @@
 
 #include <QSqlTableModel>
 
-#define PGSQL_TABLENAME "shedule.vw_activity"
+#define PGSQL_TABLENAME "calendar.vw_activity"
 
 
 class ActivityModel : public QSqlTableModel

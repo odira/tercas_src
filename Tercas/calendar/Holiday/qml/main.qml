@@ -1,129 +1,261 @@
-import QtQuick 2.12
+import QtQuick 2.15
+import QtQuick.Window 2.15
 import QtQuick.Controls 2.5
-import QtQuick.Layouts 1.4
+import QtQuick.Layouts 1.12
+import QtQml.Models 2.12
 
 ApplicationWindow {
     id: root
     visible: true
-    width: 1200
-    height: 800
-    title: qsTr("Производственный календарь праздничных, выходных и рабочих дней")
+    width: Screen.width * 3/4
+    height: Screen.height * 3/4
+    title: qsTr("Holiday Database")
 
-    header: Rectangle {
-        height: 40
-        color: "orange"
+    DelegateModel {
+        id: visualModel
+        delegate: Delegate {}
+        model: holidayModel
     }
 
-    contentData: TableView {
-        id: view
-        anchors.fill: parent
-//        anchors.topMargin: 2
-        anchors.margins: 5
-        model: holidayModel
-        columnSpacing: 2
-        rowSpacing: 5
-        clip: true
-        reuseItems: false
+    function showList() {
+        listView.currentIndex = singleView.currentIndex
+        view.state = 'inList';
+    }
+    function showSingle() {
+        singleView.currentIndex = listView.currentIndex
+        view.state = 'inSingle'
+    }
+    function addItem() {
 
-        property var columnWidths: [1, 100, 300, view.width - 100 - 300 - 1 - 1 - 1 - 1 - 1 - 1]
+    }
+    function deleteItem() {
 
-        columnWidthProvider: function (column) { return columnWidths[column] }
-        rowHeightProvider: function (row) { return 50 }
+    }
 
-        delegate: Rectangle {
-            TextField {
-                id: text
-                anchors.fill: parent
-                clip: true
-                text: display
-                hoverEnabled: true
-                horizontalAlignment: TextInput.AlignLeft
-                wrapMode: TextInput.WordWrap
-            }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    menuDialog.currentRow = row
-                    menuDialog.open()
+    header: Rectangle {
+        id: header
+        width: root.width
+        height: 70
+        border.color: 'pink'
+
+        RowLayout {
+            anchors.fill: parent
+            anchors.margins: 5
+
+            RoundButton {
+                id: listButton
+                Layout.fillHeight: true
+                Layout.preferredWidth: height
+                radius: 0
+
+                onClicked: view.state = 'inList'
+
+                background: Rectangle {
+                    color: 'white'
+                    border.color: 'pink'
+                }
+
+                Image {
+                    fillMode: Image.PreserveAspectFit
+                    anchors.centerIn: parent
+                    sourceSize.width: listButton.width
+                    sourceSize.height: listButton.height
+                    source: "qrc:images/arrow.jpg"
                 }
             }
+            // spacing
+            Item {
+                Layout.fillWidth: true
+            }
+            RoundButton {
+                id: quitButton
+                Layout.fillHeight: true
+                Layout.preferredWidth: height
+                radius: 0
+
+                onClicked: Qt.quit()
+
+                background: Rectangle {
+                    color: 'white'
+                    border.color: 'pink'
+                }
+
+                Image {
+                    fillMode: Image.PreserveAspectFit
+                    anchors.centerIn: parent
+                    sourceSize.width: quitButton.width
+                    sourceSize.height: quitButton.height
+                    source: "qrc:images/quit.png"
+                }
+            }
+
         }
     }
 
     footer: Rectangle {
-        height: 40
-        color: "orange"
-    }
+        id: footer
+        width: root.width
+        height: 70
+        border.color: 'pink'
 
-    Dialog {
-        id: menuDialog
-        width: parent.width / 4
-        anchors.centerIn: parent
-        modal: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+        RowLayout {
+//            anchors.fill: parent
+            anchors.centerIn: parent
+            height: parent.height - 10
+            anchors.margins: 5
 
-        property int currentRow: 0
-
-        contentItem: ColumnLayout {
             RoundButton {
-                Layout.fillWidth: true
-                radius: 2
-                text: qsTr("Show Item")
-                onClicked: {
-                    holidayDialog.currentRow = menuDialog.currentRow
-                    holidayDialog.currentState = "NORMAL"
-                    holidayDialog.open()
-                    menuDialog.close()
+                id: addButton
+                Layout.fillHeight: true
+                Layout.preferredWidth: 150
+                radius: 0
+                text: qsTr('Add Item')
+
+                onClicked: addItem()
+
+                background: Rectangle {
+                    color: 'orange'
+                    border.color: 'pink'
                 }
             }
             RoundButton {
-                Layout.fillWidth: true
-                radius: 2
-                text: qsTr("Add New Row")
-                onClicked: {
-                    holidayDialog.currentRow = menuDialog.currentRow
-                    holidayDialog.currentState = "ADD"
-                    holidayDialog.open()
-                    menuDialog.close()
+                id: deleteButton
+                Layout.fillHeight: true
+                Layout.preferredWidth: 150
+                radius: 0
+                text: qsTr('Delete Item')
+
+                onClicked: deleteItem()
+
+                background: Rectangle {
+                    color: 'orange'
+                    border.color: 'pink'
                 }
             }
-            RoundButton {
-                Layout.fillWidth: true
-                radius: 2
-                text: qsTr("Delete Current Row")
-                onClicked: {
-                    yesNoDialog.open()
-                    yesNoDialog.currentRow = menuDialog.currentRow
-                    menuDialog.close()
-                }
-            }
+
         }
     }
 
-    Dialog {
-        id: yesNoDialog
-        implicitWidth: menuDialog.width
-        anchors.centerIn: parent
-        modal: true
-        standardButtons: Dialog.Yes | Dialog.No
+    // CONTENT ITEM
+    contentData:  Item {
+        id: view
+        anchors.fill: parent
+        anchors.margins: 5
 
-        property int currentRow: 0
+        ScrollView {
+            id: scrollList
+            anchors.fill: parent
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+            ScrollBar.vertical.policy: ScrollBar.AlwaysOn
 
-        contentItem: ColumnLayout {
-            TextField {
-                Layout.fillWidth: true
-                text: qsTr("Are you sure?")
+            ListView {
+                id: listView
+                anchors.fill: parent
+                model: visualModel.parts.list
+                snapMode: ListView.SnapToItem
+                visible: true
+                clip: true
+                spacing: 5
+
+                headerPositioning: ListView.OverlayHeader
+                header: Item {
+                    width: view.width
+                    height: 60
+                    z: 2
+
+                    ColumnLayout {
+                        anchors.fill: parent
+                        spacing: 0
+
+                        RowLayout {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+
+                            TextField {
+                                Layout.preferredWidth: 50
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                text: qsTr('Дата')
+                                font.bold: true
+                                horizontalAlignment: TextField.AlignHCenter
+                                background: Rectangle {
+                                    color: 'lightblue'
+                                    border.color: 'pink'
+                                }
+                            }
+                            TextField {
+                                Layout.preferredWidth: 150
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                text: qsTr('Календарный день')
+                                horizontalAlignment: TextField.AlignHCenter
+                                background: Rectangle {
+                                    color: 'lightblue'
+                                    border.color: 'pink'
+                                }
+                            }
+                            TextField {
+                                Layout.preferredWidth: 200
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                text: qsTr('Примечание')
+                                horizontalAlignment: TextField.AlignHCenter
+                                background: Rectangle {
+                                    color: 'lightblue'
+                                    border.color: 'pink'
+                                }
+                            }
+                        }
+
+                        Rectangle {
+                            id: spacing2
+                            Layout.fillWidth: true
+                            height: 10
+                        }
+                    }
+                }
             }
         }
-        onAccepted: {
-            holidayModel.deleteRow(currentRow)
-            holidayModel.submitDB()
-            menuDialog.close()
-        }
-        onRejected: menuDialog.close()
-    }
 
-    HolidayDialog {
-        id: holidayDialog
+        ScrollView {
+            id: scrollSingle
+            anchors.fill: parent
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+
+            ListView {
+                id: singleView
+                anchors.fill: parent
+                model: visualModel.parts.single
+                snapMode: ListView.SnapOneItem
+                orientation: ListView.Horizontal
+                visible: true
+                clip: true
+                highlightMoveDuration: 0
+            }
+        }
+
+        state: 'inSingle'
+        states: [
+            State {
+                name: 'inList'
+                PropertyChanges { target: listView; visible: true; focus: true }
+                PropertyChanges { target: scrollList; visible: true }
+                PropertyChanges { target: scrollSingle; visible: false }
+                PropertyChanges { target: singleView; visible: false; focus: false }
+                PropertyChanges { target: listButton; enabled: false; opacity: 0.1 }
+                PropertyChanges { target: addButton; visible: true }
+                PropertyChanges { target: deleteButton; visible: true }
+            },
+            State {
+                name: 'inSingle'
+                PropertyChanges { target: listView; visible: false; focus: false }
+                PropertyChanges { target: scrollList; visible: false }
+                PropertyChanges { target: scrollSingle; visible: true }
+                PropertyChanges { target: singleView; visible: true; focus: true }
+                PropertyChanges { target: listButton; enabled: true; opacity: 0.9 }
+                PropertyChanges { target: addButton; visible: false }
+                PropertyChanges { target: deleteButton; visible: false }
+            }
+        ]
     }
 }
