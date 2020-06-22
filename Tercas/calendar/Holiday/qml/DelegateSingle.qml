@@ -6,7 +6,7 @@ Item {
     id: root
 
     function editItem() {
-
+        state = 'Edit'
     }
     function saveItem() {
 
@@ -16,7 +16,6 @@ Item {
     }
 
     ColumnLayout {
-        id: rootLayout
         anchors.fill: parent
 
         ColumnLayout {
@@ -45,62 +44,56 @@ Item {
                 Layout.fillHeight: true
             }
         }
-
-        Rectangle {
-            id: bottonBox
+        RowLayout {
+            id: buttonBox
             Layout.fillWidth: true
-            height: 70
-            border.color: 'pink'
+            Layout.fillHeight: false
+            Layout.preferredHeight: 70
 
-            RowLayout {
-                anchors.centerIn: parent
-                height: parent.height - 10
-                anchors.margins: 5
+            Item { Layout.fillWidth: true }
+            RoundButton {
+                id: editButton
+                Layout.fillHeight: true
+                Layout.preferredWidth: 150
+                radius: 0
+                text: qsTr('Edit')
 
-                RoundButton {
-                    id: editButton
-                    Layout.fillHeight: true
-                    Layout.preferredWidth: 150
-                    radius: 0
-                    text: qsTr('Edit')
+                onClicked: editItem()
 
-                    onClicked: editItem()
-
-                    background: Rectangle {
-                        color: 'orange'
-                        border.color: 'pink'
-                    }
+                background: Rectangle {
+                    color: 'orange'
+                    border.color: 'pink'
                 }
-                RoundButton {
-                    id: saveButton
-                    Layout.fillHeight: true
-                    Layout.preferredWidth: 150
-                    radius: 0
-                    text: qsTr('Save')
-
-                    onClicked: saveItem()
-
-                    background: Rectangle {
-                        color: 'orange'
-                        border.color: 'pink'
-                    }
-                }
-                RoundButton {
-                    id: deleteButton
-                    Layout.fillHeight: true
-                    Layout.preferredWidth: 150
-                    radius: 0
-                    text: qsTr('Discard')
-
-                    onClicked: discardItem()
-
-                    background: Rectangle {
-                        color: 'orange'
-                        border.color: 'pink'
-                    }
-                }
-
             }
+            RoundButton {
+                id: saveButton
+                Layout.fillHeight: true
+                Layout.preferredWidth: 150
+                radius: 0
+                text: qsTr('Save')
+
+                onClicked: saveItem()
+
+                background: Rectangle {
+                    color: 'orange'
+                    border.color: 'pink'
+                }
+            }
+            RoundButton {
+                id: discardButton
+                Layout.fillHeight: true
+                Layout.preferredWidth: 150
+                radius: 0
+                text: qsTr('Discard')
+
+                onClicked: discardItem()
+
+                background: Rectangle {
+                    color: 'orange'
+                    border.color: 'pink'
+                }
+            }
+            Item { Layout.fillWidth: true }
         }
     }
 
@@ -110,8 +103,16 @@ Item {
         State {
             name: 'Normal'
             PropertyChanges { target: widgetBox; enabled: false }
-            PropertyChanges { target: buttonBox; enabled: true }
+            PropertyChanges { target: editButton; visible: true }
+            PropertyChanges { target: saveButton; visible: false }
+            PropertyChanges { target: discardButton; visible: false }
+        },
+        State {
+            name: 'Edit'
+            PropertyChanges { target: widgetBox; enabled: true }
+            PropertyChanges { target: editButton; visible: false }
+            PropertyChanges { target: saveButton; visible: true }
+            PropertyChanges { target: discardButton; visible: true }
         }
-
     ]
 }
