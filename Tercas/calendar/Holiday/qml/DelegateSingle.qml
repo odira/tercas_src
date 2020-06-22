@@ -8,8 +8,14 @@ Item {
     function editItem() {
         state = 'Edit'
     }
-    function saveItem() {
+    function deleteItem() {
 
+    }
+    function saveItem() {
+        date = dateField.text
+        type = dateField.text
+        note = dateField.text
+        console.log(date + type + note)
     }
     function discardItem() {
 
@@ -66,6 +72,20 @@ Item {
                 }
             }
             RoundButton {
+                id: deleteButton
+                Layout.fillHeight: true
+                Layout.preferredWidth: 150
+                radius: 0
+                text: qsTr('Delete Item')
+
+                onClicked: deleteItem()
+
+                background: Rectangle {
+                    color: 'orange'
+                    border.color: 'pink'
+                }
+            }
+            RoundButton {
                 id: saveButton
                 Layout.fillHeight: true
                 Layout.preferredWidth: 150
@@ -104,6 +124,7 @@ Item {
             name: 'Normal'
             PropertyChanges { target: widgetBox; enabled: false }
             PropertyChanges { target: editButton; visible: true }
+            PropertyChanges { target: deleteButton; visible: true }
             PropertyChanges { target: saveButton; visible: false }
             PropertyChanges { target: discardButton; visible: false }
         },
@@ -111,6 +132,7 @@ Item {
             name: 'Edit'
             PropertyChanges { target: widgetBox; enabled: true }
             PropertyChanges { target: editButton; visible: false }
+            PropertyChanges { target: deleteButton; visible: false }
             PropertyChanges { target: saveButton; visible: true }
             PropertyChanges { target: discardButton; visible: true }
         }

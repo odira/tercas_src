@@ -28,9 +28,6 @@ ApplicationWindow {
     function addItem() {
 
     }
-    function deleteItem() {
-        YesNoDialog.show()
-    }
 
     header: Rectangle {
         id: header
@@ -197,21 +194,6 @@ ApplicationWindow {
                                 border.color: 'pink'
                             }
                         }
-                        RoundButton {
-                            id: deleteButton
-                            Layout.fillHeight: true
-                            Layout.preferredWidth: 150
-                            radius: 0
-                            text: qsTr('Delete Item')
-
-                            onClicked: deleteItem()
-
-                            background: Rectangle {
-                                color: 'orange'
-                                border.color: 'pink'
-                            }
-                        }
-
                     }
                 }
 
