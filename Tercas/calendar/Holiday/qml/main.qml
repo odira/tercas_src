@@ -29,7 +29,7 @@ ApplicationWindow {
 
     }
     function deleteItem() {
-
+        YesNoDialog.show()
     }
 
     header: Rectangle {
@@ -91,50 +91,6 @@ ApplicationWindow {
 
         }
     }
-
-//    footer: Rectangle {
-//        id: footer
-//        width: root.width
-//        height: 70
-//        border.color: 'pink'
-
-//        RowLayout {
-////            anchors.fill: parent
-//            anchors.centerIn: parent
-//            height: parent.height - 10
-//            anchors.margins: 5
-
-//            RoundButton {
-//                id: addButton
-//                Layout.fillHeight: true
-//                Layout.preferredWidth: 150
-//                radius: 0
-//                text: qsTr('Add Item')
-
-//                onClicked: addItem()
-
-//                background: Rectangle {
-//                    color: 'orange'
-//                    border.color: 'pink'
-//                }
-//            }
-//            RoundButton {
-//                id: deleteButton
-//                Layout.fillHeight: true
-//                Layout.preferredWidth: 150
-//                radius: 0
-//                text: qsTr('Delete Item')
-
-//                onClicked: deleteItem()
-
-//                background: Rectangle {
-//                    color: 'orange'
-//                    border.color: 'pink'
-//                }
-//            }
-
-//        }
-//    }
 
     // CONTENT ITEM
     contentData:  Item {
@@ -223,7 +179,6 @@ ApplicationWindow {
                     z: 2
 
                     RowLayout {
-            //            anchors.fill: parent
                         anchors.centerIn: parent
                         height: parent.height - 10
                         anchors.margins: 5
@@ -260,6 +215,9 @@ ApplicationWindow {
                     }
                 }
 
+                highlight: Rectangle {
+                    color: 'yellow'
+                }
             }
         }
 

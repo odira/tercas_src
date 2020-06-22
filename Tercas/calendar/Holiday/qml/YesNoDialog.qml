@@ -18,9 +18,9 @@ Dialog {
         }
     }
     onAccepted: {
-        holidayModel.deleteRow(currentRow)
-        holidayModel.submitDB()
-        menuDialog.close()
+//        holidayModel.deleteRow(currentRow)
+//        holidayModel.submitDB()
+//        menuDialog.close()
     }
-    onRejected: menuDialog.close()
+//    onRejected: menuDialog.close()
 }
