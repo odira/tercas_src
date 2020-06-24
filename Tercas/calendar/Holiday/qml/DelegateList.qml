@@ -42,4 +42,15 @@ Item {
             showSingle()
         }
     }
+
+
+            focus: true
+            Keys.onDownPressed: {
+                currentIndex = currentIndex + 1
+            }
+            Keys.onPressed: {
+                console.log(currentIndex)
+            }
+
+
 }

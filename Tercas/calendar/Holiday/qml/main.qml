@@ -110,6 +110,9 @@ ApplicationWindow {
                 clip: true
                 spacing: 5
 
+                highlight: Rectangle { color: 'yellow' }
+                keyNavigationEnabled: true
+
                 headerPositioning: ListView.OverlayHeader
                 header: Item {
                     width: view.width
@@ -195,10 +198,6 @@ ApplicationWindow {
                             }
                         }
                     }
-                }
-
-                highlight: Rectangle {
-                    color: 'yellow'
                 }
             }
         }
