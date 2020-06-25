@@ -3,6 +3,7 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
 Item {
+
     RowLayout {
         anchors.fill: parent
 
@@ -14,6 +15,7 @@ Item {
             font.bold: true
             background: Rectangle {
                 border.color: 'pink'
+                color: listView.currentIndex === index ? 'red' : 'transparent'
             }
         }
         TextField {
@@ -35,6 +37,7 @@ Item {
             }
         }
     }
+
     MouseArea {
         anchors.fill: parent
         onClicked: {
@@ -43,14 +46,10 @@ Item {
         }
     }
 
-
-            focus: true
-            Keys.onDownPressed: {
-                currentIndex = currentIndex + 1
-            }
-            Keys.onPressed: {
-                console.log(currentIndex)
-            }
-
-
+//    Keys.onDownPressed: {
+//        currentIndex = currentIndex + 1
+//    }
+//    Keys.onPressed: {
+//        console.log(currentIndex)
+//    }
 }

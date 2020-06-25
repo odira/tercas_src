@@ -100,22 +100,26 @@ ApplicationWindow {
             anchors.fill: parent
             ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
             ScrollBar.vertical.policy: ScrollBar.AlwaysOn
+            focus: true
 
             ListView {
                 id: listView
                 anchors.fill: parent
                 model: visualModel.parts.list
-                snapMode: ListView.SnapToItem
+                snapMode: ListView.SnapOneItem
                 visible: true
                 clip: true
                 spacing: 5
+                boundsBehavior: ListView.StopAtBounds
 
                 highlight: Rectangle { color: 'yellow' }
                 keyNavigationEnabled: true
+                highlightFollowsCurrentItem: true
 
                 headerPositioning: ListView.OverlayHeader
                 header: Item {
-                    width: view.width
+                    id: listHeader
+                    width: listView.width
                     height: 60
                     z: 2
 
@@ -173,8 +177,8 @@ ApplicationWindow {
 
                 footerPositioning: ListView.OverlayHeader
                 footer: Rectangle {
-                    id: footer
-                    width: view.width
+                    id: listFooter
+                    width: listView.width
                     height: 70
                     z: 2
 
