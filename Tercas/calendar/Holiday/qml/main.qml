@@ -90,124 +90,52 @@ ApplicationWindow {
     }
 
     // CONTENT ITEM
-    contentData:  Item {
+    contentData: Item {
         id: view
         anchors.fill: parent
-        anchors.margins: 5
 
-        ScrollView {
-            id: scrollList
+        ColumnLayout {
+            id: list
             anchors.fill: parent
-            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-            ScrollBar.vertical.policy: ScrollBar.AlwaysOn
-            focus: true
+            anchors.margins: 5
 
-            ListView {
-                id: listView
-                anchors.fill: parent
-                model: visualModel.parts.list
-                snapMode: ListView.SnapOneItem
-                visible: true
-                clip: true
-                spacing: 5
-                boundsBehavior: ListView.StopAtBounds
+            ListHeader {
+                id: listHeader
+                Layout.fillWidth: true
+                Layout.preferredHeight: 60
+            }
+            ScrollView {
+                id: scrollList
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                ScrollBar.vertical.policy: ScrollBar.AlwaysOn
+                focus: true
 
-                highlight: Rectangle { color: 'yellow' }
-                keyNavigationEnabled: true
-                highlightFollowsCurrentItem: true
+                ListView {
+                    id: listView
+                    anchors.fill: parent
+                    model: visualModel.parts.list
+                    snapMode: ListView.SnapOneItem
+                    clip: true
+                    spacing: 5
+                    boundsBehavior: ListView.StopAtBounds
 
-                headerPositioning: ListView.OverlayHeader
-                header: Item {
-                    id: listHeader
-                    width: listView.width
-                    height: 60
-                    z: 2
-
-                    ColumnLayout {
-                        anchors.fill: parent
-                        spacing: 0
-
-                        RowLayout {
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-
-                            TextField {
-                                Layout.preferredWidth: 50
-                                Layout.fillWidth: true
-                                Layout.fillHeight: true
-                                text: qsTr('Дата')
-                                font.bold: true
-                                horizontalAlignment: TextField.AlignHCenter
-                                background: Rectangle {
-                                    color: 'lightblue'
-                                    border.color: 'pink'
-                                }
-                            }
-                            TextField {
-                                Layout.preferredWidth: 150
-                                Layout.fillWidth: true
-                                Layout.fillHeight: true
-                                text: qsTr('Календарный день')
-                                horizontalAlignment: TextField.AlignHCenter
-                                background: Rectangle {
-                                    color: 'lightblue'
-                                    border.color: 'pink'
-                                }
-                            }
-                            TextField {
-                                Layout.preferredWidth: 200
-                                Layout.fillWidth: true
-                                Layout.fillHeight: true
-                                text: qsTr('Примечание')
-                                horizontalAlignment: TextField.AlignHCenter
-                                background: Rectangle {
-                                    color: 'lightblue'
-                                    border.color: 'pink'
-                                }
-                            }
-                        }
-
-                        Rectangle {
-                            id: spacing2
-                            Layout.fillWidth: true
-                            height: 10
-                        }
-                    }
+                    highlight: Rectangle { color: 'yellow' }
+                    highlightFollowsCurrentItem: true
+                    highlightMoveDuration: 0
                 }
 
-                footerPositioning: ListView.OverlayHeader
-                footer: Rectangle {
-                    id: listFooter
-                    width: listView.width
-                    height: 70
-                    z: 2
-
-                    RowLayout {
-                        anchors.centerIn: parent
-                        height: parent.height - 10
-                        anchors.margins: 5
-
-                        RoundButton {
-                            id: addButton
-                            Layout.fillHeight: true
-                            Layout.preferredWidth: 150
-                            radius: 0
-                            text: qsTr('Add Item')
-
-                            onClicked: addItem()
-
-                            background: Rectangle {
-                                color: 'orange'
-                                border.color: 'pink'
-                            }
-                        }
-                    }
-                }
+            }
+            ListFooter {
+                id: listFooter
+                Layout.fillWidth: true
+                Layout.preferredHeight: 70
             }
         }
 
         ScrollView {
-            id: scrollSingle
+            id: single
             anchors.fill: parent
             ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
@@ -227,18 +155,19 @@ ApplicationWindow {
         states: [
             State {
                 name: 'inList'
-                PropertyChanges { target: listView; visible: true; focus: true }
-                PropertyChanges { target: scrollList; visible: true }
-                PropertyChanges { target: scrollSingle; visible: false }
-                PropertyChanges { target: singleView; visible: false; focus: false }
+                PropertyChanges { target: list; visible: true }
+                PropertyChanges { target: scrollList; focus: true }
+                PropertyChanges { target: listView; focus: true }
+                PropertyChanges { target: single; visible: false }
+                PropertyChanges { target: singleView; focus: false }
                 PropertyChanges { target: listButton; enabled: false; opacity: 0.1 }
             },
             State {
                 name: 'inSingle'
-                PropertyChanges { target: listView; visible: false; focus: false }
-                PropertyChanges { target: scrollList; visible: false }
-                PropertyChanges { target: scrollSingle; visible: true }
-                PropertyChanges { target: singleView; visible: true; focus: true }
+                PropertyChanges { target: list; visible: false; focus: false }
+                PropertyChanges { target: listView; focus: false }
+                PropertyChanges { target: single; visible: true }
+                PropertyChanges { target: singleView; focus: true }
                 PropertyChanges { target: listButton; enabled: true; opacity: 0.9 }
             }
         ]

@@ -7,15 +7,15 @@ Package {
     DelegateList {
         id: listDelegate
         Package.name: 'list'
-        width: parent.width
+        width: listView.width
         height: 50
     }
 
     DelegateSingle {
         id: singleDelegate
         Package.name: 'single'
-        width: view.width
-        height: view.height
+        width: singleView.width
+        height: singleView.height
         anchors.margins: 5
     }
 

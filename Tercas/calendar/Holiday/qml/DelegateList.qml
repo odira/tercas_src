@@ -15,7 +15,7 @@ Item {
             font.bold: true
             background: Rectangle {
                 border.color: 'pink'
-                color: listView.currentIndex === index ? 'red' : 'transparent'
+                color: ListView.isCurrentItem ? 'lightblue' : 'transparent' //listView.currentIndex === index ? 'lightblue' : 'transparent'
             }
         }
         TextField {
@@ -23,6 +23,7 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
             text: type
+            font.bold: ListView.isCurrentItem ? true : false
             background: Rectangle {
                 border.color: 'pink'
             }
@@ -44,6 +45,11 @@ Item {
             listView.currentIndex = index
             showSingle()
         }
+    }
+
+    Keys.onReturnPressed: {
+        listView.currentIndex = index
+        showSingle()
     }
 
 //    Keys.onDownPressed: {

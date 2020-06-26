@@ -53,6 +53,10 @@ QVariant HolidayModel::data(const QModelIndex &idx, int role) const
     {
         if (col == Column_date)
             return QSqlTableModel::data(idx).toDate();
+        else if (col == Columns::Column_note) {
+            QString note = QSqlTableModel::data(idx).toString();
+            return note;
+        }
         else
             return QSqlTableModel::data(idx);
     }

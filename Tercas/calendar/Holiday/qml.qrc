@@ -10,5 +10,7 @@
         <file>qml/DelegateList.qml</file>
         <file>qml/DelegateSingle.qml</file>
         <file>qml/Delegate.qml</file>
+        <file>qml/ListHeader.qml</file>
+        <file>qml/ListFooter.qml</file>
     </qresource>
 </RCC>
