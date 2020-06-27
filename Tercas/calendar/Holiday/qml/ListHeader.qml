@@ -4,15 +4,21 @@ import QtQuick.Layouts 1.12
 
 RowLayout {
 
+    property string backgroundColor: '#F45104'
+    property string fontColor: 'white'
+    property int fontSize: 14
+
     TextField {
         Layout.preferredWidth: 50
         Layout.fillWidth: true
         Layout.fillHeight: true
         text: qsTr('Дата')
         font.bold: true
+        font.pixelSize: fontSize
+        color: fontColor
         horizontalAlignment: TextField.AlignHCenter
         background: Rectangle {
-            color: 'lightblue'
+            color: backgroundColor
             border.color: 'pink'
         }
     }
@@ -21,9 +27,12 @@ RowLayout {
         Layout.fillWidth: true
         Layout.fillHeight: true
         text: qsTr('Календарный день')
+        font.bold: true
+        font.pixelSize: fontSize
+        color: fontColor
         horizontalAlignment: TextField.AlignHCenter
         background: Rectangle {
-            color: 'lightblue'
+            color: backgroundColor
             border.color: 'pink'
         }
     }
@@ -32,9 +41,12 @@ RowLayout {
         Layout.fillWidth: true
         Layout.fillHeight: true
         text: qsTr('Примечание')
+        font.bold: true
+        font.pixelSize: fontSize
+        color: fontColor
         horizontalAlignment: TextField.AlignHCenter
         background: Rectangle {
-            color: 'lightblue'
+            color: backgroundColor
             border.color: 'pink'
         }
     }

@@ -3,19 +3,25 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
 Item {
+    id: listDelegate
+
+    property bool isCurIdx: ListView.isCurrentItem
 
     RowLayout {
         anchors.fill: parent
+        anchors.topMargin: 5
+        anchors.bottomMargin: 5
 
         TextField {
             Layout.preferredWidth: 50
             Layout.fillWidth: true
             Layout.fillHeight: true
             text: date.toLocaleDateString(Qt.locale("ru_RU"), "dd MMMM yyyy")
-            font.bold: true
+            font.bold: isCurIdx ? true : false
+            font.pixelSize: isCurIdx ? 13 : 12
             background: Rectangle {
                 border.color: 'pink'
-                color: ListView.isCurrentItem ? 'lightblue' : 'transparent' //listView.currentIndex === index ? 'lightblue' : 'transparent'
+                color: isCurIdx ? '#FFB900' : 'transparent'
             }
         }
         TextField {
@@ -23,9 +29,11 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
             text: type
-            font.bold: ListView.isCurrentItem ? true : false
+            font.bold: isCurIdx ? true : false
+            font.pixelSize: isCurIdx ? 13 : 12
             background: Rectangle {
                 border.color: 'pink'
+                color: isCurIdx ? '#FFB900' : 'transparent'
             }
         }
         TextField {
@@ -33,8 +41,11 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
             text: note
+            font.bold: isCurIdx ? true : false
+            font.pixelSize: isCurIdx ? 13 : 12
             background: Rectangle {
                 border.color: 'pink'
+                color: isCurIdx ? '#FFB900' : 'transparent'
             }
         }
     }
@@ -51,11 +62,4 @@ Item {
         listView.currentIndex = index
         showSingle()
     }
-
-//    Keys.onDownPressed: {
-//        currentIndex = currentIndex + 1
-//    }
-//    Keys.onPressed: {
-//        console.log(currentIndex)
-//    }
 }

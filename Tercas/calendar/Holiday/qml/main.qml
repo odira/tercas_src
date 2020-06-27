@@ -26,7 +26,7 @@ ApplicationWindow {
         view.state = 'inSingle'
     }
     function addItem() {
-
+        console.log('Add')
     }
 
     header: Rectangle {
@@ -46,6 +46,8 @@ ApplicationWindow {
                 radius: 0
 
                 onClicked: view.state = 'inList'
+
+
 
                 background: Rectangle {
                     color: 'white'
@@ -130,7 +132,7 @@ ApplicationWindow {
             ListFooter {
                 id: listFooter
                 Layout.fillWidth: true
-                Layout.preferredHeight: 70
+                Layout.preferredHeight: 60
             }
         }
 

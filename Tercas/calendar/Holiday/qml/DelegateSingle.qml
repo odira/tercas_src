@@ -3,7 +3,7 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
 Item {
-    id: root
+    id: singleDelegate
 
     function editItem() {
         state = 'Edit'
@@ -23,6 +23,7 @@ Item {
 
     ColumnLayout {
         anchors.fill: parent
+        anchors.margins: 5
 
         ColumnLayout {
             id: widgetBox

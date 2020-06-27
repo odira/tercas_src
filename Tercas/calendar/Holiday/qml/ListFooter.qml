@@ -11,11 +11,12 @@ RowLayout {
         Layout.preferredWidth: 150
         radius: 0
         text: qsTr('Add Item')
+        font.bold: true
 
         onClicked: addItem()
 
         background: Rectangle {
-            color: 'orange'
+            color: '#F45104'
             border.color: 'pink'
         }
     }
