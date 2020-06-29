@@ -41,10 +41,8 @@ ApplicationWindow {
     }
 
     function addItem() {
-        console.log('Add')
-        showSingle();
-//        singleView.state = 'Edit'
-        singleDelegate.edit()
+        showSingle()
+        singleView.contentItem.children[0].state = 'Add'
     }
     function deleteItem() {
         console.log('Delete')
