@@ -16,11 +16,13 @@ ApplicationWindow {
         model: holidayModel
         delegate: Package {
             ListDelegate {
+                id: listDelegate
                 Package.name: 'list'
                 width: listView.width
                 height: 50
             }
             SingleDelegate {
+                id: singleDelegate
                 Package.name: 'single'
                 width: singleView.width
                 height: singleView.height
@@ -42,6 +44,7 @@ ApplicationWindow {
         console.log('Add')
         showSingle();
 //        singleView.state = 'Edit'
+        singleDelegate.edit()
     }
     function deleteItem() {
         console.log('Delete')

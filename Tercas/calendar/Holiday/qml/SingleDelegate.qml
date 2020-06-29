@@ -3,7 +3,7 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
 Item {
-    id: singleDelegate
+//    id: singleDelegate
 
     function edit() {
         console.log('Edit')
@@ -51,21 +51,21 @@ Item {
         }
     }
 
-    state: 'Normal'
+//    state: 'Normal'
     states: [
         State {
             name: 'Normal'
             PropertyChanges { target: widgetBox; enabled: false }
-            PropertyChanges { target: editButton; visible: true }
-            PropertyChanges { target: saveButton; visible: false }
-            PropertyChanges { target: discardButton; visible: false }
+//            PropertyChanges { target: editButton; visible: true }
+//            PropertyChanges { target: saveButton; visible: false }
+//            PropertyChanges { target: discardButton; visible: false }
         },
         State {
             name: 'Edit'
             PropertyChanges { target: widgetBox; enabled: true }
-            PropertyChanges { target: editButton; visible: false }
-            PropertyChanges { target: saveButton; visible: true }
-            PropertyChanges { target: discardButton; visible: true }
+//            PropertyChanges { target: editButton; visible: false }
+//            PropertyChanges { target: saveButton; visible: true }
+//            PropertyChanges { target: discardButton; visible: true }
         }
     ]
 }
