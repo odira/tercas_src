@@ -47,8 +47,6 @@ ApplicationWindow {
 
                 onClicked: view.state = 'inList'
 
-
-
                 background: Rectangle {
                     color: 'white'
                     border.color: 'pink'

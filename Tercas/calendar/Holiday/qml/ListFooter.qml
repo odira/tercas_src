@@ -3,6 +3,8 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
 RowLayout {
+//    anchors.fill: parent
+//    anchors.margins: 5
     Layout.alignment: Qt.AlignHCenter
 
     RoundButton {

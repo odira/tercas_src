@@ -24,6 +24,7 @@ Item {
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: 5
+        spacing: 10
 
         ColumnLayout {
             id: widgetBox
@@ -51,6 +52,7 @@ Item {
                 Layout.fillHeight: true
             }
         }
+
         RowLayout {
             id: buttonBox
             Layout.fillWidth: true
@@ -58,6 +60,7 @@ Item {
             Layout.preferredHeight: 70
 
             Item { Layout.fillWidth: true }
+
             RoundButton {
                 id: editButton
                 Layout.fillHeight: true
