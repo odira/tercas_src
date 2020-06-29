@@ -6,14 +6,14 @@ RowLayout {
     Layout.alignment: Qt.AlignHCenter
 
     RoundButton {
-        id: addButton
+        id: editButton
         Layout.fillHeight: true
         Layout.preferredWidth: 150
         radius: 0
-        text: qsTr('Add Item')
+        text: qsTr('Edit')
         font.bold: true
 
-        onClicked: addItem()
+        onClicked: edit()
 
         background: Rectangle {
             color: '#F45104'
@@ -21,19 +21,33 @@ RowLayout {
         }
     }
     RoundButton {
-        id: deleteButton
+        id: saveButton
         Layout.fillHeight: true
         Layout.preferredWidth: 150
         radius: 0
-        text: qsTr('Delete Item')
+        text: qsTr('Save')
         font.bold: true
 
-        onClicked: deleteItem()
+        onClicked: save()
 
         background: Rectangle {
             color: '#F45104'
             border.color: 'pink'
         }
     }
+    RoundButton {
+        id: discardButton
+        Layout.fillHeight: true
+        Layout.preferredWidth: 150
+        radius: 0
+        text: qsTr('Discard')
+        font.bold: true
 
+        onClicked: discard()
+
+        background: Rectangle {
+            color: '#F45104'
+            border.color: 'pink'
+        }
+    }
 }

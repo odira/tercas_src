@@ -7,10 +7,10 @@
         <file>qml/YesNoDialog.qml</file>
         <file>images/arrow.jpg</file>
         <file>images/quit.png</file>
-        <file>qml/DelegateList.qml</file>
-        <file>qml/DelegateSingle.qml</file>
-        <file>qml/Delegate.qml</file>
+        <file>qml/ListDelegate.qml</file>
+        <file>qml/SingleDelegate.qml</file>
         <file>qml/ListHeader.qml</file>
         <file>qml/ListFooter.qml</file>
+        <file>qml/SingleFooter.qml</file>
     </qresource>
 </RCC>

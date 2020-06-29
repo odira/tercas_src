@@ -13,8 +13,20 @@ ApplicationWindow {
 
     DelegateModel {
         id: visualModel
-        delegate: Delegate {}
         model: holidayModel
+        delegate: Package {
+            ListDelegate {
+                Package.name: 'list'
+                width: listView.width
+                height: 50
+            }
+            SingleDelegate {
+                Package.name: 'single'
+                width: singleView.width
+                height: singleView.height
+                anchors.margins: 5
+            }
+        }
     }
 
     function showList() {
@@ -25,8 +37,14 @@ ApplicationWindow {
         singleView.currentIndex = listView.currentIndex
         view.state = 'inSingle'
     }
+
     function addItem() {
         console.log('Add')
+        showSingle();
+//        singleView.state = 'Edit'
+    }
+    function deleteItem() {
+        console.log('Delete')
     }
 
     header: Rectangle {
@@ -93,15 +111,16 @@ ApplicationWindow {
     contentData: Item {
         id: view
         anchors.fill: parent
+        anchors.margins: 5
 
         ColumnLayout {
             id: list
             anchors.fill: parent
-            anchors.margins: 5
 
             ListHeader {
                 id: listHeader
                 Layout.fillWidth: true
+                Layout.fillHeight: false
                 Layout.preferredHeight: 60
             }
             ScrollView {
@@ -114,7 +133,8 @@ ApplicationWindow {
 
                 ListView {
                     id: listView
-                    anchors.fill: parent
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
                     model: visualModel.parts.list
                     snapMode: ListView.SnapOneItem
                     clip: true
@@ -130,28 +150,43 @@ ApplicationWindow {
             ListFooter {
                 id: listFooter
                 Layout.fillWidth: true
+                Layout.fillHeight: false
                 Layout.preferredHeight: 60
             }
         }
 
-        ScrollView {
+        ColumnLayout {
             id: single
             anchors.fill: parent
-            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
-            ListView {
-                id: singleView
-                anchors.fill: parent
-                model: visualModel.parts.single
-                snapMode: ListView.SnapOneItem
-                orientation: ListView.Horizontal
-                visible: true
-                clip: true
-                highlightMoveDuration: 0
+            ScrollView {
+                id: scrollSingle
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+
+                ListView {
+                    id: singleView
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    model: visualModel.parts.single
+                    snapMode: ListView.SnapOneItem
+                    orientation: ListView.Horizontal
+                    visible: true
+                    clip: true
+                    highlightMoveDuration: 0
+                }
+            }
+            SingleFooter {
+                id: singleFooter
+                Layout.fillWidth: true
+                Layout.fillHeight: false
+                Layout.preferredHeight: 60
             }
         }
 
         state: 'inList'
+//        state: 'inSingle'
         states: [
             State {
                 name: 'inList'
