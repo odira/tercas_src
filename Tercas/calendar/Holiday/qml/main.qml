@@ -24,8 +24,8 @@ ApplicationWindow {
             SingleDelegate {
                 id: singleDelegate
                 Package.name: 'single'
-                width: singleView.width
-                height: singleView.height
+                width: single.width
+                height: single.height
                 anchors.margins: 5
             }
         }
@@ -159,37 +159,42 @@ ApplicationWindow {
             }
         }
 
-        ColumnLayout {
+        SingleItem {
             id: single
             anchors.fill: parent
-
-            ScrollView {
-                id: scrollSingle
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-
-                ListView {
-                    id: singleView
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    model: visualModel.parts.single
-                    snapMode: ListView.SnapOneItem
-                    orientation: ListView.Horizontal
-                    visible: true
-                    clip: true
-                    boundsBehavior: ListView.StopAtBounds
-
-                    highlightMoveDuration: 0
-                }
-            }
-            SingleFooter {
-                id: singleFooter
-                Layout.fillWidth: true
-                Layout.fillHeight: false
-                Layout.preferredHeight: 60
-            }
         }
+
+//        ColumnLayout {
+//            id: single
+//            anchors.fill: parent
+
+//            ScrollView {
+//                id: scrollSingle
+//                Layout.fillWidth: true
+//                Layout.fillHeight: true
+//                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+
+//                ListView {
+//                    id: singleView
+//                    Layout.fillWidth: true
+//                    Layout.fillHeight: true
+//                    model: visualModel.parts.single
+//                    snapMode: ListView.SnapOneItem
+//                    orientation: ListView.Horizontal
+//                    visible: true
+//                    clip: true
+//                    boundsBehavior: ListView.StopAtBounds
+
+//                    highlightMoveDuration: 0
+//                }
+//            }
+//            SingleFooter {
+//                id: singleFooter
+//                Layout.fillWidth: true
+//                Layout.fillHeight: false
+//                Layout.preferredHeight: 60
+//            }
+//        }
 
         state: 'inList'
 //        state: 'inSingle'

@@ -12,5 +12,6 @@
         <file>qml/ListHeader.qml</file>
         <file>qml/ListFooter.qml</file>
         <file>qml/SingleFooter.qml</file>
+        <file>qml/SingleItem.qml</file>
     </qresource>
 </RCC>

@@ -34,7 +34,6 @@ Item {
                 id: dateField
                 Layout.fillWidth: true
                 text: date.toLocaleDateString(Qt.locale("ru_RU"), "dd MMMM yyyy")
-//                canUndo: true
             }
             TextField {
                 id: typeField
