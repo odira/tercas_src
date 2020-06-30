@@ -15,7 +15,8 @@ Item {
         note = dateField.text
     }
     function discard() {
-
+        console.log('Undo')
+        dateField.undo()
     }
 
     ColumnLayout {
@@ -33,6 +34,7 @@ Item {
                 id: dateField
                 Layout.fillWidth: true
                 text: date.toLocaleDateString(Qt.locale("ru_RU"), "dd MMMM yyyy")
+//                canUndo: true
             }
             TextField {
                 id: typeField

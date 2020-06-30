@@ -32,11 +32,9 @@ ApplicationWindow {
     }
 
     function showList() {
-        listView.currentIndex = singleView.currentIndex
         view.state = 'inList';
     }
     function showSingle() {
-        singleView.currentIndex = listView.currentIndex
         view.state = 'inSingle'
     }
 
@@ -132,6 +130,10 @@ ApplicationWindow {
                 ScrollBar.vertical.policy: ScrollBar.AlwaysOn
                 focus: true
 
+                background: Rectangle {
+                    color: '#F2F4F9'
+                }
+
                 ListView {
                     id: listView
                     Layout.fillWidth: true
@@ -142,11 +144,12 @@ ApplicationWindow {
                     spacing: 5
                     boundsBehavior: ListView.StopAtBounds
 
-                    highlight: Rectangle { color: 'yellow' }
-                    highlightFollowsCurrentItem: true
-                    highlightMoveDuration: 0
-                }
+//                    highlight: Rectangle { color: 'yellow' }
+//                    highlightFollowsCurrentItem: true
+//                    highlightMoveDuration: 0
 
+                    onCurrentIndexChanged: singleView.currentIndex = currentIndex
+                }
             }
             ListFooter {
                 id: listFooter
@@ -175,6 +178,8 @@ ApplicationWindow {
                     orientation: ListView.Horizontal
                     visible: true
                     clip: true
+                    boundsBehavior: ListView.StopAtBounds
+
                     highlightMoveDuration: 0
                 }
             }

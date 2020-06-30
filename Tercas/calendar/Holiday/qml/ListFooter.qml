@@ -5,6 +5,8 @@ import QtQuick.Layouts 1.12
 RowLayout {
     Layout.alignment: Qt.AlignHCenter
 
+    property color buttonBackground: "#8EC9BB"
+
     RoundButton {
         id: addButton
         Layout.fillHeight: true
@@ -16,7 +18,7 @@ RowLayout {
         onClicked: addItem()
 
         background: Rectangle {
-            color: '#F45104'
+            color: buttonBackground
             border.color: 'pink'
         }
     }
@@ -31,7 +33,7 @@ RowLayout {
         onClicked: deleteItem()
 
         background: Rectangle {
-            color: '#F45104'
+            color: buttonBackground
             border.color: 'pink'
         }
     }

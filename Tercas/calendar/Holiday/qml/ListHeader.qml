@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.12
 
 RowLayout {
 
-    property string backgroundColor: '#F45104'
+    property string backgroundColor: '#FA6E4F'
     property string fontColor: 'white'
     property int fontSize: 14
 

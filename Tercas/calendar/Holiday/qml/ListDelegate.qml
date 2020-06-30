@@ -3,14 +3,13 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
 Item {
-//    id: listDelegate
 
     property bool isCurIdx: ListView.isCurrentItem
+    property color selectedColor: '#F5D788'
+    property color nonselectedColor: '#F8EFD4'
 
     RowLayout {
         anchors.fill: parent
-        anchors.topMargin: 5
-        anchors.bottomMargin: 5
 
         TextField {
             Layout.preferredWidth: 50
@@ -21,7 +20,7 @@ Item {
             font.pixelSize: isCurIdx ? 13 : 12
             background: Rectangle {
                 border.color: 'pink'
-                color: isCurIdx ? '#FFB900' : 'transparent'
+                color: isCurIdx ? selectedColor : nonselectedColor
             }
         }
         TextField {
@@ -33,7 +32,7 @@ Item {
             font.pixelSize: isCurIdx ? 13 : 12
             background: Rectangle {
                 border.color: 'pink'
-                color: isCurIdx ? '#FFB900' : 'transparent'
+                color: isCurIdx ? selectedColor : nonselectedColor
             }
         }
         TextField {
@@ -45,7 +44,7 @@ Item {
             font.pixelSize: isCurIdx ? 13 : 12
             background: Rectangle {
                 border.color: 'pink'
-                color: isCurIdx ? '#FFB900' : 'transparent'
+                color: isCurIdx ? selectedColor : nonselectedColor
             }
         }
     }
@@ -57,9 +56,7 @@ Item {
             showSingle()
         }
     }
-
     Keys.onReturnPressed: {
-        listView.currentIndex = index
         showSingle()
     }
 }
