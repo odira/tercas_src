@@ -17,35 +17,23 @@ Item {
             Layout.fillHeight: true
             text: date.toLocaleDateString(Qt.locale("ru_RU"), "dd MMMM yyyy")
             font.bold: isCurIdx ? true : false
-            font.pixelSize: isCurIdx ? 13 : 12
-            background: Rectangle {
-                border.color: 'pink'
-                color: isCurIdx ? selectedColor : nonselectedColor
-            }
+//            font.pixelSize: isCurIdx ? 13 : 12
+//            background: Rectangle {
+//                border.color: 'pink'
+//                color: isCurIdx ? selectedColor : nonselectedColor
+//            }
         }
         TextField {
             Layout.preferredWidth: 150
             Layout.fillWidth: true
             Layout.fillHeight: true
             text: type
-            font.bold: isCurIdx ? true : false
-            font.pixelSize: isCurIdx ? 13 : 12
-            background: Rectangle {
-                border.color: 'pink'
-                color: isCurIdx ? selectedColor : nonselectedColor
-            }
         }
         TextField {
             Layout.preferredWidth: 200
             Layout.fillWidth: true
             Layout.fillHeight: true
             text: note
-            font.bold: isCurIdx ? true : false
-            font.pixelSize: isCurIdx ? 13 : 12
-            background: Rectangle {
-                border.color: 'pink'
-                color: isCurIdx ? selectedColor : nonselectedColor
-            }
         }
     }
 

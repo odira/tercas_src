@@ -20,8 +20,7 @@ Item {
     }
 
     ColumnLayout {
-        anchors.fill: parent
-        anchors.margins: 5
+        anchors.fill: parent; anchors.margins: 5
         spacing: 10
 
         ColumnLayout {
@@ -29,25 +28,42 @@ Item {
             Layout.fillWidth: true; Layout.fillHeight: true
             enabled: false
 
-            TextField {
-                id: dateField
+            RowLayout {
                 Layout.fillWidth: true
-                text: date.toLocaleDateString(Qt.locale("ru_RU"), "dd MMMM yyyy")
+                Text {
+                    Layout.preferredWidth: parent.width * 1/5
+                    text: qsTr('Дата (календарная)')
+                }
+                TextField {
+                    id: dateField
+                    Layout.fillWidth: true
+                    text: date.toLocaleDateString(Qt.locale("ru_RU"), "dd MMMM yyyy")
+                }
             }
-            TextField {
-                id: typeField
+            RowLayout {
                 Layout.fillWidth: true
-                text: type
+                Text {
+                    Layout.preferredWidth: parent.width * 1/5
+                    text: qsTr('Наименование дня')
+                }
+                TextField {
+                    id: typeField
+                    Layout.fillWidth: true
+                    text: type
+                }
             }
-            TextField {
-                id: noteField
+            RowLayout {
                 Layout.fillWidth: true
-                text: note
+                Text {
+                    Layout.preferredWidth: parent.width * 1/5
+                    text: qsTr('Примечание')
+                }
+                TextField {
+                    id: noteField
+                    Layout.fillWidth: true
+                    text: note
+                }
             }
-//            Item {
-//                id: spacing
-//                Layout.fillHeight: true
-//            }
         }
     }
 

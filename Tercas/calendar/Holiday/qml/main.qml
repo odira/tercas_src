@@ -15,17 +15,13 @@ ApplicationWindow {
         model: holidayModel
         delegate: Package {
             ListDelegate {
-                id: listDelegate
-                Package.name: 'list'
-                width: listView.width
-                height: 50
+                id: listDelegate; Package.name: 'list'
+                width: listView.width; height: 50
             }
-            SingleItem {
-                id: singleDelegate
-                Package.name: 'single'
-                width: single.width
-                height: single.height
-                anchors.margins: 5
+            SingleDelegate {
+                id: singleDelegate; Package.name: 'single'
+                width: single.width; height: single.height
+//                anchors.margins: 5
             }
         }
     }
@@ -45,118 +41,119 @@ ApplicationWindow {
         console.log('Delete')
     }
 
-    header: Rectangle {
-        id: header
-        width: root.width
-        height: 70
-        border.color: 'pink'
+//    header: Rectangle {
+//        id: header
+//        width: root.width
+//        height: 70
+//        border.color: 'pink'
 
-        RowLayout {
-            anchors.fill: parent
-            anchors.margins: 5
+//        RowLayout {
+//            anchors.fill: parent
+//            anchors.margins: 5
 
-            RoundButton {
-                id: listButton
-                Layout.fillHeight: true
-                Layout.preferredWidth: height
-                radius: 0
+//            RoundButton {
+//                id: listButton
+//                Layout.fillHeight: true
+//                Layout.preferredWidth: height
+//                radius: 0
 
-                onClicked: view.state = 'inList'
+//                onClicked: view.state = 'inList'
 
-                background: Rectangle {
-                    color: 'white'
-                    border.color: 'pink'
-                }
+//                background: Rectangle {
+//                    color: 'white'
+//                    border.color: 'pink'
+//                }
 
-                Image {
-                    fillMode: Image.PreserveAspectFit
-                    anchors.centerIn: parent
-                    sourceSize.width: listButton.width
-                    sourceSize.height: listButton.height
-                    source: "qrc:images/arrow.jpg"
-                }
-            }
-            // spacing
-            Item {
-                Layout.fillWidth: true
-            }
-            RoundButton {
-                id: quitButton
-                Layout.fillHeight: true
-                Layout.preferredWidth: height
-                radius: 0
+//                Image {
+//                    fillMode: Image.PreserveAspectFit
+//                    anchors.centerIn: parent
+//                    sourceSize.width: listButton.width
+//                    sourceSize.height: listButton.height
+//                    source: "qrc:images/arrow.jpg"
+//                }
+//            }
+//            // spacing
+//            Item {
+//                Layout.fillWidth: true
+//            }
+//            RoundButton {
+//                id: quitButton
+//                Layout.fillHeight: true
+//                Layout.preferredWidth: height
+//                radius: 0
 
-                onClicked: Qt.quit()
+//                onClicked: Qt.quit()
 
-                background: Rectangle {
-                    color: 'white'
-                    border.color: 'pink'
-                }
+//                background: Rectangle {
+//                    color: 'white'
+//                    border.color: 'pink'
+//                }
 
-                Image {
-                    fillMode: Image.PreserveAspectFit
-                    anchors.centerIn: parent
-                    sourceSize.width: quitButton.width
-                    sourceSize.height: quitButton.height
-                    source: "qrc:images/quit.png"
-                }
-            }
+//                Image {
+//                    fillMode: Image.PreserveAspectFit
+//                    anchors.centerIn: parent
+//                    sourceSize.width: quitButton.width
+//                    sourceSize.height: quitButton.height
+//                    source: "qrc:images/quit.png"
+//                }
+//            }
 
-        }
-    }
+//        }
+//    }
 
     // CONTENT ITEM
     contentData: Item {
         id: view
-        anchors.fill: parent
-        anchors.margins: 5
+        anchors.fill: parent; anchors.margins: 5
 
-        ColumnLayout {
-            id: list
-            anchors.fill: parent
+//        ColumnLayout {
+//            id: list
+//            anchors.fill: parent
 
-            ListHeader {
-                id: listHeader
-                Layout.fillWidth: true
-                Layout.fillHeight: false
-                Layout.preferredHeight: 60
-            }
-            ScrollView {
-                id: scrollList
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-                ScrollBar.vertical.policy: ScrollBar.AlwaysOn
-                focus: true
+//            visible: false
 
-                background: Rectangle {
-                    color: '#F2F4F9'
-                }
+//            ListHeader {
+//                id: listHeader
+//                Layout.fillWidth: true
+//                Layout.fillHeight: false
+//                Layout.preferredHeight: 60
+//            }
+//            ScrollView {
+//                id: scrollList
+//                Layout.fillWidth: true
+//                Layout.fillHeight: true
+//                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+//                ScrollBar.vertical.policy: ScrollBar.AlwaysOn
+////                focus: true
 
-                ListView {
-                    id: listView
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    model: visualModel.parts.list
-                    snapMode: ListView.SnapOneItem
-                    clip: true
-                    spacing: 5
-                    boundsBehavior: ListView.StopAtBounds
+//                background: Rectangle {
+//                    color: '#F2F4F9'
+//                }
 
-//                    highlight: Rectangle { color: 'yellow' }
-//                    highlightFollowsCurrentItem: true
-//                    highlightMoveDuration: 0
+//                ListView {
+//                    id: listView
+//                    Layout.fillWidth: true
+//                    Layout.fillHeight: true
+//                    model: visualModel.parts.list
+//                    snapMode: ListView.SnapOneItem
+//                    clip: true
+//                    spacing: 5
+//                    boundsBehavior: ListView.StopAtBounds
 
-                    onCurrentIndexChanged: singleView.currentIndex = currentIndex
-                }
-            }
-            ListFooter {
-                id: listFooter
-                Layout.fillWidth: true
-                Layout.fillHeight: false
-                Layout.preferredHeight: 60
-            }
-        }
+////                    highlight: Rectangle { color: 'yellow' }
+////                    highlightFollowsCurrentItem: true
+////                    highlightMoveDuration: 0
+
+////                    onCurrentIndexChanged: singleView.currentIndex = currentIndex
+//                }
+//            }
+//            ListFooter {
+//                id: listFooter
+//                Layout.fillWidth: true
+//                Layout.fillHeight: false
+//                Layout.preferredHeight: 60
+//            }
+//        }
 
         SingleItem {
             id: single
@@ -196,25 +193,25 @@ ApplicationWindow {
 //        }
 
 //        state: 'inList'
-        state: 'inSingle'
-        states: [
-            State {
-                name: 'inList'
-                PropertyChanges { target: list; visible: true }
-                PropertyChanges { target: scrollList; focus: true }
-                PropertyChanges { target: listView; focus: true }
-                PropertyChanges { target: single; visible: false }
-                PropertyChanges { target: singleView; focus: false }
-                PropertyChanges { target: listButton; enabled: false; opacity: 0.1 }
-            },
-            State {
-                name: 'inSingle'
-                PropertyChanges { target: list; visible: false; focus: false }
-                PropertyChanges { target: listView; focus: false }
-                PropertyChanges { target: single; visible: true }
-                PropertyChanges { target: singleView; focus: true }
-                PropertyChanges { target: listButton; enabled: true; opacity: 0.9 }
-            }
-        ]
+//        state: 'inSingle'
+//        states: [
+//            State {
+//                name: 'inList'
+//                PropertyChanges { target: list; visible: true }
+//                PropertyChanges { target: scrollList; focus: true }
+//                PropertyChanges { target: listView; focus: true }
+//                PropertyChanges { target: single; visible: false }
+////                PropertyChanges { target: singleView; focus: false }
+//                PropertyChanges { target: listButton; enabled: false; opacity: 0.1 }
+//            },
+//            State {
+//                name: 'inSingle'
+//                PropertyChanges { target: list; visible: false; focus: false }
+//                PropertyChanges { target: listView; focus: false }
+//                PropertyChanges { target: single; visible: true }
+////                PropertyChanges { target: singleView; focus: true }
+//                PropertyChanges { target: listButton; enabled: true; opacity: 0.9 }
+//            }
+//        ]
     }
 }
