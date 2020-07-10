@@ -26,8 +26,7 @@ Item {
 
         ColumnLayout {
             id: widgetBox
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+            Layout.fillWidth: true; Layout.fillHeight: true
             enabled: false
 
             TextField {
@@ -45,10 +44,10 @@ Item {
                 Layout.fillWidth: true
                 text: note
             }
-            Item {
-                id: spacing
-                Layout.fillHeight: true
-            }
+//            Item {
+//                id: spacing
+//                Layout.fillHeight: true
+//            }
         }
     }
 
@@ -56,10 +55,13 @@ Item {
     states: [
         State {
             name: 'Normal'
-            PropertyChanges { target: widgetBox; enabled: false }
+//            PropertyChanges { target: widgetBox; enabled: false }
 //            PropertyChanges { target: editButton; visible: true }
 //            PropertyChanges { target: saveButton; visible: false }
 //            PropertyChanges { target: discardButton; visible: false }
+            PropertyChanges { target: dateField; readOnly: true }
+            PropertyChanges { target: typeField; readOnly: true }
+            PropertyChanges { target: noteField; readOnly: true }
         },
         State {
             name: 'Edit'

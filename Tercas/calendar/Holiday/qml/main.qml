@@ -6,9 +6,8 @@ import QtQml.Models 2.12
 
 ApplicationWindow {
     id: root
+    width: Screen.width * 3/4; height: Screen.height * 3/4
     visible: true
-    width: Screen.width * 3/4
-    height: Screen.height * 3/4
     title: qsTr("Holiday Database")
 
     DelegateModel {
@@ -21,7 +20,7 @@ ApplicationWindow {
                 width: listView.width
                 height: 50
             }
-            SingleDelegate {
+            SingleItem {
                 id: singleDelegate
                 Package.name: 'single'
                 width: single.width
@@ -196,8 +195,8 @@ ApplicationWindow {
 //            }
 //        }
 
-        state: 'inList'
-//        state: 'inSingle'
+//        state: 'inList'
+        state: 'inSingle'
         states: [
             State {
                 name: 'inList'
