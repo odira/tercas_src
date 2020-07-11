@@ -9,8 +9,5 @@
         <file>images/quit.png</file>
         <file>qml/ListDelegate.qml</file>
         <file>qml/SingleDelegate.qml</file>
-        <file>qml/ListHeader.qml</file>
-        <file>qml/ListFooter.qml</file>
-        <file>qml/SingleItem.qml</file>
     </qresource>
 </RCC>

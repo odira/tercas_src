@@ -15,22 +15,23 @@ ApplicationWindow {
         model: holidayModel
         delegate: Package {
             ListDelegate {
-                id: listDelegate; Package.name: 'list'
-                width: listView.width; height: 50
+                id: listDelegate; Package.name: 'listDelegate'
+                width: listItem.width; height: 50
             }
             SingleDelegate {
-                id: singleDelegate; Package.name: 'single'
-                width: single.width; height: single.height
-//                anchors.margins: 5
+                id: singleDelegate; Package.name: 'singleDelegate'
+                width: singleItem.width; height: singleItem.height
             }
         }
+//        property int currentIndex
     }
 
     function showList() {
-        view.state = 'inList';
+        content.state = 'inList';
     }
     function showSingle() {
-        view.state = 'inSingle'
+        content.state = 'inSingle'
+        singleView.currentIndex = listView.currentIndex
     }
 
     function addItem() {
@@ -41,124 +42,195 @@ ApplicationWindow {
         console.log('Delete')
     }
 
-//    header: Rectangle {
-//        id: header
-//        width: root.width
-//        height: 70
-//        border.color: 'pink'
+    header: Rectangle {
+        id: header
+        width: root.width
+        height: 70
+        border.color: 'pink'
 
-//        RowLayout {
-//            anchors.fill: parent
-//            anchors.margins: 5
+        RowLayout {
+            anchors.fill: parent
+            anchors.margins: 5
 
-//            RoundButton {
-//                id: listButton
-//                Layout.fillHeight: true
-//                Layout.preferredWidth: height
-//                radius: 0
+            RoundButton {
+                id: listButton
+                Layout.preferredWidth: height; Layout.fillHeight: true
+                radius: 0
+                onClicked: content.state = 'inList'
+                Image {
+                    fillMode: Image.PreserveAspectFit
+                    anchors.centerIn: parent
+                    sourceSize.width: listButton.width
+                    sourceSize.height: listButton.height
+                    source: "qrc:images/arrow.jpg"
+                }
+            }
 
-//                onClicked: view.state = 'inList'
+            RowLayout {
+                id: listFooter
+                Layout.fillWidth: false; Layout.fillHeight: false
+                Layout.alignment: Qt.AlignHCenter
 
-//                background: Rectangle {
-//                    color: 'white'
-//                    border.color: 'pink'
-//                }
+                RoundButton {
+                    id: addButton
+                    text: qsTr('Add Item')
+                    onClicked: addItem()
+                }
+                RoundButton {
+                    id: deleteButton
+                    text: qsTr('Delete Item')
+                    onClicked: deleteItem()
+                }
+            }
 
-//                Image {
-//                    fillMode: Image.PreserveAspectFit
-//                    anchors.centerIn: parent
-//                    sourceSize.width: listButton.width
-//                    sourceSize.height: listButton.height
-//                    source: "qrc:images/arrow.jpg"
-//                }
-//            }
-//            // spacing
-//            Item {
-//                Layout.fillWidth: true
-//            }
-//            RoundButton {
-//                id: quitButton
-//                Layout.fillHeight: true
-//                Layout.preferredWidth: height
-//                radius: 0
-
-//                onClicked: Qt.quit()
-
-//                background: Rectangle {
-//                    color: 'white'
-//                    border.color: 'pink'
-//                }
-
-//                Image {
-//                    fillMode: Image.PreserveAspectFit
-//                    anchors.centerIn: parent
-//                    sourceSize.width: quitButton.width
-//                    sourceSize.height: quitButton.height
-//                    source: "qrc:images/quit.png"
-//                }
-//            }
-
-//        }
-//    }
+            RoundButton {
+                id: quitButton
+                Layout.preferredWidth: height; Layout.fillHeight: true
+                Layout.alignment: Qt.AlignRight
+                radius: 0
+                onClicked: Qt.quit()
+                Image {
+                    fillMode: Image.PreserveAspectFit
+                    anchors.centerIn: parent
+                    sourceSize.width: quitButton.width
+                    sourceSize.height: quitButton.height
+                    source: "qrc:images/quit.png"
+                }
+            }
+        }
+    }
 
     // CONTENT ITEM
     contentData: Item {
-        id: view
+        id: content
         anchors.fill: parent; anchors.margins: 5
 
-//        ColumnLayout {
-//            id: list
-//            anchors.fill: parent
-
-//            visible: false
-
-//            ListHeader {
-//                id: listHeader
-//                Layout.fillWidth: true
-//                Layout.fillHeight: false
-//                Layout.preferredHeight: 60
-//            }
-//            ScrollView {
-//                id: scrollList
-//                Layout.fillWidth: true
-//                Layout.fillHeight: true
-//                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-//                ScrollBar.vertical.policy: ScrollBar.AlwaysOn
-////                focus: true
-
-//                background: Rectangle {
-//                    color: '#F2F4F9'
-//                }
-
-//                ListView {
-//                    id: listView
-//                    Layout.fillWidth: true
-//                    Layout.fillHeight: true
-//                    model: visualModel.parts.list
-//                    snapMode: ListView.SnapOneItem
-//                    clip: true
-//                    spacing: 5
-//                    boundsBehavior: ListView.StopAtBounds
-
-////                    highlight: Rectangle { color: 'yellow' }
-////                    highlightFollowsCurrentItem: true
-////                    highlightMoveDuration: 0
-
-////                    onCurrentIndexChanged: singleView.currentIndex = currentIndex
-//                }
-//            }
-//            ListFooter {
-//                id: listFooter
-//                Layout.fillWidth: true
-//                Layout.fillHeight: false
-//                Layout.preferredHeight: 60
-//            }
-//        }
-
-        SingleItem {
-            id: single
+        ColumnLayout {
+            id: listItem
             anchors.fill: parent
+
+            RowLayout {
+                id: listHeader
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignTop
+
+                TextField {
+                    Layout.preferredWidth: parent.width * 1/8
+                    text: qsTr('Дата')
+                }
+                TextField {
+                    Layout.preferredWidth: parent.width * 3/8
+                    text: qsTr('Календарный день')
+                }
+                TextField {
+                    Layout.fillWidth: true
+                    text: qsTr('Примечание')
+                }
+            }
+
+            ScrollView {
+                id: scrollList
+                Layout.fillWidth: true; Layout.fillHeight: true
+                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                ScrollBar.vertical.policy: ScrollBar.AlwaysOn
+                focus: true
+
+                ListView {
+                    id: listView
+                    Layout.fillWidth: true;Layout.fillHeight: true
+                    model: visualModel.parts.listDelegate
+                    snapMode: ListView.SnapOneItem
+                    clip: true
+                    boundsBehavior: ListView.SnapToItem
+        //                                highlight: Rectangle { color: 'yellow' }
+        //                                highlightFollowsCurrentItem: true
+        //                                highlightMoveDuration: 0
+                                        focus: true
+        //                                onCurrentIndexChanged: singleView.currentIndex = currentIndex
+        //                                onCurrentIndexChanged:
+                }
+            }
         }
+
+        ColumnLayout {
+            id: singleItem
+            anchors.fill: parent
+
+            ScrollView {
+                id: scrollSingle
+                Layout.fillWidth: true; Layout.fillHeight: false
+                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+
+                ListView {
+                    id: singleView
+                    Layout.fillWidth: true; Layout.fillHeight: true
+                    model: visualModel.parts.singleDelegate
+                    snapMode: ListView.SnapOneItem
+                    orientation: ListView.Horizontal
+                    visible: true
+                    clip: true
+                    boundsBehavior: ListView.StopAtBounds
+
+                    highlightMoveDuration: 0
+                }
+
+            }
+            RowLayout {
+                id: buttonBox
+                Layout.fillWidth: true; Layout.fillHeight: false
+                Layout.alignment: Qt.AlignHCenter
+
+                property color buttonBackground: "#8EC9BB"
+
+                function edit() {
+                    singleView.contentItem.children[singleView.currentIndex].state = 'Edit'
+                    singleButtonBox.state = 'Edit'
+                }
+                function discard() {
+                    singleView.contentItem.children[singleView.currentIndex].state = 'Normal'
+                    singleButtonBox.state = 'Normal'
+                }
+
+                RoundButton {
+                    id: editButton
+                    Layout.fillHeight: true
+                    Layout.preferredWidth: 150
+                    text: qsTr('Edit')
+                    onClicked: edit()
+                }
+                RoundButton {
+                    id: saveButton
+                    Layout.fillHeight: true
+                    Layout.preferredWidth: 150
+                    text: qsTr('Save')
+                    onClicked: save()
+                }
+                RoundButton {
+                    id: discardButton
+                    Layout.fillHeight: true
+                    Layout.preferredWidth: 150
+                    text: qsTr('Discard')
+                    onClicked: discard()
+                }
+
+                state: 'Normal'
+                states: [
+                    State {
+                        name: 'Normal'
+                        PropertyChanges { target: editButton; enabled: true }
+                        PropertyChanges { target: saveButton; enabled: false }
+                        PropertyChanges { target: discardButton; enabled: false }
+                    },
+                    State {
+                        name: 'Edit'
+                        PropertyChanges { target: editButton; enabled: false }
+                        PropertyChanges { target: saveButton; enabled: true }
+                        PropertyChanges { target: discardButton; enabled: true }
+                    }
+                ]
+            }
+        }
+
 
 //        ColumnLayout {
 //            id: single
@@ -192,26 +264,26 @@ ApplicationWindow {
 //            }
 //        }
 
-//        state: 'inList'
+        state: 'inList'
 //        state: 'inSingle'
-//        states: [
-//            State {
-//                name: 'inList'
-//                PropertyChanges { target: list; visible: true }
+        states: [
+            State {
+                name: 'inList'
+                PropertyChanges { target: listItem; visible: true }
 //                PropertyChanges { target: scrollList; focus: true }
 //                PropertyChanges { target: listView; focus: true }
-//                PropertyChanges { target: single; visible: false }
-////                PropertyChanges { target: singleView; focus: false }
+                PropertyChanges { target: singleItem; visible: false }
+//                PropertyChanges { target: singleView; focus: false }
 //                PropertyChanges { target: listButton; enabled: false; opacity: 0.1 }
-//            },
-//            State {
-//                name: 'inSingle'
-//                PropertyChanges { target: list; visible: false; focus: false }
+            },
+            State {
+                name: 'inSingle'
+                PropertyChanges { target: listItem; visible: false }
 //                PropertyChanges { target: listView; focus: false }
-//                PropertyChanges { target: single; visible: true }
-////                PropertyChanges { target: singleView; focus: true }
+                PropertyChanges { target: singleItem; visible: true }
+//                PropertyChanges { target: singleView; focus: true }
 //                PropertyChanges { target: listButton; enabled: true; opacity: 0.9 }
-//            }
-//        ]
+            }
+        ]
     }
 }

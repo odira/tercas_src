@@ -3,44 +3,45 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
 Item {
+    id: listDelegate
+    width: listView.width
 
     property bool isCurIdx: ListView.isCurrentItem
-    property color selectedColor: '#F5D788'
-    property color nonselectedColor: '#F8EFD4'
 
     RowLayout {
         anchors.fill: parent
 
         TextField {
-            Layout.preferredWidth: 50
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+            Layout.preferredWidth: parent.width * 1/8
             text: date.toLocaleDateString(Qt.locale("ru_RU"), "dd MMMM yyyy")
             font.bold: isCurIdx ? true : false
-//            font.pixelSize: isCurIdx ? 13 : 12
-//            background: Rectangle {
-//                border.color: 'pink'
-//                color: isCurIdx ? selectedColor : nonselectedColor
-//            }
+            autoScroll: false
         }
         TextField {
-            Layout.preferredWidth: 150
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+            Layout.preferredWidth: parent.width * 3/8
             text: type
+            font.bold: isCurIdx ? true : false
+            autoScroll: false
         }
         TextField {
-            Layout.preferredWidth: 200
+            id: noteField
             Layout.fillWidth: true
-            Layout.fillHeight: true
             text: note
+            font.bold: isCurIdx ? true : false
+            wrapMode: TextInput.NoWrap
+            autoScroll: false
+
+            hoverEnabled: true
+            ToolTip.visible: hovered
+            ToolTip.text: noteField.text
         }
     }
 
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            listView.currentIndex = index
+            singleView.currentIndex = index
+            console.log(visualModel.currentIndex)
             showSingle()
         }
     }
