@@ -5,64 +5,59 @@ import QtQuick.Layouts 1.12
 Item {
     id: root
 
-    function edit() {
-        console.log('Edit')
-        state = 'Edit'
-    }
-    function save() {
-        date = dateField.text
-        type = dateField.text
-        note = dateField.text
-    }
-    function discard() {
-        console.log('Undo')
-        dateField.undo()
-    }
+//    function edit() {
+//        console.log('Edit')
+//        state = 'Edit'
+//    }
+//    function save() {
+//        date = dateField.text
+//        type = dateField.text
+//        note = dateField.text
+//    }
+//    function discard() {
+//        console.log('Undo')
+//        dateField.undo()
+//    }
 
     ColumnLayout {
-        anchors.fill: parent; anchors.margins: 5
-        spacing: 10
+        id: widgetBox
+        width: parent.width
+//        enabled: false
 
-        ColumnLayout {
-            id: widgetBox
-            Layout.fillWidth: true; Layout.fillHeight: true
-            enabled: false
-
-            RowLayout {
-                Layout.fillWidth: true
-                Text {
-                    Layout.preferredWidth: parent.width * 1/5
-                    text: qsTr('Дата (календарная)')
-                }
-                TextField {
-                    id: dateField
-                    Layout.fillWidth: true
-                    text: date.toLocaleDateString(Qt.locale("ru_RU"), "dd MMMM yyyy")
-                }
+        RowLayout {
+            width: parent.width
+            Text {
+                Layout.preferredWidth: parent.width * 1/5
+                text: qsTr('Дата (календарная)')
             }
-            RowLayout {
+            TextField {
+                id: dateField
                 Layout.fillWidth: true
-                Text {
-                    Layout.preferredWidth: parent.width * 1/5
-                    text: qsTr('Наименование дня')
-                }
-                TextField {
-                    id: typeField
-                    Layout.fillWidth: true
-                    text: type
-                }
+                text: date.toLocaleDateString(Qt.locale("ru_RU"), "dd MMMM yyyy")
             }
-            RowLayout {
+        }
+        RowLayout {
+            width: parent.width
+            Text {
+                Layout.preferredWidth: parent.width * 1/5
+                text: qsTr('Наименование дня')
+            }
+            TextField {
+                id: typeField
                 Layout.fillWidth: true
-                Text {
-                    Layout.preferredWidth: parent.width * 1/5
-                    text: qsTr('Примечание')
-                }
-                TextField {
-                    id: noteField
-                    Layout.fillWidth: true
-                    text: note
-                }
+                text: type
+            }
+        }
+        RowLayout {
+            width: parent.width
+            Text {
+                Layout.preferredWidth: parent.width * 1/5
+                text: qsTr('Примечание')
+            }
+            TextField {
+                id: noteField
+                Layout.fillWidth: true
+                text: note
             }
         }
     }

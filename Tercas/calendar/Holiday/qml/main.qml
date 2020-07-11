@@ -23,7 +23,6 @@ ApplicationWindow {
                 width: singleItem.width; height: singleItem.height
             }
         }
-//        property int currentIndex
     }
 
     function showList() {
@@ -41,21 +40,45 @@ ApplicationWindow {
     function deleteItem() {
         console.log('Delete')
     }
+    //                function edit() {
+    //                    singleView.contentItem.children[singleView.currentIndex].state = 'Edit'
+    //                    singleButtonBox.state = 'Edit'
+    //                }
+    //                function discard() {
+    //                    singleView.contentItem.children[singleView.currentIndex].state = 'Normal'
+    //                    singleButtonBox.state = 'Normal'
+    //                }
+
 
     header: Rectangle {
         id: header
         width: root.width
-        height: 70
-        border.color: 'pink'
+        height: listButton.height
+        anchors.margins: 5
+
+        //                state: 'Normal'
+        //                states: [
+        //                    State {
+        //                        name: 'Normal'
+        //                        PropertyChanges { target: editButton; enabled: true }
+        //                        PropertyChanges { target: saveButton; enabled: false }
+        //                        PropertyChanges { target: discardButton; enabled: false }
+        //                    },
+        //                    State {
+        //                        name: 'Edit'
+        //                        PropertyChanges { target: editButton; enabled: false }
+        //                        PropertyChanges { target: saveButton; enabled: true }
+        //                        PropertyChanges { target: discardButton; enabled: true }
+        //                    }
+        //                ]
+
 
         RowLayout {
             anchors.fill: parent
-            anchors.margins: 5
 
             RoundButton {
                 id: listButton
                 Layout.preferredWidth: height; Layout.fillHeight: true
-                radius: 0
                 onClicked: content.state = 'inList'
                 Image {
                     fillMode: Image.PreserveAspectFit
@@ -81,13 +104,27 @@ ApplicationWindow {
                     text: qsTr('Delete Item')
                     onClicked: deleteItem()
                 }
+                RoundButton {
+                    id: editButton
+                    text: qsTr('Edit')
+                    onClicked: edit()
+                }
+                RoundButton {
+                    id: saveButton
+                    text: qsTr('Save')
+                    onClicked: save()
+                }
+                RoundButton {
+                    id: discardButton
+                    text: qsTr('Discard')
+                    onClicked: discard()
+                }
             }
 
             RoundButton {
                 id: quitButton
                 Layout.preferredWidth: height; Layout.fillHeight: true
                 Layout.alignment: Qt.AlignRight
-                radius: 0
                 onClicked: Qt.quit()
                 Image {
                     fillMode: Image.PreserveAspectFit
@@ -111,15 +148,15 @@ ApplicationWindow {
 
             RowLayout {
                 id: listHeader
-                Layout.fillWidth: true
+                width: parent.width
                 Layout.alignment: Qt.AlignTop
 
                 TextField {
-                    Layout.preferredWidth: parent.width * 1/8
+                    Layout.preferredWidth: listHeader.width * 1/8
                     text: qsTr('Дата')
                 }
                 TextField {
-                    Layout.preferredWidth: parent.width * 3/8
+                    Layout.preferredWidth: listHeader.width * 3/8
                     text: qsTr('Календарный день')
                 }
                 TextField {
@@ -142,12 +179,10 @@ ApplicationWindow {
                     snapMode: ListView.SnapOneItem
                     clip: true
                     boundsBehavior: ListView.SnapToItem
-        //                                highlight: Rectangle { color: 'yellow' }
-        //                                highlightFollowsCurrentItem: true
-        //                                highlightMoveDuration: 0
-                                        focus: true
-        //                                onCurrentIndexChanged: singleView.currentIndex = currentIndex
-        //                                onCurrentIndexChanged:
+//                    highlight: Rectangle { color: 'yellow' }
+//                    highlightFollowsCurrentItem: true
+//                    highlightMoveDuration: 0
+                    focus: true
                 }
             }
         }
@@ -158,111 +193,22 @@ ApplicationWindow {
 
             ScrollView {
                 id: scrollSingle
-                Layout.fillWidth: true; Layout.fillHeight: false
+                Layout.fillWidth: true; Layout.fillHeight: true
                 ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
                 ListView {
                     id: singleView
-                    Layout.fillWidth: true; Layout.fillHeight: true
+                    Layout.fillWidth: true
                     model: visualModel.parts.singleDelegate
                     snapMode: ListView.SnapOneItem
                     orientation: ListView.Horizontal
-                    visible: true
                     clip: true
                     boundsBehavior: ListView.StopAtBounds
-
                     highlightMoveDuration: 0
                 }
 
             }
-            RowLayout {
-                id: buttonBox
-                Layout.fillWidth: true; Layout.fillHeight: false
-                Layout.alignment: Qt.AlignHCenter
-
-                property color buttonBackground: "#8EC9BB"
-
-                function edit() {
-                    singleView.contentItem.children[singleView.currentIndex].state = 'Edit'
-                    singleButtonBox.state = 'Edit'
-                }
-                function discard() {
-                    singleView.contentItem.children[singleView.currentIndex].state = 'Normal'
-                    singleButtonBox.state = 'Normal'
-                }
-
-                RoundButton {
-                    id: editButton
-                    Layout.fillHeight: true
-                    Layout.preferredWidth: 150
-                    text: qsTr('Edit')
-                    onClicked: edit()
-                }
-                RoundButton {
-                    id: saveButton
-                    Layout.fillHeight: true
-                    Layout.preferredWidth: 150
-                    text: qsTr('Save')
-                    onClicked: save()
-                }
-                RoundButton {
-                    id: discardButton
-                    Layout.fillHeight: true
-                    Layout.preferredWidth: 150
-                    text: qsTr('Discard')
-                    onClicked: discard()
-                }
-
-                state: 'Normal'
-                states: [
-                    State {
-                        name: 'Normal'
-                        PropertyChanges { target: editButton; enabled: true }
-                        PropertyChanges { target: saveButton; enabled: false }
-                        PropertyChanges { target: discardButton; enabled: false }
-                    },
-                    State {
-                        name: 'Edit'
-                        PropertyChanges { target: editButton; enabled: false }
-                        PropertyChanges { target: saveButton; enabled: true }
-                        PropertyChanges { target: discardButton; enabled: true }
-                    }
-                ]
-            }
         }
-
-
-//        ColumnLayout {
-//            id: single
-//            anchors.fill: parent
-
-//            ScrollView {
-//                id: scrollSingle
-//                Layout.fillWidth: true
-//                Layout.fillHeight: true
-//                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-
-//                ListView {
-//                    id: singleView
-//                    Layout.fillWidth: true
-//                    Layout.fillHeight: true
-//                    model: visualModel.parts.single
-//                    snapMode: ListView.SnapOneItem
-//                    orientation: ListView.Horizontal
-//                    visible: true
-//                    clip: true
-//                    boundsBehavior: ListView.StopAtBounds
-
-//                    highlightMoveDuration: 0
-//                }
-//            }
-//            SingleFooter {
-//                id: singleFooter
-//                Layout.fillWidth: true
-//                Layout.fillHeight: false
-//                Layout.preferredHeight: 60
-//            }
-//        }
 
         state: 'inList'
 //        state: 'inSingle'
@@ -270,7 +216,7 @@ ApplicationWindow {
             State {
                 name: 'inList'
                 PropertyChanges { target: listItem; visible: true }
-//                PropertyChanges { target: scrollList; focus: true }
+                PropertyChanges { target: scrollList; focus: true }
 //                PropertyChanges { target: listView; focus: true }
                 PropertyChanges { target: singleItem; visible: false }
 //                PropertyChanges { target: singleView; focus: false }
