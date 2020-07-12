@@ -10,6 +10,9 @@ ApplicationWindow {
     visible: true
     title: qsTr("Holiday Database")
 
+//    palette.highlight: 'violet'
+//    palette.buttonText: 'red'
+
     DelegateModel {
         id: visualModel
         model: holidayModel

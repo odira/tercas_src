@@ -2,6 +2,8 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
+//#include <QQuickStyle>
+
 #include "HolidayModel.h"
 #include <connection.h>
 
@@ -10,6 +12,8 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
+
+//    QQuickStyle::setStyle("Imagine");
 
     if (!openConnection())
         return -1;
