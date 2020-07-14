@@ -28,6 +28,19 @@ ApplicationWindow {
         }
     }
 
+//    function getChildWithName(contentItem, name) {
+//        for (var i = 0; i < contentItem.children.length; i++) {
+//            var item = contentItem.children[i];
+////            if (item.contentItem.children.length > 0)
+
+
+//            if (item.objectName == name)
+//                return item;
+//        }
+
+//        return undefined;
+//    }
+
     function showList() {
         listView.currentIndex = singleView.currentIndex;
         content.state = 'list';
@@ -50,15 +63,15 @@ ApplicationWindow {
     function deleteItem() {
         console.log('Delete')
     }
-    //                function edit() {
-    //                    singleView.contentItem.children[singleView.currentIndex].state = 'Edit'
-    //                    singleButtonBox.state = 'Edit'
-    //                }
-    //                function discard() {
-    //                    singleView.contentItem.children[singleView.currentIndex].state = 'Normal'
-    //                    singleButtonBox.state = 'Normal'
-    //                }
 
+    function saveItem() {
+        buttons.state = 'single-normal'
+        singleView.contentItem.children[singleView.currentIndex].state = 'normal'
+    }
+    function discardItem() {
+        buttons.state = 'single-normal'
+        singleView.contentItem.children[singleView.currentIndex].state = 'normal'
+    }
 
     header: Rectangle {
         id: buttons
@@ -226,7 +239,9 @@ ApplicationWindow {
                 ListView {
                     id: singleView
                     Layout.fillWidth: true
-                    model: visualModel.parts.singleDelegate
+//                    model: visualModel.parts.singleDelegate
+                    model: holidayModel
+                    delegate: SingleDelegate { }
                     snapMode: ListView.SnapOneItem
                     orientation: ListView.Horizontal
                     clip: true

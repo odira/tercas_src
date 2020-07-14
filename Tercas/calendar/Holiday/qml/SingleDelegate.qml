@@ -5,9 +5,13 @@ import QtQuick.Layouts 1.12
 Item {
     id: root
 
+    property alias dateValue: dateField.text
+    property alias typeValue: typeField.text
+    property alias noteValue: noteField.text
+
     ColumnLayout {
         id: widgetBox
-        width: parent.width
+        width: root.width
 
         RowLayout {
             width: parent.width
@@ -16,7 +20,7 @@ Item {
                 text: qsTr('Дата (календарная)')
             }
             TextField {
-                id: dateField
+                id: dateField; objectName: 'dateField'
                 Layout.fillWidth: true
                 text: date.toLocaleDateString(Qt.locale("ru_RU"), "dd MMMM yyyy")
             }
@@ -59,10 +63,6 @@ Item {
             PropertyChanges { target: dateField; readOnly: false }
             PropertyChanges { target: typeField; readOnly: false }
             PropertyChanges { target: noteField; readOnly: false }
-        },
-        State {
-            name: 'add'
-            PropertyChanges { target: widgetBox; enabled: true }
         }
     ]
 }
