@@ -29,16 +29,23 @@ ApplicationWindow {
     }
 
     function showList() {
-        content.state = 'inList';
+        listView.currentIndex = singleView.currentIndex;
+        content.state = 'list';
+        buttons.state = 'list'
     }
     function showSingle() {
-        content.state = 'inSingle'
-        singleView.currentIndex = listView.currentIndex
+        content.state = 'single'
+        buttons.state = 'single-normal'
+        singleView.contentItem.children[singleView.currentIndex].state = 'normal'
     }
 
     function addItem() {
         showSingle()
-        singleView.contentItem.children[0].state = 'Add'
+        singleView.contentItem.children[singleView.currentIndex].state = 'add'
+    }
+    function editItem() {
+        buttons.state = 'single-edit'
+        singleView.contentItem.children[singleView.currentIndex].state = 'edit'
     }
     function deleteItem() {
         console.log('Delete')
@@ -54,46 +61,63 @@ ApplicationWindow {
 
 
     header: Rectangle {
-        id: header
+        id: buttons
         width: root.width
-        height: listButton.height
-        anchors.margins: 5
+        height: backButton.height + 10
 
-        //                state: 'Normal'
-        //                states: [
-        //                    State {
-        //                        name: 'Normal'
-        //                        PropertyChanges { target: editButton; enabled: true }
-        //                        PropertyChanges { target: saveButton; enabled: false }
-        //                        PropertyChanges { target: discardButton; enabled: false }
-        //                    },
-        //                    State {
-        //                        name: 'Edit'
-        //                        PropertyChanges { target: editButton; enabled: false }
-        //                        PropertyChanges { target: saveButton; enabled: true }
-        //                        PropertyChanges { target: discardButton; enabled: true }
-        //                    }
-        //                ]
-
+        state: 'list'
+        states: [
+            State {
+                name: 'list'
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: addButton; visible: true }
+                PropertyChanges { target: deleteButton; visible: true }
+                PropertyChanges { target: editButton; visible: false }
+                PropertyChanges { target: saveButton; visible: false }
+                PropertyChanges { target: discardButton; visible: false }
+                PropertyChanges { target: quitButton; visible: true }
+            },
+            State {
+                name: 'single-normal'
+                PropertyChanges { target: backButton; visible: true }
+                PropertyChanges { target: addButton; visible: false }
+                PropertyChanges { target: deleteButton; visible: false }
+                PropertyChanges { target: editButton; visible: true }
+                PropertyChanges { target: saveButton; visible: false }
+                PropertyChanges { target: discardButton; visible: false }
+                PropertyChanges { target: quitButton; visible: true }
+            },
+            State {
+                name: 'single-edit'
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: addButton; visible: false }
+                PropertyChanges { target: deleteButton; visible: false }
+                PropertyChanges { target: editButton; visible: false }
+                PropertyChanges { target: saveButton; visible: true }
+                PropertyChanges { target: discardButton; visible: true }
+                PropertyChanges { target: quitButton; visible: false }
+            }
+        ]
 
         RowLayout {
             anchors.fill: parent
+            anchors.margins: 5
 
             RoundButton {
-                id: listButton
+                id: backButton
                 Layout.preferredWidth: height; Layout.fillHeight: true
-                onClicked: content.state = 'inList'
+                onClicked: showList();
                 Image {
                     fillMode: Image.PreserveAspectFit
                     anchors.centerIn: parent
-                    sourceSize.width: listButton.width
-                    sourceSize.height: listButton.height
+                    sourceSize.width: backButton.width
+                    sourceSize.height: backButton.height
                     source: "qrc:images/arrow.jpg"
                 }
             }
 
             RowLayout {
-                id: listFooter
+                id: buttonBox
                 Layout.fillWidth: false; Layout.fillHeight: false
                 Layout.alignment: Qt.AlignHCenter
 
@@ -110,17 +134,17 @@ ApplicationWindow {
                 RoundButton {
                     id: editButton
                     text: qsTr('Edit')
-                    onClicked: edit()
+                    onClicked: editItem()
                 }
                 RoundButton {
                     id: saveButton
                     text: qsTr('Save')
-                    onClicked: save()
+                    onClicked: saveItem()
                 }
                 RoundButton {
                     id: discardButton
                     text: qsTr('Discard')
-                    onClicked: discard()
+                    onClicked: discardItem()
                 }
             }
 
@@ -213,25 +237,18 @@ ApplicationWindow {
             }
         }
 
-        state: 'inList'
-//        state: 'inSingle'
+        state: 'list'
         states: [
             State {
-                name: 'inList'
+                name: 'list'
                 PropertyChanges { target: listItem; visible: true }
                 PropertyChanges { target: scrollList; focus: true }
-//                PropertyChanges { target: listView; focus: true }
                 PropertyChanges { target: singleItem; visible: false }
-//                PropertyChanges { target: singleView; focus: false }
-//                PropertyChanges { target: listButton; enabled: false; opacity: 0.1 }
             },
             State {
-                name: 'inSingle'
+                name: 'single'
                 PropertyChanges { target: listItem; visible: false }
-//                PropertyChanges { target: listView; focus: false }
                 PropertyChanges { target: singleItem; visible: true }
-//                PropertyChanges { target: singleView; focus: true }
-//                PropertyChanges { target: listButton; enabled: true; opacity: 0.9 }
             }
         ]
     }

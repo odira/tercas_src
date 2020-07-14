@@ -41,11 +41,11 @@ Item {
         anchors.fill: parent
         onClicked: {
             singleView.currentIndex = index
-            console.log(visualModel.currentIndex)
             showSingle()
         }
     }
     Keys.onReturnPressed: {
+        singleView.currentIndex = listView.currentIndex
         showSingle()
     }
 }

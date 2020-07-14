@@ -5,24 +5,9 @@ import QtQuick.Layouts 1.12
 Item {
     id: root
 
-//    function edit() {
-//        console.log('Edit')
-//        state = 'Edit'
-//    }
-//    function save() {
-//        date = dateField.text
-//        type = dateField.text
-//        note = dateField.text
-//    }
-//    function discard() {
-//        console.log('Undo')
-//        dateField.undo()
-//    }
-
     ColumnLayout {
         id: widgetBox
         width: parent.width
-//        enabled: false
 
         RowLayout {
             width: parent.width
@@ -62,27 +47,21 @@ Item {
         }
     }
 
-//    state: 'Normal'
     states: [
         State {
-            name: 'Normal'
-//            PropertyChanges { target: widgetBox; enabled: false }
-//            PropertyChanges { target: editButton; visible: true }
-//            PropertyChanges { target: saveButton; visible: false }
-//            PropertyChanges { target: discardButton; visible: false }
+            name: 'normal'
             PropertyChanges { target: dateField; readOnly: true }
             PropertyChanges { target: typeField; readOnly: true }
             PropertyChanges { target: noteField; readOnly: true }
         },
         State {
-            name: 'Edit'
-            PropertyChanges { target: widgetBox; enabled: true }
-//            PropertyChanges { target: editButton; visible: false }
-//            PropertyChanges { target: saveButton; visible: true }
-//            PropertyChanges { target: discardButton; visible: true }
+            name: 'edit'
+            PropertyChanges { target: dateField; readOnly: false }
+            PropertyChanges { target: typeField; readOnly: false }
+            PropertyChanges { target: noteField; readOnly: false }
         },
         State {
-            name: 'Add'
+            name: 'add'
             PropertyChanges { target: widgetBox; enabled: true }
         }
     ]
