@@ -85,9 +85,6 @@ ApplicationWindow {
                 PropertyChanges { target: backButton; visible: false }
                 PropertyChanges { target: addButton; visible: true }
                 PropertyChanges { target: deleteButton; visible: true }
-                PropertyChanges { target: editButton; visible: false }
-                PropertyChanges { target: saveButton; visible: false }
-                PropertyChanges { target: discardButton; visible: false }
                 PropertyChanges { target: quitButton; visible: true }
             },
             State {
@@ -95,9 +92,6 @@ ApplicationWindow {
                 PropertyChanges { target: backButton; visible: true }
                 PropertyChanges { target: addButton; visible: false }
                 PropertyChanges { target: deleteButton; visible: false }
-                PropertyChanges { target: editButton; visible: true }
-                PropertyChanges { target: saveButton; visible: false }
-                PropertyChanges { target: discardButton; visible: false }
                 PropertyChanges { target: quitButton; visible: true }
             },
             State {
@@ -105,9 +99,6 @@ ApplicationWindow {
                 PropertyChanges { target: backButton; visible: false }
                 PropertyChanges { target: addButton; visible: false }
                 PropertyChanges { target: deleteButton; visible: false }
-                PropertyChanges { target: editButton; visible: false }
-                PropertyChanges { target: saveButton; visible: true }
-                PropertyChanges { target: discardButton; visible: true }
                 PropertyChanges { target: quitButton; visible: false }
             }
         ]
@@ -144,21 +135,21 @@ ApplicationWindow {
                     text: qsTr('Delete Item')
                     onClicked: deleteItem()
                 }
-                RoundButton {
-                    id: editButton
-                    text: qsTr('Edit')
-                    onClicked: editItem()
-                }
-                RoundButton {
-                    id: saveButton
-                    text: qsTr('Save')
-                    onClicked: saveItem()
-                }
-                RoundButton {
-                    id: discardButton
-                    text: qsTr('Discard')
-                    onClicked: discardItem()
-                }
+//                RoundButton {
+//                    id: editButton
+//                    text: qsTr('Edit')
+//                    onClicked: editItem()
+//                }
+//                RoundButton {
+//                    id: saveButton
+//                    text: qsTr('Save')
+//                    onClicked: saveItem()
+//                }
+//                RoundButton {
+//                    id: discardButton
+//                    text: qsTr('Discard')
+//                    onClicked: discardItem()
+//                }
             }
 
             RoundButton {
@@ -239,9 +230,9 @@ ApplicationWindow {
                 ListView {
                     id: singleView
                     Layout.fillWidth: true
-//                    model: visualModel.parts.singleDelegate
-                    model: holidayModel
-                    delegate: SingleDelegate { }
+                    model: visualModel.parts.singleDelegate
+//                    model: holidayModel
+//                    delegate: SingleDelegate { }
                     snapMode: ListView.SnapOneItem
                     orientation: ListView.Horizontal
                     clip: true
