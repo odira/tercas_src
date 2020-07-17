@@ -4,21 +4,23 @@ import QtQuick.Layouts 1.12
 
 Item {
     id: listDelegate
-    width: ListView.view.width; height: 70
+    width: ListView.view.width; height: layout.height + 10
 
     property bool isCurIdx: ListView.isCurrentItem
 
     RowLayout {
-        anchors.fill: parent
-//        Layout.fillWidth: true
+        id: layout
+        width: parent.width; Layout.preferredHeight: children[0].height
 
         TextField {
+            id: dateField
             Layout.preferredWidth: parent.width * 1/8
             text: date.toLocaleDateString(Qt.locale("ru_RU"), "dd MMMM yyyy")
             font.bold: isCurIdx ? true : false
             autoScroll: false
         }
         TextField {
+            id: typeField
             Layout.preferredWidth: parent.width * 3/8
             text: type
             font.bold: isCurIdx ? true : false
@@ -31,7 +33,6 @@ Item {
             font.bold: isCurIdx ? true : false
             wrapMode: TextInput.NoWrap
             autoScroll: false
-
             hoverEnabled: true
             ToolTip.visible: hovered
             ToolTip.text: noteField.text
