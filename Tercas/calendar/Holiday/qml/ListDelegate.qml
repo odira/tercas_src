@@ -4,12 +4,13 @@ import QtQuick.Layouts 1.12
 
 Item {
     id: listDelegate
-    width: ListView.view.width
+    width: ListView.view.width; height: 70
 
     property bool isCurIdx: ListView.isCurrentItem
 
     RowLayout {
         anchors.fill: parent
+//        Layout.fillWidth: true
 
         TextField {
             Layout.preferredWidth: parent.width * 1/8

@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.12
 
 Item {
     id: root
+    width: ListView.view.width; height: ListView.view.height
 
     property alias dateValue: dateField.text
     property alias typeValue: typeField.text
@@ -48,27 +49,6 @@ Item {
                     text: note
                 }
             }
-        }
-
-        RowLayout {
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-
-            RoundButton {
-                id: editButton
-                text: qsTr('Edit')
-                onClicked: editItem()
-            }
-            RoundButton {
-                id: saveButton
-                text: qsTr('Save')
-                onClicked: saveItem()
-            }
-            RoundButton {
-                id: discardButton
-                text: qsTr('Discard')
-                onClicked: discardItem()
-            }
-
         }
     }
 

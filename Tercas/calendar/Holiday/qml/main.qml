@@ -17,14 +17,8 @@ ApplicationWindow {
         id: visualModel
         model: holidayModel
         delegate: Package {
-            ListDelegate {
-                id: listDelegate; Package.name: 'listDelegate'
-                width: listItem.width; height: 50
-            }
-            SingleDelegate {
-                id: singleDelegate; Package.name: 'singleDelegate'
-                width: singleItem.width; height: singleItem.height
-            }
+            ListDelegate { id: listDelegate; Package.name: 'listDelegate' }
+            SingleDelegate { id: singleDelegate; Package.name: 'singleDelegate' }
         }
     }
 
@@ -120,38 +114,6 @@ ApplicationWindow {
                 }
             }
 
-            RowLayout {
-                id: buttonBox
-                Layout.fillWidth: false; Layout.fillHeight: false
-                Layout.alignment: Qt.AlignHCenter
-
-                RoundButton {
-                    id: addButton
-                    text: qsTr('Add Item')
-                    onClicked: addItem()
-                }
-                RoundButton {
-                    id: deleteButton
-                    text: qsTr('Delete Item')
-                    onClicked: deleteItem()
-                }
-//                RoundButton {
-//                    id: editButton
-//                    text: qsTr('Edit')
-//                    onClicked: editItem()
-//                }
-//                RoundButton {
-//                    id: saveButton
-//                    text: qsTr('Save')
-//                    onClicked: saveItem()
-//                }
-//                RoundButton {
-//                    id: discardButton
-//                    text: qsTr('Discard')
-//                    onClicked: discardItem()
-//                }
-            }
-
             RoundButton {
                 id: quitButton
                 Layout.preferredWidth: height; Layout.fillHeight: true
@@ -195,7 +157,6 @@ ApplicationWindow {
                     text: qsTr('Примечание')
                 }
             }
-
             ScrollView {
                 id: scrollList
                 Layout.fillWidth: true; Layout.fillHeight: true
@@ -205,7 +166,7 @@ ApplicationWindow {
 
                 ListView {
                     id: listView
-                    Layout.fillWidth: true;Layout.fillHeight: true
+                    Layout.fillWidth: true; Layout.fillHeight: true
                     model: visualModel.parts.listDelegate
                     snapMode: ListView.SnapOneItem
                     clip: true
@@ -214,6 +175,22 @@ ApplicationWindow {
 //                    highlightFollowsCurrentItem: true
 //                    highlightMoveDuration: 0
                     focus: true
+                }
+            }
+            RowLayout {
+                id: buttonBox
+                Layout.fillWidth: false; Layout.fillHeight: false
+                Layout.alignment: Qt.AlignHCenter
+
+                RoundButton {
+                    id: addButton
+                    text: qsTr('Add Item')
+                    onClicked: addItem()
+                }
+                RoundButton {
+                    id: deleteButton
+                    text: qsTr('Delete Item')
+                    onClicked: deleteItem()
                 }
             }
         }
@@ -239,7 +216,25 @@ ApplicationWindow {
                     boundsBehavior: ListView.StopAtBounds
                     highlightMoveDuration: 0
                 }
+            }
+            RowLayout {
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
 
+                RoundButton {
+                    id: editButton
+                    text: qsTr('Edit')
+                    onClicked: editItem()
+                }
+                RoundButton {
+                    id: saveButton
+                    text: qsTr('Save')
+                    onClicked: saveItem()
+                }
+                RoundButton {
+                    id: discardButton
+                    text: qsTr('Discard')
+                    onClicked: discardItem()
+                }
             }
         }
 
