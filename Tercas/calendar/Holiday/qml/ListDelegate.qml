@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.12
 
 Item {
     id: listDelegate
-    width: listView.width
+    width: ListView.view.width
 
     property bool isCurIdx: ListView.isCurrentItem
 
@@ -44,6 +44,7 @@ Item {
             showSingle()
         }
     }
+
     Keys.onReturnPressed: {
         singleView.currentIndex = listView.currentIndex
         showSingle()
