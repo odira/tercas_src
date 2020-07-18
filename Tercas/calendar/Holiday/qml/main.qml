@@ -69,23 +69,23 @@ ApplicationWindow {
         width: root.width
         height: backButton.height + 10
 
-//        states: [
-//            State {
-//                name: 'list'
-//                PropertyChanges { target: backButton; visible: false }
-//                PropertyChanges { target: quitButton; visible: true }
-//            },
-//            State {
-//                name: 'single-normal'
-//                PropertyChanges { target: backButton; visible: true }
-//                PropertyChanges { target: quitButton; visible: true }
-//            },
-//            State {
-//                name: 'single-edit'
-//                PropertyChanges { target: backButton; visible: false }
-//                PropertyChanges { target: quitButton; visible: false }
-//            }
-//        ]
+        states: [
+            State {
+                name: 'list'
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: quitButton; visible: true }
+            },
+            State {
+                name: 'single-normal'
+                PropertyChanges { target: backButton; visible: true }
+                PropertyChanges { target: quitButton; visible: true }
+            },
+            State {
+                name: 'single-edit'
+                PropertyChanges { target: backButton; visible: false }
+                PropertyChanges { target: quitButton; visible: false }
+            }
+        ]
 
         RowLayout {
             anchors.fill: parent
@@ -208,6 +208,7 @@ ApplicationWindow {
                 State {
                     name: 'normal'
                     PropertyChanges { target: singleView.contentItem.children[singleView.currentIndex]; state: 'normal' }
+                    PropertyChanges { target: header; state: 'single-normal' }
                     PropertyChanges { target: editButton; visible: true }
                     PropertyChanges { target: saveButton; visible: false }
                     PropertyChanges { target: discardButton; visible: false }
@@ -215,9 +216,11 @@ ApplicationWindow {
                 State {
                     name: 'edit'
                     PropertyChanges { target: singleView.contentItem.children[singleView.currentIndex]; state: 'edit' }
+                    PropertyChanges { target: header; state: 'single-edit' }
                     PropertyChanges { target: editButton; visible: false }
                     PropertyChanges { target: saveButton; visible: true }
                     PropertyChanges { target: discardButton; visible: true }
+
                 }
             ]
 
@@ -264,6 +267,7 @@ ApplicationWindow {
                 name: 'list'
                 PropertyChanges { target: listItem; state: 'normal' }
                 PropertyChanges { target: singleItem; state: 'list' }
+                PropertyChanges { target: header; state: 'list' }
             },
             State {
                 name: 'single'
