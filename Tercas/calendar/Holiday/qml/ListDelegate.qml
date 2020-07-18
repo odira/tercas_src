@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.12
 
 Item {
     id: listDelegate
-    width: ListView.view.width; height: layout.height + 10
+    width: ListView.view.width; height: layout.height + 5
 
     property bool isCurIdx: ListView.isCurrentItem
 

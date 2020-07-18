@@ -58,9 +58,6 @@ Item {
             PropertyChanges { target: dateField; readOnly: true }
             PropertyChanges { target: typeField; readOnly: true }
             PropertyChanges { target: noteField; readOnly: true }
-            PropertyChanges { target: editButton; visible: true }
-            PropertyChanges { target: saveButton; visible: false }
-            PropertyChanges { target: discardButton; visible: false }
 
         },
         State {
@@ -68,9 +65,6 @@ Item {
             PropertyChanges { target: dateField; readOnly: false }
             PropertyChanges { target: typeField; readOnly: false }
             PropertyChanges { target: noteField; readOnly: false }
-            PropertyChanges { target: editButton; visible: false }
-            PropertyChanges { target: saveButton; visible: true }
-            PropertyChanges { target: discardButton; visible: true }
         }
     ]
 }
