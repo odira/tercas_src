@@ -12,6 +12,7 @@ class HolidayModel : public QSqlTableModel
     Q_OBJECT
 
 public:
+
     enum Columns {
         Column_pid        = 0,
         Column_date,     // 1
@@ -32,17 +33,18 @@ public:
     QVariant data(const QModelIndex &idx, int role = Qt::DisplayRole) const;
     bool setData(const QModelIndex &idx, const QVariant &value, int role = Qt::EditRole);
 
-    Q_INVOKABLE bool submitDB();
-    Q_INVOKABLE void revertDB();
+//    Q_INVOKABLE bool submitDB();
+//    Q_INVOKABLE void revertDB();
 
-    Q_INVOKABLE QVariant get(int row) const;
-    Q_INVOKABLE bool set(int row, QVariant value, QString role);
-    Q_INVOKABLE bool deleteRow(int row);
-    Q_INVOKABLE void add(QDate date, QString type, QString noteRu);
+//    Q_INVOKABLE QVariant get(int row) const;
+//    Q_INVOKABLE bool set(int row, QVariant value, QString role);
+//    Q_INVOKABLE bool deleteRow(int row);
+//    Q_INVOKABLE void add(QDate date, QString type, QString noteRu);
 
 private:
     void generateRoleNames();
 
+private:
     QHash<int, QByteArray> m_roleNames;
 };
 

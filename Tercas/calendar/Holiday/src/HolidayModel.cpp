@@ -14,13 +14,14 @@ HolidayModel::HolidayModel(QObject *parent, QSqlDatabase db)
 void HolidayModel::generateRoleNames()
 {
     m_roleNames.clear();
+
     m_roleNames[Qt::DisplayRole] = QVariant(QString("display").toUtf8()).toByteArray();
 
-    m_roleNames[Qt::UserRole + 1 + 0] = QVariant(QString("pid").toUtf8()).toByteArray();
-    m_roleNames[Qt::UserRole + 1 + 1] = QVariant(QString("date").toUtf8()).toByteArray();
-    m_roleNames[Qt::UserRole + 1 + 2] = QVariant(QString("type_pid").toUtf8()).toByteArray();
-    m_roleNames[Qt::UserRole + 1 + 3] = QVariant(QString("type").toUtf8()).toByteArray();
-    m_roleNames[Qt::UserRole + 1 + 4] = QVariant(QString("note").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + Columns::Column_pid]      = QVariant(QString("pid").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + Columns::Column_date]     = QVariant(QString("date").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + Columns::Column_type_pid] = QVariant(QString("type_pid").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + Columns::Column_type]     = QVariant(QString("type").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + Columns::Column_note]     = QVariant(QString("note").toUtf8()).toByteArray();
 }
 
 //QStringList HolidayModel::roleNamesList() const
@@ -64,7 +65,6 @@ QVariant HolidayModel::data(const QModelIndex &idx, int role) const
     {
         int colIndex = role - Qt::UserRole - 1;
         QModelIndex index = this->index(row, colIndex);
-//        return QSqlTableModel::data(index, Qt::DisplayRole);
         return this->data(index, Qt::DisplayRole);
     }
     else {
@@ -82,62 +82,62 @@ bool HolidayModel::setData(const QModelIndex &idx, const QVariant &value, int ro
     return false;
 }
 
-bool HolidayModel::submitDB()
-{
-    return submitAll();
-}
+//bool HolidayModel::submitDB()
+//{
+//    return submitAll();
+//}
 
-void HolidayModel::revertDB()
-{
-    revertAll();
-}
+//void HolidayModel::revertDB()
+//{
+//    revertAll();
+//}
 
-QVariant HolidayModel::get(int row) const
-{
-    if (row < 0 || row >= rowCount())
-        return QVariant();
+//QVariant HolidayModel::get(int row) const
+//{
+//    if (row < 0 || row >= rowCount())
+//        return QVariant();
 
-    QMap<QString, QVariant> data;
+//    QMap<QString, QVariant> data;
 
-    QHashIterator<int, QByteArray> iterator(roleNames());
-    while (iterator.hasNext()) {
-        iterator.next();
-        data.insert(iterator.value(), this->data(index(row, iterator.key() - Qt::UserRole - 1), iterator.key()).toString());
+//    QHashIterator<int, QByteArray> iterator(roleNames());
+//    while (iterator.hasNext()) {
+//        iterator.next();
+//        data.insert(iterator.value(), this->data(index(row, iterator.key() - Qt::UserRole - 1), iterator.key()).toString());
 
-    }
-    return data;
-}
+//    }
+//    return data;
+//}
 
-bool HolidayModel::set(int row, QVariant value, QString role)
-{
-    if (row < 0 || row > rowCount())
-        return false;
+//bool HolidayModel::set(int row, QVariant value, QString role)
+//{
+//    if (row < 0 || row > rowCount())
+//        return false;
 
-    QHashIterator<int, QByteArray> iterator(roleNames());
-    while (iterator.hasNext()) {
-        iterator.next();
-        if (iterator.value() == role) {
-            QModelIndex index = createIndex(row, iterator.key() - Qt::UserRole - 1);
-            if (!index.isValid())
-                return false;
+//    QHashIterator<int, QByteArray> iterator(roleNames());
+//    while (iterator.hasNext()) {
+//        iterator.next();
+//        if (iterator.value() == role) {
+//            QModelIndex index = createIndex(row, iterator.key() - Qt::UserRole - 1);
+//            if (!index.isValid())
+//                return false;
 
-            return setData(index, value, Qt::EditRole);
-        }
-    }
+//            return setData(index, value, Qt::EditRole);
+//        }
+//    }
 
-    return false;
-}
+//    return false;
+//}
 
-bool HolidayModel::deleteRow(int row)
-{
-    return QSqlTableModel::removeRow(row);
-}
+//bool HolidayModel::deleteRow(int row)
+//{
+//    return QSqlTableModel::removeRow(row);
+//}
 
-void HolidayModel::add(QDate date, QString type, QString noteRu)
-{
-    QSqlRecord rec = record();
-    rec.setValue("date", date);
-    rec.setValue("type", type);
-    rec.setValue("note_ru", noteRu);
-    insertRecord(rowCount(), rec);
-}
+//void HolidayModel::add(QDate date, QString type, QString noteRu)
+//{
+//    QSqlRecord rec = record();
+//    rec.setValue("date", date);
+//    rec.setValue("type", type);
+//    rec.setValue("note_ru", noteRu);
+//    insertRecord(rowCount(), rec);
+//}
