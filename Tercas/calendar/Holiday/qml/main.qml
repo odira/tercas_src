@@ -168,7 +168,6 @@ ApplicationWindow {
                 }
             }
             RowLayout {
-                id: buttonBox
                 Layout.fillWidth: false; Layout.fillHeight: false
                 Layout.alignment: Qt.AlignHCenter
 
