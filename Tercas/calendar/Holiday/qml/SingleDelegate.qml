@@ -8,7 +8,7 @@ Item {
 
     property int   pidValue:  model.pid
     property alias dateValue: dateField.text //.fromLocaleDateString(Qt.locale("ru_RU"), "dd MMMM yyyy")
-    property alias typeValue: typeField.text
+    property alias typeValue: typeField.currentText
     property alias noteValue: noteField.text
 
     ColumnLayout {
@@ -33,10 +33,10 @@ Item {
                     Layout.preferredWidth: root.width * 1/5
                     text: qsTr('Наименование дня')
                 }
-                TextField {
+                ComboBox {
                     id: typeField
                     Layout.fillWidth: true
-                    text: type
+                    model: ['one', 'two', 'three']
                 }
             }
             RowLayout {
