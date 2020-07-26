@@ -6,7 +6,8 @@ Item {
     id: root
     width: ListView.view.width; height: ListView.view.height
 
-    property alias dateValue: dateField.text
+    property int   pidValue:  model.pid
+    property alias dateValue: dateField.text //.fromLocaleDateString(Qt.locale("ru_RU"), "dd MMMM yyyy")
     property alias typeValue: typeField.text
     property alias noteValue: noteField.text
 

@@ -41,6 +41,8 @@ public:
 //    Q_INVOKABLE bool deleteRow(int row);
 //    Q_INVOKABLE void add(QDate date, QString type, QString noteRu);
 
+    Q_INVOKABLE void save(int pid, QDate date, QString type, QString note);
+
 private:
     void generateRoleNames();
 

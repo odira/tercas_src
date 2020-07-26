@@ -78,8 +78,19 @@ bool HolidayModel::setData(const QModelIndex &idx, const QVariant &value, int ro
         QSqlTableModel::setData(idx, value, role);
         emit dataChanged(idx, idx);
         return true;
-    }
-    return false;
+    } else
+        return false;
+}
+
+void HolidayModel::save(int pid, QDate date, QString type, QString note)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE calendar.vw_holiday SET date=:date, type=:type, note=:note WHERE pid=:pid");
+    query.bindValue(0, date);
+    query.bindValue(1, type);
+    query.bindValue(2, note);
+    query.bindValue(3, pid);
+    query.exec();
 }
 
 //bool HolidayModel::submitDB()

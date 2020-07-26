@@ -53,12 +53,16 @@ ApplicationWindow {
         singleItem.state = 'edit'
     }
     function saveItem() {
-        singleItem.state = 'normal'
-        var item = singleView.contentItem.children[singleView.currentIndex]
-        var date = item.dateValue
-        var type = item.typeValue
-        var note = item.noteValue
-        console.log(date, type, note)
+        var item = singleView.contentItem.children[singleView.currentIndex];
+
+        var date = Date.fromLocaleDateString(Qt.locale("ru_RU"), item.dateValue, "dd MMMM yyyy");
+        var type = item.typeValue;
+        var note = item.noteValue;
+        var pid  = item.pidValue;
+
+        holidayModel.save(pid, date, type, note);
+
+        singleItem.state = 'normal';
     }
     function discardItem() {
         singleItem.state = 'normal'
