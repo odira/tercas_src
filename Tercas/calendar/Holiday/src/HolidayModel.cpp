@@ -7,8 +7,8 @@ HolidayModel::HolidayModel(QObject *parent, QSqlDatabase db)
 {
     setTable(PGSQL_TABLE);
     setEditStrategy(QSqlTableModel::OnManualSubmit);
-    generateRoleNames();
-    select();
+
+    update();
 }
 
 void HolidayModel::generateRoleNames()
@@ -22,6 +22,12 @@ void HolidayModel::generateRoleNames()
     m_roleNames[Qt::UserRole + 1 + Columns::Column_type_pid] = QVariant(QString("type_pid").toUtf8()).toByteArray();
     m_roleNames[Qt::UserRole + 1 + Columns::Column_type]     = QVariant(QString("type").toUtf8()).toByteArray();
     m_roleNames[Qt::UserRole + 1 + Columns::Column_note]     = QVariant(QString("note").toUtf8()).toByteArray();
+}
+
+void HolidayModel::update()
+{
+    generateRoleNames();
+    select();
 }
 
 //QStringList HolidayModel::roleNamesList() const
@@ -91,6 +97,17 @@ void HolidayModel::save(int pid, QDate date, QString type, QString note)
     query.bindValue(2, note);
     query.bindValue(3, pid);
     query.exec();
+
+    update();
+}
+
+#include <QDebug>
+void HolidayModel::add()
+{
+    beginInsertRows(QModelIndex(), 0, 0);
+    endInsertRows();
+
+    qDebug() << "ADD";
 }
 
 //bool HolidayModel::submitDB()

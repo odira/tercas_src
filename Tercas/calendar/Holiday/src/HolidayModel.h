@@ -42,9 +42,11 @@ public:
 //    Q_INVOKABLE void add(QDate date, QString type, QString noteRu);
 
     Q_INVOKABLE void save(int pid, QDate date, QString type, QString note);
+    Q_INVOKABLE void add();
 
 private:
     void generateRoleNames();
+    void update();
 
 private:
     QHash<int, QByteArray> m_roleNames;

@@ -8,7 +8,7 @@ Item {
 
     property int   pidValue:  model.pid
     property alias dateValue: dateField.text //.fromLocaleDateString(Qt.locale("ru_RU"), "dd MMMM yyyy")
-    property alias typeValue: typeField.currentText
+    property alias typeValue: typeCombo.currentText
     property alias noteValue: noteField.text
 
     ColumnLayout {
@@ -34,9 +34,14 @@ Item {
                     text: qsTr('Наименование дня')
                 }
                 ComboBox {
-                    id: typeField
+                    id: typeCombo
                     Layout.fillWidth: true
-                    model: ['one', 'two', 'three']
+                    model: [
+                        'Нерабочий праздничный день',
+                        'Выходной день',
+                        'Рабочий день'
+                    ]
+                    displayText: type
                 }
             }
             RowLayout {
@@ -57,14 +62,20 @@ Item {
         State {
             name: 'normal'
             PropertyChanges { target: dateField; readOnly: true }
-            PropertyChanges { target: typeField; readOnly: true }
+            PropertyChanges { target: typeCombo; editable: false }
             PropertyChanges { target: noteField; readOnly: true }
 
         },
         State {
             name: 'edit'
             PropertyChanges { target: dateField; readOnly: false }
-            PropertyChanges { target: typeField; readOnly: false }
+            PropertyChanges { target: typeCombo; editable: true }
+            PropertyChanges { target: noteField; readOnly: false }
+        },
+        State {
+            name: 'add'
+            PropertyChanges { target: dateField; readOnly: false }
+            PropertyChanges { target: typeCombo; editable: true }
             PropertyChanges { target: noteField; readOnly: false }
         }
     ]

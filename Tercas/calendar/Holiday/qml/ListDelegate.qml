@@ -33,9 +33,10 @@ Item {
             font.bold: isCurIdx ? true : false
             wrapMode: TextInput.NoWrap
             autoScroll: false
-//            hoverEnabled: true
-//            ToolTip.visible: hovered
-//            ToolTip.text: noteField.text
+            hoverEnabled: true
+            ToolTip.visible: hovered
+            ToolTip.text: noteField.text
+            ToolTip.delay: 1000
         }
     }
 

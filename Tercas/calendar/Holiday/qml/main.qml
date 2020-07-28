@@ -42,15 +42,18 @@ ApplicationWindow {
     function showSingle() {
         content.state = 'single'
     }
+    function editItem() {
+        singleItem.state = 'edit'
+    }
     function addItem() {
-//        showSingle()
-//        singleView.contentItem.children[singleView.currentIndex].state = 'add'
+        holidayModel.add();
+        singleView.currentIndex = 0;
+
+        showSingle();
+        singleItem.state = 'add'
     }
     function deleteItem() {
         console.log('Delete')
-    }
-    function editItem() {
-        singleItem.state = 'edit'
     }
     function saveItem() {
         var item = singleView.contentItem.children[singleView.currentIndex];
@@ -223,7 +226,14 @@ ApplicationWindow {
                     PropertyChanges { target: editButton; visible: false }
                     PropertyChanges { target: saveButton; visible: true }
                     PropertyChanges { target: discardButton; visible: true }
-
+                },
+                State {
+                    name: 'add'
+                    PropertyChanges { target: singleView.contentItem.children[singleView.currentIndex]; state: 'add' }
+                    PropertyChanges { target: header; state: 'single-edit' }
+                    PropertyChanges { target: editButton; visible: false }
+                    PropertyChanges { target: saveButton; visible: true }
+                    PropertyChanges { target: discardButton; visible: true }
                 }
             ]
 
