@@ -3,15 +3,19 @@
 #include <QQmlContext>
 
 #include "PersonModel.h"
-#include <connection.h>
+//#include <connection.h>
+
+#include "Database.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
 
-    if (!openConnection())
-        return -1;
+    Database db;
+
+//    if (!openConnection())
+//        return -1;
 
     PersonModel * personModel = new PersonModel();
 
@@ -25,8 +29,8 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-    if (!closeConnection())
-        return -1;
-    else
+//    if (!closeConnection())
+//        return -1;
+//    else
         return app.exec();
 }
