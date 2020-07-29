@@ -42,6 +42,7 @@ ApplicationWindow {
     function showSingle() {
         content.state = 'single'
     }
+
     function editItem() {
         singleItem.state = 'edit'
     }
@@ -50,11 +51,12 @@ ApplicationWindow {
         singleView.currentIndex = 0;
 
         showSingle();
-        singleItem.state = 'add'
+        singleItem.state = 'edit';
     }
     function deleteItem() {
         console.log('Delete')
     }
+
     function saveItem() {
         var item = singleView.contentItem.children[singleView.currentIndex];
 

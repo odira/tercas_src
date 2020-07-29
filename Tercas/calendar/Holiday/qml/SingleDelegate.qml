@@ -11,6 +11,7 @@ Item {
     property alias typeValue: typeCombo.currentText
     property alias noteValue: noteField.text
 
+
     ColumnLayout {
         anchors.fill: parent
 
