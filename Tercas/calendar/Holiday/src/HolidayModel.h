@@ -11,27 +11,29 @@ class HolidayModel : public QSqlTableModel
 {
     Q_OBJECT
 
+//    Q_PROPERTY(QDate   date READ date WRITE setDate NOTIFY dateChanged)
+//    Q_PROPERTY(QString type READ type WRITE setType NOTIFY typeChanged)
+//    Q_PROPERTY(QString note READ note WRITE setNote NOTIFY noteChanged)
+
 public:
 
-    enum Columns {
-        Column_pid        = 0,
-        Column_date,     // 1
-        Column_type_pid, // 2
-        Column_type,     // 3
-        Column_note,     // 4
-
-        ColumnsNumber
+    enum HolidayRoles {
+         DateRole = Qt::UserRole + 1
+        ,TypeRole
+        ,NoteRole
     };
-    Q_ENUM(Columns)
+    Q_ENUM(HolidayRoles)
 
 public:
     HolidayModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
 
     virtual QHash<int, QByteArray> roleNames() const { return m_roleNames; }
-//    QStringList roleNamesList() const;
 
     QVariant data(const QModelIndex &idx, int role = Qt::DisplayRole) const;
     bool setData(const QModelIndex &idx, const QVariant &value, int role = Qt::EditRole);
+
+
+
 
 //    Q_INVOKABLE bool submitDB();
 //    Q_INVOKABLE void revertDB();
@@ -41,12 +43,21 @@ public:
 //    Q_INVOKABLE bool deleteRow(int row);
 //    Q_INVOKABLE void add(QDate date, QString type, QString noteRu);
 
-    Q_INVOKABLE void save(int pid, QDate date, QString type, QString note);
-    Q_INVOKABLE void add();
+//    Q_INVOKABLE void save(int pid, QDate date, QString type, QString note);
+//    Q_INVOKABLE void add();
+
+//    void setDate(const QDate   &/*date*/) { emit dateChanged(); }
+//    void setType(const QString &/*type*/) { emit typeChanged(); }
+//    void setNote(const QString &/*note*/) { emit noteChanged(); }
 
 private:
     void generateRoleNames();
     void update();
+
+//signals:
+//    void dateChanged();
+//    void typeChanged();
+//    void noteChanged();
 
 private:
     QHash<int, QByteArray> m_roleNames;

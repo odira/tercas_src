@@ -15,13 +15,9 @@ void HolidayModel::generateRoleNames()
 {
     m_roleNames.clear();
 
-    m_roleNames[Qt::DisplayRole] = QVariant(QString("display").toUtf8()).toByteArray();
-
-    m_roleNames[Qt::UserRole + 1 + Columns::Column_pid]      = QVariant(QString("pid").toUtf8()).toByteArray();
-    m_roleNames[Qt::UserRole + 1 + Columns::Column_date]     = QVariant(QString("date").toUtf8()).toByteArray();
-    m_roleNames[Qt::UserRole + 1 + Columns::Column_type_pid] = QVariant(QString("type_pid").toUtf8()).toByteArray();
-    m_roleNames[Qt::UserRole + 1 + Columns::Column_type]     = QVariant(QString("type").toUtf8()).toByteArray();
-    m_roleNames[Qt::UserRole + 1 + Columns::Column_note]     = QVariant(QString("note").toUtf8()).toByteArray();
+    m_roleNames[DateRole] = "date";
+    m_roleNames[TypeRole] = "type";
+    m_roleNames[NoteRole] = "note";
 }
 
 void HolidayModel::update()
@@ -29,18 +25,6 @@ void HolidayModel::update()
     generateRoleNames();
     select();
 }
-
-//QStringList HolidayModel::roleNamesList() const
-//{
-//    QMap<int, QString> res;
-//    QHashIterator<int, QByteArray> i(m_roleNames);
-//    while (i.hasNext()) {
-//        i.next();
-//        if (i.key() > Qt::UserRole)
-//            res[i.key()] = i.value();
-//    }
-//    return QStringList(res.values());
-//}
 
 QVariant HolidayModel::data(const QModelIndex &idx, int role) const
 {
@@ -58,24 +42,31 @@ QVariant HolidayModel::data(const QModelIndex &idx, int role) const
 
     if (role == Qt::DisplayRole)
     {
-        if (col == Column_date)
-            return QSqlTableModel::data(idx).toDate();
-        else if (col == Columns::Column_note) {
+        if (col == DateRole) {
+            QDate date = QSqlTableModel::data(idx).toDate();
+            return date;
+        } else if (col == TypeRole) {
+            QString type = QSqlTableModel::data(idx).toString();
+            return type;
+        } else if (col == NoteRole) {
             QString note = QSqlTableModel::data(idx).toString();
             return note;
-        }
-        else
-            return QSqlTableModel::data(idx);
+        } else
+//            return QSqlTableModel::data(idx);
+            return QVariant();
     }
     else if (role > Qt::UserRole)
     {
-        int colIndex = role - Qt::UserRole - 1;
-        QModelIndex index = this->index(row, colIndex);
+        int columnIdx = role - Qt::UserRole - 1;
+        QModelIndex index = this->index(row, columnIdx);
         return this->data(index, Qt::DisplayRole);
     }
-    else {
-        return QSqlTableModel::data(idx, role);
-    }
+//    else {
+////        return QSqlTableModel::data(idx, role);
+
+//    }
+
+    return QVariant();
 }
 
 bool HolidayModel::setData(const QModelIndex &idx, const QVariant &value, int role)
@@ -88,27 +79,27 @@ bool HolidayModel::setData(const QModelIndex &idx, const QVariant &value, int ro
         return false;
 }
 
-void HolidayModel::save(int pid, QDate date, QString type, QString note)
-{
-    QSqlQuery query;
-    query.prepare("UPDATE calendar.vw_holiday SET date=:date, type=:type, note=:note WHERE pid=:pid");
-    query.bindValue(0, date);
-    query.bindValue(1, type);
-    query.bindValue(2, note);
-    query.bindValue(3, pid);
-    query.exec();
+//void HolidayModel::save(int pid, QDate date, QString type, QString note)
+//{
+//    QSqlQuery query;
+//    query.prepare("UPDATE calendar.vw_holiday SET date=:date, type=:type, note=:note WHERE pid=:pid");
+//    query.bindValue(0, date);
+//    query.bindValue(1, type);
+//    query.bindValue(2, note);
+//    query.bindValue(3, pid);
+//    query.exec();
 
-    update();
-}
+//    update();
+//}
 
-#include <QDebug>
-void HolidayModel::add()
-{
-    beginInsertRows(QModelIndex(), 0, 0);
-    endInsertRows();
+//#include <QDebug>
+//void HolidayModel::add()
+//{
+//    beginInsertRows(QModelIndex(), 0, 0);
+//    endInsertRows();
 
-    qDebug() << "ADD";
-}
+//    qDebug() << "ADD";
+//}
 
 //bool HolidayModel::submitDB()
 //{
