@@ -2,6 +2,8 @@
 
 #include "HolidayModel.h"
 
+#include <QDebug>
+
 HolidayModel::HolidayModel(QObject *parent, QSqlDatabase db)
     : QSqlTableModel(parent, db)
 {
@@ -15,6 +17,7 @@ void HolidayModel::generateRoleNames()
 {
     m_roleNames.clear();
 
+    m_roleNames[PidRole]  = "pid";
     m_roleNames[DateRole] = "date";
     m_roleNames[TypeRole] = "type";
     m_roleNames[NoteRole] = "note";
@@ -44,6 +47,7 @@ QVariant HolidayModel::data(const QModelIndex &idx, int role) const
     {
         if (col == DateRole) {
             QDate date = QSqlTableModel::data(idx).toDate();
+            qDebug() << date;
             return date;
         } else if (col == TypeRole) {
             QString type = QSqlTableModel::data(idx).toString();
@@ -52,8 +56,7 @@ QVariant HolidayModel::data(const QModelIndex &idx, int role) const
             QString note = QSqlTableModel::data(idx).toString();
             return note;
         } else
-//            return QSqlTableModel::data(idx);
-            return QVariant();
+            return QSqlTableModel::data(idx);
     }
     else if (role > Qt::UserRole)
     {
@@ -61,10 +64,6 @@ QVariant HolidayModel::data(const QModelIndex &idx, int role) const
         QModelIndex index = this->index(row, columnIdx);
         return this->data(index, Qt::DisplayRole);
     }
-//    else {
-////        return QSqlTableModel::data(idx, role);
-
-//    }
 
     return QVariant();
 }
@@ -75,6 +74,10 @@ bool HolidayModel::setData(const QModelIndex &idx, const QVariant &value, int ro
         QSqlTableModel::setData(idx, value, role);
         emit dataChanged(idx, idx);
         return true;
+    } else if(role > Qt::UserRole) {
+        int columnIdx = role - Qt::UserRole - 1;
+        QModelIndex index = this->index(idx.row(), columnIdx);
+        return this->setData(index, value, Qt::EditRole);
     } else
         return false;
 }

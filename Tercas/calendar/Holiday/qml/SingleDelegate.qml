@@ -1,4 +1,4 @@
-import QtQuick 2.12
+import QtQuick 2.15
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
@@ -42,7 +42,7 @@ Item {
                         'Выходной день',
                         'Рабочий день'
                     ]
-                    displayText: type
+                    displayText: model.type
                 }
             }
             RowLayout {

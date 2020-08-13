@@ -18,7 +18,8 @@ class HolidayModel : public QSqlTableModel
 public:
 
     enum HolidayRoles {
-         DateRole = Qt::UserRole + 1
+         PidRole = Qt::UserRole + 1
+        ,DateRole
         ,TypeRole
         ,NoteRole
     };
@@ -28,7 +29,6 @@ public:
     HolidayModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
 
     virtual QHash<int, QByteArray> roleNames() const { return m_roleNames; }
-
     QVariant data(const QModelIndex &idx, int role = Qt::DisplayRole) const;
     bool setData(const QModelIndex &idx, const QVariant &value, int role = Qt::EditRole);
 
