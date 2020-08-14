@@ -147,9 +147,9 @@ ApplicationWindow {
                     text: qsTr('Дата')
 //                    background: Rectangle { color: 'yellow' }
 //                    color: 'yellow'
-                    style: TextFieldStyle {
-                        textColor: 'red'
-                    }
+//                    style: TextFieldStyle {
+//                        textColor: 'red'
+//                    }
                 }
                 TextField {
                     Layout.preferredWidth: listHeader.width * 3/8
