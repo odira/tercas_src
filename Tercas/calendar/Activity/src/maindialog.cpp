@@ -1,7 +1,7 @@
 #include <QtWidgets>
 #include <QtSql>
 
-#include "../../model/ActivityModel.h"
+#include "ActivityModel.h"
 #include "maindialog.h"
 #include "mapperdialog.h"
 //#include "tableviewdelegate.h"

@@ -1,6 +1,6 @@
 #include <QtWidgets>
 
-#include "../model/ActivityModel.h"
+#include "ActivityModel.h"
 #include "mapperdialog.h"
 #include "mapperdelegate.h"
 #include "colorwidget.h"

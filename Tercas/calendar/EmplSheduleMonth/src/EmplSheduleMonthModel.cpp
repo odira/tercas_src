@@ -10,8 +10,9 @@ EmplSheduleMonthModel::EmplSheduleMonthModel(QObject *parent, QSqlDatabase db)
     : QSqlTableModel(parent, db)
 {
     m_date = QDate::currentDate();
-//    m_date.setDate(2020, 6, 1);
     m_shiftnum = 4;
+
+    // Initialize the person pids array
     m_personPidArray.clear();
     QString queryString("SELECT pid "
                         "FROM person.vw_person "
@@ -24,7 +25,6 @@ EmplSheduleMonthModel::EmplSheduleMonthModel(QObject *parent, QSqlDatabase db)
     }
 
     setEditStrategy(QSqlTableModel::OnManualSubmit);
-
     update();
 }
 

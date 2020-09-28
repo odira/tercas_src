@@ -2,7 +2,7 @@
 #include <QtSql>
 #include <QSqlError>
 
-#include "../model/ActivityModel.h"
+#include "ActivityModel.h"
 #include "mapperdelegate.h"
 #include "colorwidget.h"
 

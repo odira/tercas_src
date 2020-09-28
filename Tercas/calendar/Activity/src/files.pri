@@ -1,4 +1,5 @@
 HEADERS += \
+    $$PWD/ActivityModel.h \
     $$PWD/maindialog.h \
     $$PWD/mapperdialog.h \
     $$PWD/mapperdelegate.h \
@@ -6,6 +7,7 @@ HEADERS += \
     $$PWD/tableviewdelegate.h
 
 SOURCES += \
+    $$PWD/ActivityModel.cpp \
     $$PWD/main.cpp \
     $$PWD/maindialog.cpp \
     $$PWD/mapperdialog.cpp \

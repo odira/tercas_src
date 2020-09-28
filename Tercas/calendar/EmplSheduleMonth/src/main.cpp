@@ -10,13 +10,14 @@
 #include "src/EmplSheduleMonthModel.h"
 #include <connection.h>
 
+#include <QDebug>
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
 
-    QLockFile lockFile(QDir::temp().absoluteFilePath("dashboard.lock"));
-
+    QString lockFileName = QString(QCoreApplication::applicationName() + ".lock");
+    QLockFile lockFile(QDir::temp().absoluteFilePath(lockFileName));
     /* Пытаемся закрыть Lock File, если попытка безуспешна в течение 100 миллисекунд,
      * значит уже существует Lock File созданный другим процессом.
      * Следовательно, выбрасываем предупреждение и закрываем программу
@@ -34,9 +35,6 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    /*
-     * Defining models
-     * */
     EmplSheduleMonthModel *emplSheduleMonthModel = new EmplSheduleMonthModel;
 
     QQmlApplicationEngine engine;

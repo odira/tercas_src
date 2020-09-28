@@ -136,7 +136,7 @@ QVariant EmplSheduleIntervalModel::data(const QModelIndex &idx, int role) const
         }
         else if (role == Qt::ForegroundRole)
         {
-            return QColor("blue");
+            return QColor("lightblue");
         }
 
         break;
@@ -206,7 +206,23 @@ QVariant EmplSheduleIntervalModel::headerData(int section, Qt::Orientation orien
             {
 
             case column_person_surname:
-                return QString(QObject::tr("Работник"));
+                return QString(QObject::tr("Фамилия"));
+                // break;
+
+            case column_person_name:
+                return QString(tr("Имя"));
+                // break;
+
+            case column_person_middlename:
+                return QString(tr("Отчество"));
+                // break;
+
+            case column_person_position:
+                return QString(tr("Должность"));
+                // break;
+
+            case column_person_sectors_pool:
+                return QString(tr("Направление"));
                 // break;
 
             case column_person_shift_num:
@@ -243,6 +259,8 @@ QVariant EmplSheduleIntervalModel::headerData(int section, Qt::Orientation orien
             return QColor("green");
         }
 
+        return QVariant();
+
     }
     else if (orientation == Qt::Vertical)
     {
@@ -255,6 +273,8 @@ QVariant EmplSheduleIntervalModel::headerData(int section, Qt::Orientation orien
         {
             return section + 1;
         }
+
+        return QVariant();
     }
 
     return QSqlTableModel::headerData(section, orientation, role);

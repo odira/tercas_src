@@ -14,10 +14,10 @@ int main(int argc, char *argv[])
         return -1;
 
     MainDialog mainDialog;
-    mainDialog.setTitle(QObject::trUtf8("Рабочий календарь (ИНТЕРВАЛЬНЫЙ)"));
+    mainDialog.setTitle(QObject::tr("Рабочий календарь (ИНТЕРВАЛЬНЫЙ)"));
     mainDialog.setMinimumWidth(1400);
     mainDialog.setMinimumHeight(800);
-    mainDialog.show(); // mainDialog.showMaximized();
+    mainDialog.show();
 
     app.exec();
 

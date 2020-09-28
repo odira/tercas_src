@@ -11,6 +11,7 @@ ApplicationWindow {
     visible: true
     width: Screen.width
     height: Screen.height
+    color: 'black'
 
     header: RowLayout {
         Layout.fillWidth: true

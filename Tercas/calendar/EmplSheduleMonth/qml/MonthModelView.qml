@@ -55,8 +55,6 @@ ListView {
                     property date delegateDate: new Date(emplSheduleMonthModel.date.getFullYear(), emplSheduleMonthModel.date.getMonth(), index)
                     property string delegateDayOfWeekName: CalendarFunctions.getDayOfWeekNameAbbr(delegateDate.getDay())
                     property int delegateDayOfMonthNum: index + 1
-//                    property bool delegateIsDayOff: emplSheduleMonthModel.isDayOff(modelData) // modelData = index
-//                    property bool delegateIsHoliday: emplSheduleMonthModel.isHoliday(modelData) // modelData = index
                     property bool delegateIsDayOff: emplSheduleMonthModel.isDayOff(delegateDate)
                     property bool delegateIsHoliday: emplSheduleMonthModel.isHoliday(delegateDate)
 
@@ -126,6 +124,7 @@ ListView {
 
                     property date curDate: new Date(emplSheduleMonthModel.date.getFullYear(), emplSheduleMonthModel.date.getMonth(), index + 1)
                     property int personNumberAvailable: emplSheduleMonthModel.getNumberAvailable(modelData)
+                    property int shiftNum: CalendarFunctions.getShiftNum(curDate)
 
                     Layout.preferredWidth: listView.delegateCellWidth
                     Layout.fillWidth: true
@@ -135,9 +134,9 @@ ListView {
                     font.bold: true
                     font.pixelSize: 12
                     padding: 10
-                    color: "yellow"
-                    background: Rectangle { color: "silver" }
-                    text: CalendarFunctions.getShiftNum(curDate) === 4 ? personNumberAvailable : ""
+                    color: personNumberAvailable > 6 ? "black" : "red"
+                    background: Rectangle { color: shiftNum === 4 ? "silver" : "transparent"; border.color: 'gray' }
+                    text: shiftNum === 4 ? personNumberAvailable : ""
                 }
             }
         }
@@ -176,7 +175,7 @@ ListView {
 
                     Layout.preferredWidth: listView.delegateCellWidth
                     Layout.fillHeight: true
-                    border.color: "lightgrey"
+//                    border.color: "lightgrey"
                     color: {
                         if (dutyName === 'опг') return 'lightgreen';
                         else if (dutyName === 'овг') return 'lightgreen';
@@ -184,22 +183,25 @@ ListView {
                         else if (dutyName === 'ксп') return 'orange';
                         else if (dutyName === 'eng') return 'yellow';
                         else if (dutyName === 'ref') return 'lightblue';
-                        else if (dutyName === 'вых') return 'transparent';
+                        else if (dutyName === 'вых') return 'white';
                         else if (dutyName === 'окд') return 'lightgreen';
                         else if (dutyName === 'ТУ')  return 'lightblue';
                         else if (dutyName === 'бол') return 'red';
-                        else if (dutyName === 'дор') return 'blue';
+                        else if (dutyName === 'дор') return 'lightblue';
                         else if (dutyName === 'ком') return 'orange';
                         else if (dutyName === 'mls') return '#e1b746';
                         else if (dutyName === 'кпп') return 'orange';
+                        else if (dutyName === 'кпс') return 'orange';
                         else if (dutyName === 'кпк') return 'orange';
                         else if (dutyName === 'крс') return 'orange';
-                        else if (dutyName === 'нсвп') return 'orange';
                         else if (dutyName === 'пер') return 'lightblue';
                         else if (dutyName === 'крп') return 'orange';
                         else if (dutyName === 'субп') return 'yellow';
+                        else if (dutyName === 'нсвп') return 'orange';
+                        else if (dutyName === 'нстр') return 'orange';
+                        else if (dutyName === 'нст2') return 'orange';
 //                        else return Func.getShiftColor(delegateDate);
-                        else (TercasDate.isShiftWorking(delegateDate, 4) ? Qt.lighter("yellow") : "white")
+                        else (TercasDate.isShiftWorking(delegateDate, 4) ? Qt.lighter("yellow") : "transparent");
                     }
                     radius: 3
 

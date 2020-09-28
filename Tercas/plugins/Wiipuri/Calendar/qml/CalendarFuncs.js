@@ -35,11 +35,16 @@ function getDayOfWeekNameAbbr (num) {
     return DayOfWeekNameAbbr;
 }
 
+function getNumberOfDaysBetween(date1, date2) {
+    var dif = Math.round(Math.abs(date1 - date2) / 1000 / 60 / 60 / 24);
+    return dif;
+}
+
 function getShiftNum (date) {
     var jDate = new Date(1, 0, 1);
     var shiftNum = 4;
 
-    var dif = (date - jDate) / 1000 / 60 / 60 / 24 % 6;
+    var dif = getNumberOfDaysBetween(date, jDate) % 6;
     if (dif === 0 || dif === 1 || dif === 2 || dif === 3)
         return 4;
 
@@ -51,7 +56,7 @@ function getShiftColor (date) {
     var shiftNum = 4;
     var theColor;
 
-    var dif = (date - jDate) /1000 /60 /60 /24 %6;
+    var dif = getNumberOfDaysBetween(date, jDate) % 6;
     if (dif === 0 || dif === 1 || dif === 2 || dif === 3) {
         theColor = "#f9eeda";
     } else {

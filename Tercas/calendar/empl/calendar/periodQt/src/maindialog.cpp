@@ -1,7 +1,6 @@
 #include <QtWidgets>
 #include <QtSql>
 
-//#include "../../model/EmplSheduleIntervalModel.h"
 #include "EmplSheduleIntervalModel.h"
 #include "maindialog.h"
 #include "mapperdialog.h"
