@@ -36,7 +36,7 @@ QVariant ActivityModel::data(const QModelIndex &idx, int role) const
         }
 
         case Qt::TextAlignmentRole:
-            return Qt::AlignCenter;
+            return Qt::AlignLeft;
 
         case Qt::BackgroundRole: {
             QString coverStr = QSqlTableModel::data(index(idx.row(), path)).toString();
@@ -105,6 +105,10 @@ QVariant ActivityModel::headerData(int section, Qt::Orientation orientation, int
             } // switch
 
         }
+        else if (role == Qt::BackgroundRole)
+            return QColor("green");
+        else
+            return QVariant();
     }
 
     return QSqlTableModel::headerData(section, orientation, role);

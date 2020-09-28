@@ -4,7 +4,7 @@
 #include <QSqlTableModel>
 #include <QAbstractItemModel>
 
-#include "../model/ActivityModel.h"
+#include "ActivityModel.h"
 #include "tableviewdelegate.h"
 
 TableViewDelegate::TableViewDelegate(QObject *parent)
