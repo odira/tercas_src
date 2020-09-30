@@ -19,10 +19,10 @@ RoundButton {
     font: directionButtonFont
 
     contentItem: Text {
-        color: color
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         font.bold: true
+        font.pixelSize: 24
         text: {
             if (orientation === DirectionButton.Orientation.Previous)
                 return '<';
@@ -32,9 +32,9 @@ RoundButton {
     }
 
     background: Rectangle {
-        implicitWidth: button.width; implicitHeight: button.height
-        color: "transparent"
-        border.color: button.color
-        radius: 1
+        implicitWidth: button.width
+        implicitHeight: button.height
+        color: button.color
+        radius: 0
     }
 }

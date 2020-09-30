@@ -175,7 +175,6 @@ ListView {
 
                     Layout.preferredWidth: listView.delegateCellWidth
                     Layout.fillHeight: true
-//                    border.color: "lightgrey"
                     color: {
                         if (dutyName === 'опг') return 'lightgreen';
                         else if (dutyName === 'овг') return 'lightgreen';
@@ -213,19 +212,20 @@ ListView {
 
                     // ToolTip implementation for delegate
                     MouseArea {
+                        id: mouseArea
                         anchors.fill: parent
-                        onClicked: {
-                            var component = Qt.createComponent("ToolTipPopup.qml")
-                            if (component.status === Component.Ready) {
-                                var tooltipText = emplSheduleMonthModel.getToolTip(personPid, delegateDayOfMonth)
-                                if (tooltipText === undefined)
-                                    return
-
-                                var tooltipPopup = component.createObject(delegateRect, { "tooltipText" : tooltipText } )
-                                tooltipPopup.open()
-                            }
+                        hoverEnabled: true
+                    }
+                    ToolTip {
+                        id: toolTip
+                        text: {
+                            var text = emplSheduleMonthModel.getToolTip(personPid, delegateDayOfMonth);
+                            return text ? "<b>" + text + "</b>" : null;
                         }
-                    } // MouseArea
+                        visible: toolTip.text !== "" ? mouseArea.containsMouse : false
+                        delay: 400
+                    }
+
 
                 }
             }

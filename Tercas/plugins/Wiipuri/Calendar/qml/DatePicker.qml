@@ -7,7 +7,7 @@ import "CalendarFuncs.js" as Func
 Item {
     id: datePicker
 
-    width: yearBlock.width + monthBlock.width + 4
+    width: yearBlock.width + monthBlock.width + dateBlock.width + 4
     height: directionButtonHeight
 
     // Variables for calendar
@@ -42,34 +42,24 @@ Item {
     property var directionButtonFont: textMetrics.font
 
     // Variables for blocks
-    property color dateBlockColor: "orange"
-    property color monthBlockColor: Qt.lighter("blue")
-    property color yearBlockColor: Qt.lighter("green")
-
-    // Spacer item
-    Component {
-        id: spacer
-        Rectangle {
-            width: 2
-            Layout.fillHeight: true
-            color: "gray"
-        }
-    }
+    property color dateBlockColor: Qt.lighter("orange")
+    property color monthBlockColor: Qt.lighter("gray")
+    property color yearBlockColor: 'salmon'
 
     RowLayout {
         id: root
         spacing: 2
 
-        Loader { Layout.fillHeight: true; sourceComponent: spacer }
-
         // DATE block
         Pane {
             id: dateBlock
             visible: showDate
+            background: Rectangle { color: 'transparent' }
 
             RowLayout {
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Previous
+                    color: dateBlockColor
                     onClicked: {
                         date--
                         if (date === 0) {
@@ -92,20 +82,21 @@ Item {
                 TextArea {
                     id: textDate
                     implicitWidth: charWidth * 1.5
-                    font.pixelSize: textSize
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     readOnly: true
                     text: date
+                    font.pixelSize: textSize
+                    font.bold: true
                     background: Rectangle {
                         height: 50
-                        color: "transparent"
-                        border.color: dateBlockColor
+                        color: dateBlockColor
                     }
                 }
 
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Next
+                    color: dateBlockColor
                     onClicked: {
                         date++
                         var maxDateInMonth = daysInMonth(month, year)
@@ -131,6 +122,7 @@ Item {
         Pane {
             id: monthBlock
             visible: showMonth
+            background: Rectangle { color: 'transparent' }
 
             RowLayout {
                 anchors.fill: parent
@@ -159,16 +151,16 @@ Item {
 
                 TextArea {
                     Layout.fillHeight: true
-                    implicitWidth: charWidth * 6
-                    font.pixelSize: textSize
+                    implicitWidth: charWidth * 8
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     readOnly: true
                     text: Func.getMonthName0(month) + ' - (' + (month+1) + ')'
+                    font.bold: true
+                    font.pixelSize: textSize
                     background: Rectangle {
                         height: 50
-                        color: "transparent"
-                        border.color: monthBlockColor
+                        color: monthBlockColor
                     }
                 }
 
@@ -200,6 +192,7 @@ Item {
         Pane {
             id: yearBlock
             visible: showYear
+            background: Rectangle { color: 'transparent' }
 
             RowLayout {
                 anchors.fill: parent
@@ -223,16 +216,16 @@ Item {
 
                 TextArea {
                     Layout.fillHeight: true
-                    implicitWidth: charWidth * 3
-                    font.pixelSize: textSize
+                    implicitWidth: charWidth * 4
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     readOnly: true
                     text: year
+                    font.pixelSize: textSize
+                    font.bold: true
                     background: Rectangle {
                         height: 50
-                        color: "transparent"
-                        border.color: yearBlockColor
+                        color: yearBlockColor
                     }
                 }
 
@@ -254,7 +247,5 @@ Item {
                 }
             }
         }
-
-        Loader { Layout.fillHeight: true; sourceComponent: spacer }
     }
 }

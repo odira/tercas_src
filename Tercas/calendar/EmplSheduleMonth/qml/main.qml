@@ -11,21 +11,27 @@ ApplicationWindow {
     visible: true
     width: Screen.width
     height: Screen.height
-    color: 'black'
+    color: Qt.lighter('black')
 
-    header: RowLayout {
-        Layout.fillWidth: true
-        height: 70
+    header:
+        Rectangle {
+        width: root.width
+        height: 100
+        color: 'yellow'
+
+        RowLayout {
+            anchors.fill: parent
 
         DatePicker {
             id: datePicker
             Layout.fillHeight: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            Layout.alignment: Qt.AlignCenter
             showDate: false
             onDpDateUpdated: {
                 emplSheduleMonthModel.date = dpDate
                 listView.daysInMonth = emplSheduleMonthModel.columnCount() - 1
             }
+        }
         }
     }
 
@@ -37,7 +43,9 @@ ApplicationWindow {
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignTop
-            Layout.margins: 20
+            Layout.leftMargin: 20
+            Layout.rightMargin: leftMargin
+            Layout.bottomMargin: 20
             focus: true
         }
     }
