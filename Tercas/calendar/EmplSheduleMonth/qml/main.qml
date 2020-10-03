@@ -13,30 +13,23 @@ ApplicationWindow {
     height: Screen.height
     color: Qt.lighter('black')
 
-    header:
-        Rectangle {
-        width: root.width
-        height: 100
-        color: 'yellow'
-
-        RowLayout {
-            anchors.fill: parent
-
-        DatePicker {
-            id: datePicker
-            Layout.fillHeight: true
-            Layout.alignment: Qt.AlignCenter
-            showDate: false
-            onDpDateUpdated: {
-                emplSheduleMonthModel.date = dpDate
-                listView.daysInMonth = emplSheduleMonthModel.columnCount() - 1
-            }
-        }
-        }
-    }
-
     ColumnLayout {
         anchors.fill: parent
+
+        RowLayout {
+            Layout.preferredWidth: parent.width
+            Layout.preferredHeight: 100
+
+            DatePicker {
+                id: datePicker
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                showDate: false
+                onDpDateUpdated: {
+                    emplSheduleMonthModel.date = dpDate
+                    listView.daysInMonth = emplSheduleMonthModel.columnCount() - 1
+                }
+            }
+        }
 
         MonthModelView {
             id: listView

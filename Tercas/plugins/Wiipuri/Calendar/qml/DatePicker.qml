@@ -149,18 +149,26 @@ Item {
                     }
                 }
 
-                TextArea {
+//                TextArea {
+//                    Layout.fillHeight: true
+//                    implicitWidth: charWidth * 8
+//                    verticalAlignment: Text.AlignVCenter
+//                    horizontalAlignment: Text.AlignHCenter
+//                    readOnly: true
+//                    text: Func.getMonthName0(month) + ' - (' + (month+1) + ')'
+//                    font.bold: true
+//                    font.pixelSize: textSize
+//                    background: Rectangle {
+//                        height: 50
+//                        color: monthBlockColor
+//                    }
+//                }
+                ComboBox {
                     Layout.fillHeight: true
                     implicitWidth: charWidth * 8
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                    readOnly: true
-                    text: Func.getMonthName0(month) + ' - (' + (month+1) + ')'
-                    font.bold: true
-                    font.pixelSize: textSize
-                    background: Rectangle {
-                        height: 50
-                        color: monthBlockColor
+                    model: ListModel {
+                        id: monthListModel
+                        ListElement { text: tr("Январь") }
                     }
                 }
 
