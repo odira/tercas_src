@@ -188,7 +188,8 @@ Item {
                     background: Rectangle { color: monthBlockColor }
                     currentIndex: month
                     onActivated: {
-                        dpDate.setMonth(index)
+                        month = index
+                        dpDate.setMonth(month)
                         dpDateUpdated(dpDate)
                     }
                 }
