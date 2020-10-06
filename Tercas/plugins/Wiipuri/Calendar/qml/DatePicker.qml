@@ -164,11 +164,32 @@ Item {
 //                    }
 //                }
                 ComboBox {
+                    id: monthCombo
                     Layout.fillHeight: true
                     implicitWidth: charWidth * 8
-                    model: ListModel {
-                        id: monthListModel
-                        ListElement { text: tr("Январь") }
+                    textRole: "text"
+                    valueRole: "value"
+                    model: [
+                        { text: "Январь (1)", value: 0 },
+                        { text: "Февраль (2)", value: 1 },
+                        { text: "Март (3)", value: 2 },
+                        { text: "Апрель (4)", value: 3 },
+                        { text: "Май (5)", value: 4 },
+                        { text: "Июнь (6)", value: 5 },
+                        { text: "Июль (7)", value: 6 },
+                        { text: "Август (8)", value: 7 },
+                        { text: "Сентябрь (9)", value: 8 },
+                        { text: "Октябрь (10)", value: 9 },
+                        { text: "Ноябрь (11)", value: 10 },
+                        { text: "Декабрь (12)", value: 11 }
+                    ]
+                    font.bold: true
+                    font.pixelSize: textSize
+                    background: Rectangle { color: monthBlockColor }
+                    currentIndex: month
+                    onActivated: {
+                        dpDate.setMonth(index)
+                        dpDateUpdated(dpDate)
                     }
                 }
 
