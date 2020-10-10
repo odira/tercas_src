@@ -8,13 +8,13 @@ conn = psycopg2.connect(dbname='terkas',
         password='monrepo',
         host='localhost')
 cursor = conn.cursor()
-cursor.execute("SELECT surname,name,middlename FROM person.vw_person WHERE shiftnum ilike '%4%' AND sectorspool ilike '%пенза%' AND uservalid is true")
+cursor.execute("SELECT surname,name,middlename FROM person.vw_person WHERE shift_num=4 AND sectors_pool ILIKE '%пенза%' AND valid IS true")
 
 names = cursor.fetchall()
 
 for name in names:
 
-    if 'Зыбина' in name:
+    if 'Степанова' in name:
         continue 
 
     print(sepline)
@@ -22,7 +22,7 @@ for name in names:
     namenum += 1
     print(sepline)
 
-    cursor.execute("SELECT activity_note,start_date,end_date,duration FROM shedule.vw_empl_shedule WHERE period <@ daterange('2020-01-01', '2020-12-31', '[]') AND activity_abbr ilike 'опг' AND person_fullname ilike '{} %'"
+    cursor.execute("SELECT activity_note,start_date,end_date,duration FROM calendar.vw_empl_period WHERE daterange(start_date,end_date,'[]') <@ daterange('2021-01-01','2021-12-31','[]') AND activity_abbr ILIKE 'опг' AND person_surname ILIKE '{}%'"
             .format(name[0]))
     holidays = cursor.fetchall()
     for holiday in holidays:
@@ -34,7 +34,7 @@ for name in names:
 
     print(sepline)
 
-    cursor.execute("SELECT SUM(duration) FROM shedule.vw_empl_shedule WHERE period <@ daterange('2020-01-01', '2020-12-31', '[]') AND activity_abbr ilike 'опг' AND person_fullname ilike '{} %'"
+    cursor.execute("SELECT SUM(duration) FROM calendar.vw_empl_period WHERE daterange(start_date,end_date,'[]') <@ daterange('2021-01-01','2021-12-31','[]') AND activity_abbr ILIKE 'опг' AND person_surname ILIKE '{}%'"
             .format(name[0]))
     for row in cursor:
         print('| Общая продолжительность: {} \t\t\t\t\t      |'.format(row[0]))
