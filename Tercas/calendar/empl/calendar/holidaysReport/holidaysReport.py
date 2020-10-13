@@ -22,7 +22,9 @@ for name in names:
     namenum += 1
     print(sepline)
 
-    cursor.execute("SELECT activity_note,start_date,end_date,duration FROM calendar.vw_empl_period WHERE daterange(start_date,end_date,'[]') <@ daterange('2021-01-01','2021-12-31','[]') AND activity_abbr ILIKE 'опг' AND person_surname ILIKE '{}%'"
+    cursor.execute("SELECT activity_note,start_date,end_date,duration FROM calendar.vw_empl_period "
+		   "WHERE daterange(start_date,end_date,'[]') && daterange('2021-01-01','2021-12-31','[]') AND activity_abbr ILIKE 'опг' AND person_surname ILIKE '{}%'"
+		   # "WHERE daterange(start_date,end_date,'[]') <@ daterange('2021-01-01','2021-12-31','[]') AND activity_abbr ILIKE 'опг' AND person_surname ILIKE '{}%'"
             .format(name[0]))
     holidays = cursor.fetchall()
     for holiday in holidays:
