@@ -7,8 +7,13 @@ import "CalendarFuncs.js" as Func
 Item {
     id: datePicker
 
-    width: yearBlock.width + monthBlock.width + dateBlock.width + 4
+    width: yearBlock.width + monthBlock.width + dateBlock.width
     height: directionButtonHeight
+
+
+    //
+    // DATE
+    //
 
     // Variables for calendar
     property var dpDate: new Date()
@@ -22,7 +27,10 @@ Item {
         return new Date(year, month, 0).getDate();
     }
 
+
+    //
     // GRAPHICS
+    //
 
     // Variables for graphics
     property bool showYear: true
@@ -46,6 +54,7 @@ Item {
     property color monthBlockColor: Qt.lighter("gray")
     property color yearBlockColor: 'salmon'
 
+
     RowLayout {
         id: root
         spacing: 2
@@ -53,10 +62,14 @@ Item {
         // DATE block
         Pane {
             id: dateBlock
-            visible: showDate
             background: Rectangle { color: 'transparent' }
+            width: 0
+            visible: showDate
 
             RowLayout {
+                id: dayBlock
+                anchors.fill: parent
+
                 DirectionButton {
                     orientation: DirectionButton.Orientation.Previous
                     color: dateBlockColor
@@ -81,6 +94,7 @@ Item {
 
                 TextArea {
                     id: textDate
+                    Layout.fillHeight: true
                     implicitWidth: charWidth * 1.5
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
@@ -88,10 +102,7 @@ Item {
                     text: date
                     font.pixelSize: textSize
                     font.bold: true
-                    background: Rectangle {
-                        height: 50
-                        color: dateBlockColor
-                    }
+                    background: Rectangle { color: dateBlockColor }
                 }
 
                 DirectionButton {
@@ -149,20 +160,6 @@ Item {
                     }
                 }
 
-//                TextArea {
-//                    Layout.fillHeight: true
-//                    implicitWidth: charWidth * 8
-//                    verticalAlignment: Text.AlignVCenter
-//                    horizontalAlignment: Text.AlignHCenter
-//                    readOnly: true
-//                    text: Func.getMonthName0(month) + ' - (' + (month+1) + ')'
-//                    font.bold: true
-//                    font.pixelSize: textSize
-//                    background: Rectangle {
-//                        height: 50
-//                        color: monthBlockColor
-//                    }
-//                }
                 ComboBox {
                     id: monthCombo
                     Layout.fillHeight: true
@@ -253,10 +250,7 @@ Item {
                     text: year
                     font.pixelSize: textSize
                     font.bold: true
-                    background: Rectangle {
-                        height: 50
-                        color: yearBlockColor
-                    }
+                    background: Rectangle { color: yearBlockColor }
                 }
 
                 DirectionButton {
