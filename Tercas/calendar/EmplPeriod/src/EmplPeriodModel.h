@@ -19,23 +19,23 @@ public:
     enum Columns
     {
         Column_pid = 0,
-        Column_person_pid,          // 1
-        Column_person_surname,      // 2
-        Column_person_name,         // 3
-        Column_person_middlename,   // 4
-        Column_person_position,     // 5
-        Column_person_shift_num,    // 6
-        Column_person_sectors_pool, // 7
-        Column_activity_pid,        // 8
-        Column_activity_abbr,       // 9
+        Column_person_pid,          //  1
+        Column_person_surname,      //  2
+        Column_person_name,         //  3
+        Column_person_middlename,   //  4
+        Column_person_position,     //  5
+        Column_person_shift_num,    //  6
+        Column_person_sectors_pool, //  7
+        Column_activity_pid,        //  8
+        Column_activity_abbr,       //  9
         Column_activity_activity,   // 10
         Column_activity_color,      // 11
         Column_activity_note,       // 12
-        Column_start_date,          // 13
-        Column_end_date,            // 14
-        Column_duration,            // 15
-        Column_note,                // 16
-
+        Column_valid,               // 13
+        Column_start_date,          // 14
+        Column_end_date,            // 15
+        Column_duration,            // 16
+        Column_note,                // 17
         ColumnsNumber
     };
     Q_ENUM(Columns)

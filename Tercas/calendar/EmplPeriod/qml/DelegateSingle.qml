@@ -58,7 +58,7 @@ Item {
         }
         TextField {
             Layout.fillWidth: true
-            text: start_end
+            text: end_date
         }
         TextField {
             Layout.fillWidth: true

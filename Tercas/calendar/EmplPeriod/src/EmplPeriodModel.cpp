@@ -16,6 +16,7 @@ EmplPeriodModel::EmplPeriodModel(QObject *parent, QSqlDatabase db)
 void EmplPeriodModel::generateRoleNames()
 {
     m_roleNames.clear();
+
     m_roleNames[Qt::DisplayRole] = QVariant(QString("display").toUtf8()).toByteArray();
 
     m_roleNames[Qt::UserRole + 1 + Columns::Column_pid]                 = QVariant(QString("pid").toUtf8()).toByteArray();
@@ -31,6 +32,7 @@ void EmplPeriodModel::generateRoleNames()
     m_roleNames[Qt::UserRole + 1 + Columns::Column_activity_activity]   = QVariant(QString("activity_activity").toUtf8()).toByteArray();
     m_roleNames[Qt::UserRole + 1 + Columns::Column_activity_color]      = QVariant(QString("activity_color").toUtf8()).toByteArray();
     m_roleNames[Qt::UserRole + 1 + Columns::Column_activity_note]       = QVariant(QString("activity_note").toUtf8()).toByteArray();
+    m_roleNames[Qt::UserRole + 1 + Columns::Column_valid]               = QVariant(QString("valid").toUtf8()).toByteArray();
     m_roleNames[Qt::UserRole + 1 + Columns::Column_start_date]          = QVariant(QString("start_date").toUtf8()).toByteArray();
     m_roleNames[Qt::UserRole + 1 + Columns::Column_end_date]            = QVariant(QString("end_date").toUtf8()).toByteArray();
     m_roleNames[Qt::UserRole + 1 + Columns::Column_duration]            = QVariant(QString("duration").toUtf8()).toByteArray();
