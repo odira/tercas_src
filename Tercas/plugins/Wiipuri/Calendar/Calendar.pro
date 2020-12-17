@@ -1,6 +1,6 @@
 TEMPLATE = lib
 QT += qml quick
-CONFIG += qt plugin c++11
+CONFIG += qt plugin c++11 sdk_no_version_check
 TARGET = WiipuriCalendar
 TARGET = $$qtLibraryTarget($$TARGET)
 

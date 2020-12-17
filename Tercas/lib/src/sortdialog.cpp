@@ -13,19 +13,19 @@ VyborgSortDialog::VyborgSortDialog(QSqlTableModel *model, QWidget *parent)
 //    proxy_ = proxy;
 
     columnComboBox = new QComboBox;
-    QLabel *columnLabel = new QLabel(trUtf8("Sort column"));
+    QLabel *columnLabel = new QLabel(tr("Sort column"));
     columnLabel->setBuddy(columnComboBox);
 
     orderComboBox = new QComboBox;
-    orderComboBox->addItem(trUtf8("Ascending"), Qt::AscendingOrder);
-    orderComboBox->addItem(trUtf8("Descending"), Qt::DescendingOrder);
-    QLabel *orderLabel = new QLabel(trUtf8("Ascend/Descend order"));
+    orderComboBox->addItem(tr("Ascending"), Qt::AscendingOrder);
+    orderComboBox->addItem(tr("Descending"), Qt::DescendingOrder);
+    QLabel *orderLabel = new QLabel(tr("Ascend/Descend order"));
     orderLabel->setBuddy(orderComboBox);
 
-    caseSensitivityCheckBox = new QCheckBox(trUtf8("Case sensitive sorting"));
+    caseSensitivityCheckBox = new QCheckBox(tr("Case sensitive sorting"));
 
-    QPushButton *sortButton = new QPushButton(trUtf8("Sort"));
-    QPushButton *closeButton  = new QPushButton(trUtf8("Close"));
+    QPushButton *sortButton = new QPushButton(tr("Sort"));
+    QPushButton *closeButton  = new QPushButton(tr("Close"));
 
     connect(sortButton, SIGNAL(clicked()),
             SLOT(sort()));

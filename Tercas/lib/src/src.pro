@@ -1,7 +1,6 @@
 QT -= gui
-QT += widgets sql
-#CONFIG += install
-#CONFIG+=sdk_no_version_check
+QT += widgets sql core
+#QT += core5compat
 CONFIG += sdk_no_version_check install
 TARGET = vyborg
 TEMPLATE = lib

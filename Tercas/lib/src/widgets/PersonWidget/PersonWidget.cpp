@@ -13,7 +13,7 @@ PersonWidget::PersonWidget(QWidget *parent)
 
     QHBoxLayout *mainLayout = new QHBoxLayout;
     mainLayout->setSpacing(2);
-    mainLayout->setMargin(0);
+//    mainLayout->setMargin(0);
     mainLayout->addWidget(m_surnameLineEdit);
     mainLayout->addWidget(m_nameLineEdit);
     mainLayout->addWidget(m_middlenameLineEdit);
@@ -115,7 +115,7 @@ void PersonWidget::surnameEdited(const QString &surname)
 void PersonWidget::surnameHighlighted(const QModelIndex &index)
 {
 //    qDebug() << "OK";
-    int col = index.column();
+//    int col = index.column();
     int row = index.row();
 //    qDebug() << completionModel->data(completionModel->index(row, 2)) << completionModel->data(completionModel->index(row, 3));
 

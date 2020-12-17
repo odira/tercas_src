@@ -30,10 +30,11 @@ public:
         column_activity_activity,   // 10
         column_activity_color,      // 11
         column_activity_note,       // 12
-        column_start_date,          // 13
-        column_end_date,            // 14
-        column_duration,            // 15
-        column_note,                // 16
+        column_valid,               // 13
+        column_start_date,          // 14
+        column_end_date,            // 15
+        column_duration,            // 16
+        column_note,                // 17
 
         ColumnsNumber
     };

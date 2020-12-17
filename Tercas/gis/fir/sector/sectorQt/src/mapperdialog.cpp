@@ -21,8 +21,8 @@ void MapperDialog::createPrivateWidgets()
 {
     m_pidLE = new QLineEdit;
     m_sectorpidarrW = new SectorPidArrayWidget;
-    m_nameLE = new QLineEdit;
-    m_compoundCB = new QCheckBox(trUtf8("Совмещенный сектор"));
+    m_labelLE = new QLineEdit;
+    m_compoundCB = new QCheckBox(tr("Совмещенный сектор"));
     m_compoundCB->setEnabled(false);
     m_freqLE = new QLineEdit;
     m_nodeArrayW = new NodePidArrayTableWidget;
@@ -36,7 +36,7 @@ void MapperDialog::createPrivateWidgets()
 
     m_mapper->addMapping(m_pidLE, GisSectorModel::sector_pid);
     m_mapper->addMapping(m_sectorpidarrW, GisSectorModel::sector_sectorpidarr, "array");
-    m_mapper->addMapping(m_nameLE, GisSectorModel::sector_name);
+    m_mapper->addMapping(m_labelLE, GisSectorModel::sector_label);
     m_mapper->addMapping(m_compoundCB, GisSectorModel::sector_compound);
     m_mapper->addMapping(m_freqLE, GisSectorModel::sector_freq);
 //    m_mapper->addMapping(m_nodeArrayW, sector_nodepidarr, "nodepidarr");
@@ -52,24 +52,24 @@ void MapperDialog::layoutPrivateWidgets()
 {
     QGridLayout *gridLayout = new QGridLayout;
     gridLayout->addWidget(m_compoundCB, 1, 1);
-    gridLayout->addWidget(new QLabel(trUtf8("Обозначение")), 3, 0);
+    gridLayout->addWidget(new QLabel(tr("Обозначение")), 3, 0);
     gridLayout->addWidget(m_sectorpidarrW, 3, 1);
-    gridLayout->addWidget(new QLabel(trUtf8("Полное наименование")), 4, 0);
-    gridLayout->addWidget(m_nameLE, 4, 1);
-    gridLayout->addWidget(new QLabel(trUtf8("Частота сектора")), 5, 0);
+    gridLayout->addWidget(new QLabel(tr("Полное наименование")), 4, 0);
+    gridLayout->addWidget(m_labelLE, 4, 1);
+    gridLayout->addWidget(new QLabel(tr("Частота сектора")), 5, 0);
     gridLayout->addWidget(m_freqLE, 5, 1);
 
     QHBoxLayout *hPhoneLayout = new QHBoxLayout;
     hPhoneLayout->addWidget(m_phoneLE);
 
-    QGroupBox *phoneBox = new QGroupBox(trUtf8("Телефоны"));
+    QGroupBox *phoneBox = new QGroupBox(tr("Телефоны"));
     phoneBox->setLayout(hPhoneLayout);
 
     QHBoxLayout *hNpsLayout = new QHBoxLayout;
     hNpsLayout->addWidget(m_npsdzLE);
     hNpsLayout->addWidget(m_npspdzLE);
 
-    QGroupBox *npsBox = new QGroupBox(trUtf8("НПС (Нормативы пропускной способности)"));
+    QGroupBox *npsBox = new QGroupBox(tr("НПС (Нормативы пропускной способности)"));
     npsBox->setLayout(hNpsLayout);
 
 
@@ -96,8 +96,8 @@ void MapperDialog::layoutPrivateWidgets()
 
 
     QTabWidget *tabWidget = new QTabWidget;
-    tabWidget->addTab(tab1, trUtf8("Общая информация"));
-    tabWidget->addTab(tab2, trUtf8("Граница"));
+    tabWidget->addTab(tab1, tr("Общая информация"));
+    tabWidget->addTab(tab2, tr("Граница"));
 
     QVBoxLayout *privateWidgetsLayout = layout();
     privateWidgetsLayout->addLayout(gridLayout);
@@ -106,24 +106,10 @@ void MapperDialog::layoutPrivateWidgets()
 
 void MapperDialog::updatePrivateWidgets()
 {
-    if (state() == Edit)
-    {
-        m_pidLE->setReadOnly(false);
-        m_sectorpidarrW->setEnabled(true);
-        m_nameLE->setReadOnly(false);
-        m_compoundCB->setEnabled(true);
-        m_freqLE->setReadOnly(false);
-        m_nodeArrayW->setEnabled(true);
-        m_phoneLE->setReadOnly(false);
-        m_npsdzLE->setReadOnly(false);
-        m_npspdzLE->setReadOnly(false);
-        m_colorW->setEnabled(true);
-    }
-    else
-    {
+    if (state() == Normal) {
         m_pidLE->setReadOnly(true);
         m_sectorpidarrW->setEnabled(false);
-        m_nameLE->setReadOnly(true);
+        m_labelLE->setReadOnly(true);
         m_compoundCB->setEnabled(false);
         m_freqLE->setReadOnly(true);
         m_nodeArrayW->setEnabled(false);
@@ -131,6 +117,17 @@ void MapperDialog::updatePrivateWidgets()
         m_npsdzLE->setReadOnly(true);
         m_npspdzLE->setReadOnly(true);
         m_colorW->setEnabled(false);
+    } else {
+        m_pidLE->setReadOnly(false);
+        m_sectorpidarrW->setEnabled(true);
+        m_labelLE->setReadOnly(false);
+        m_compoundCB->setEnabled(true);
+        m_freqLE->setReadOnly(false);
+        m_nodeArrayW->setEnabled(true);
+        m_phoneLE->setReadOnly(false);
+        m_npsdzLE->setReadOnly(false);
+        m_npspdzLE->setReadOnly(false);
+        m_colorW->setEnabled(true);
     }
 }
 

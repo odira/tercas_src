@@ -30,7 +30,7 @@ protected:
 private: // Visible widgets
     QLineEdit *m_pidLE;
     SectorPidArrayWidget *m_sectorpidarrW;
-    QLineEdit *m_nameLE;
+    QLineEdit *m_labelLE;
     QCheckBox *m_compoundCB;
     QLineEdit *m_freqLE;
     NodePidArrayTableWidget *m_nodeArrayW;

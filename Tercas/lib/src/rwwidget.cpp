@@ -13,11 +13,11 @@ RWWidget::RWWidget(QWidget *parent)
     QVBoxLayout *vbLayout = new QVBoxLayout;
     vbLayout->addWidget(m_tableView);
 
-    m_editButton   = new QPushButton(trUtf8("Edit"));
-    m_addButton    = new QPushButton(trUtf8("Add"));
-    m_saveButton   = new QPushButton(trUtf8("Save"));
+    m_editButton   = new QPushButton(tr("Edit"));
+    m_addButton    = new QPushButton(tr("Add"));
+    m_saveButton   = new QPushButton(tr("Save"));
     m_saveButton->setEnabled(false);
-    m_revertButton = new QPushButton(trUtf8("Revert"));
+    m_revertButton = new QPushButton(tr("Revert"));
     m_revertButton->setEnabled(false);
 
     connect(m_editButton, SIGNAL(clicked(bool)),
@@ -61,15 +61,15 @@ void RWWidget::setAdid(const int &adid)
     m_model->setFilter(filterString);
     m_model->select();
 
-    m_model->setHeaderData(1,  Qt::Horizontal, QString(trUtf8("Номер\nВПП")));
-    m_model->setHeaderData(2,  Qt::Horizontal, QString(trUtf8("Длина")));
-    m_model->setHeaderData(3,  Qt::Horizontal, QString(trUtf8("Ширина")));
-    m_model->setHeaderData(4,  Qt::Horizontal, QString(trUtf8("Истинный\nкурс")));
-    m_model->setHeaderData(5,  Qt::Horizontal, QString(trUtf8("Широта")));
-    m_model->setHeaderData(6,  Qt::Horizontal, QString(trUtf8("Долгота")));
-    m_model->setHeaderData(8,  Qt::Horizontal, QString(trUtf8("Покрытие")));
-    m_model->setHeaderData(9,  Qt::Horizontal, QString(trUtf8("Освещение")));
-    m_model->setHeaderData(10, Qt::Horizontal, QString(trUtf8("Круг\nполетов")));
+    m_model->setHeaderData(1,  Qt::Horizontal, QString(tr("Номер\nВПП")));
+    m_model->setHeaderData(2,  Qt::Horizontal, QString(tr("Длина")));
+    m_model->setHeaderData(3,  Qt::Horizontal, QString(tr("Ширина")));
+    m_model->setHeaderData(4,  Qt::Horizontal, QString(tr("Истинный\nкурс")));
+    m_model->setHeaderData(5,  Qt::Horizontal, QString(tr("Широта")));
+    m_model->setHeaderData(6,  Qt::Horizontal, QString(tr("Долгота")));
+    m_model->setHeaderData(8,  Qt::Horizontal, QString(tr("Покрытие")));
+    m_model->setHeaderData(9,  Qt::Horizontal, QString(tr("Освещение")));
+    m_model->setHeaderData(10, Qt::Horizontal, QString(tr("Круг\nполетов")));
 
     m_tableView->setModel(m_model);
     m_tableView->resizeColumnsToContents();

@@ -2,9 +2,7 @@
 #include <QtSql>
 #include <QLocale>
 
-
 #include "EmplSheduleIntervalModel.h"
-
 
 EmplSheduleIntervalModel::EmplSheduleIntervalModel(QObject *parent, QSqlDatabase db)
     : QSqlTableModel(parent, db)
@@ -34,37 +32,6 @@ QVariant EmplSheduleIntervalModel::data(const QModelIndex &idx, int role) const
 
         break;
     }
-//    case column_personpid:
-//    {
-//        if (role == Qt::DisplayRole)
-//        {
-//            int personpid = QSqlTableModel::data(idx).toInt();
-//            QString queryString = QString("SELECT (surname || ' ' || LEFT(name, 1) || '.' || LEFT(middlename, 1) || '.') person_fullname "
-//                                                               "FROM person.vw_person WHERE pid=%1").arg(personpid);
-//            QSqlQuery query(queryString);
-//            while (query.next()) {
-//                QString person_fullname = query.value(0).toString();
-//                return person_fullname;
-//            }
-//        }
-
-//        break;
-//    }
-//    case column_activitypid:
-//    {
-//        if (role == Qt::DisplayRole)
-//        {
-//            int activitypid = QSqlTableModel::data(idx).toInt();
-//            QString queryString = QString("SELECT activity FROM calendar.vw_activity WHERE pid=%1").arg(activitypid);
-//            QSqlQuery query(queryString);
-//            while (query.next()) {
-//                QString activity = query.value(0).toString();
-//                return activity;
-//            }
-//        }
-
-//        break;
-//    }
 
     case column_activity_abbr:
     {
@@ -141,52 +108,6 @@ QVariant EmplSheduleIntervalModel::data(const QModelIndex &idx, int role) const
 
         break;
     }
-
-//    case additional_activityabbrcolor:
-//    {
-//        if (role == Qt::DisplayRole)
-//        {
-//            int row = idx.row();
-//            int col = fieldIndex("activitypid");
-//            int activitypid = QSqlTableModel::data(index(row, col)).toInt();
-//            QString queryString = QString("SELECT abbr FROM calendar.vw_activity WHERE pid=%1").arg(activitypid);
-//            QSqlQuery query(queryString);
-//            while (query.next()) {
-//                QString abbrString = query.value(0).toString();
-//                return abbrString;
-//            }
-//        }
-//        else if (role == Qt::TextAlignmentRole)
-//        {
-//            return Qt::AlignCenter;
-//        }
-//        else if (role == Qt::ForegroundRole)
-//        {
-//            return QColor("black");
-//        }
-//        else if (role == Qt::BackgroundRole)
-//        {
-//            int row = idx.row();
-//            int col = fieldIndex("activitypid");
-//            int activitypid = QSqlTableModel::data(index(row, col)).toInt();
-//            QString queryString = QString("SELECT color FROM calendar.vw_activity WHERE pid=%1").arg(activitypid);
-//            QSqlQuery query(queryString);
-//            while (query.next()) {
-//                QString colorString = query.value(0).toString();
-//                if (!colorString.isEmpty()) {
-//                    return QColor(colorString);
-//                } else {
-//                    return QVariant();
-//                }
-//            }
-//        }
-//        else if (role == Qt::SizeHintRole)
-//        {
-//            return QSize(38, 20);
-//        }
-
-//        break;
-//    }
     }
 
     return QSqlTableModel::data(idx, role);
@@ -235,6 +156,10 @@ QVariant EmplSheduleIntervalModel::headerData(int section, Qt::Orientation orien
 
             case column_activity_activity:
                 return QString(QObject::tr("Вид деятельности"));
+                // break;
+
+            case column_valid:
+                return QString(QObject::tr("Действителен"));
                 // break;
 
             case column_start_date:

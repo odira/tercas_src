@@ -1,31 +1,32 @@
 #include <QtWidgets>
 #include <QtSql>
+#include <QRegExp>
 
 #include "filterdialog.h"
 
 VyborgFilterDialog::VyborgFilterDialog(QWidget *parent)
     : QDialog(parent)
 {
-    caseSensitivityCheckBox = new QCheckBox(trUtf8("Case sensitive filtering"));
+    caseSensitivityCheckBox = new QCheckBox(tr("Case sensitive filtering"));
 
     patternLineEdit = new QLineEdit;
-    QLabel *patternLabel = new QLabel(trUtf8("&Filter pattern"));
+    QLabel *patternLabel = new QLabel(tr("&Filter pattern"));
     patternLabel->setBuddy(patternLineEdit);
 
     syntaxComboBox = new QComboBox;
-    syntaxComboBox->addItem(trUtf8("Regular Expression"), QRegExp::RegExp);
-    syntaxComboBox->addItem(trUtf8("Wildcard"), QRegExp::Wildcard);
-    syntaxComboBox->addItem(trUtf8("Fixed String"), QRegExp::FixedString);
-    QLabel *syntaxLabel = new QLabel(trUtf8("Filter syntax"));
+    syntaxComboBox->addItem(tr("Regular Expression"), QRegExp::RegExp);
+    syntaxComboBox->addItem(tr("Wildcard"), QRegExp::Wildcard);
+    syntaxComboBox->addItem(tr("Fixed String"), QRegExp::FixedString);
+    QLabel *syntaxLabel = new QLabel(tr("Filter syntax"));
     syntaxLabel->setBuddy(syntaxComboBox);
 
     columnComboBox = new QComboBox;
-    QLabel *columnLabel = new QLabel(trUtf8("Filter column"));
+    QLabel *columnLabel = new QLabel(tr("Filter column"));
     columnLabel->setBuddy(columnComboBox);
 
-    filterButton = new QPushButton(trUtf8("Filter"));
+    filterButton = new QPushButton(tr("Filter"));
     filterButton->setEnabled(false);
-    QPushButton *closeButton  = new QPushButton(trUtf8("Close"));
+    QPushButton *closeButton  = new QPushButton(tr("Close"));
 
 
     connect(patternLineEdit, SIGNAL(textChanged(QString)),

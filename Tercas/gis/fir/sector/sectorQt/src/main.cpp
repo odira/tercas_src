@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     }
 
     MainDialog mainDialog;
-    mainDialog.setTitle(QObject::trUtf8("Перечень секторов РДЦ"));
+    mainDialog.setTitle(QObject::tr("Перечень секторов РДЦ"));
     mainDialog.showMaximized();
 
     app.exec();

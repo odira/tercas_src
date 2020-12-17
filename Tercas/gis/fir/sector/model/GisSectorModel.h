@@ -25,7 +25,6 @@ public:
         sector_pid,
         sector_sectorpidarr,
         sector_label,
-        sector_name,
         sector_compound,
         sector_freq,
         sector_border,

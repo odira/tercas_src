@@ -141,9 +141,9 @@ void NodePidArrayTableWidget::insertButtonClicked()
         return;
 
     bool ok;
-    QString offerstr = trUtf8("Введите номер node (максимальное число %1)").arg(maxval);
+    QString offerstr = tr("Введите номер node (максимальное число %1)").arg(maxval);
     int val  = QInputDialog::getInt(this,
-                                    trUtf8("Введите число"),
+                                    tr("Введите число"),
                                     offerstr,
                                     -1, -1, maxval, 1,
                                     &ok);
@@ -167,9 +167,9 @@ void NodePidArrayTableWidget::appendButtonClicked()
     }
 
     bool ok;
-    QString offerstr = trUtf8("Введите номер node (максимальное число %1)").arg(maxval);
+    QString offerstr = tr("Введите номер node (максимальное число %1)").arg(maxval);
     int val = QInputDialog::getInt(this,
-                                   trUtf8("Введите число"),
+                                   tr("Введите число"),
                                    offerstr,
                                    -1, -1, 100, 1,
                                    &ok);

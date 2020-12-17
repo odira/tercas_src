@@ -1,5 +1,5 @@
 QT += qml quick sql widgets
-CONFIG += vyborg
+CONFIG += vyborg sdk_no_version
 TEMPLATE = app
 TARGET = EmplSheduleMonth
 

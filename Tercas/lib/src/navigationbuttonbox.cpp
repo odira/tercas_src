@@ -115,7 +115,7 @@ void VyborgNavigationButtonBox::update()
         QFont font("monospace");
         font.setFamily("courier");
         label->setFont(font);
-        label->setText(trUtf8("Item %1 of %2")
+        label->setText(tr("Item %1 of %2")
                        .arg(currentIndex_ + 1, 3, 10, QChar(' '))
                        .arg(count_));
     }

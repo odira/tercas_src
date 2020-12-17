@@ -8,7 +8,7 @@ VyborgChartsDialog::VyborgChartsDialog(QSqlTableModel *model, QWidget *parent, Q
 {
     m_model = model;
 
-    QPushButton *closeButton = new QPushButton(trUtf8("Close"));
+    QPushButton *closeButton = new QPushButton(tr("Close"));
     connect(closeButton, SIGNAL(clicked(bool)),
             this, SLOT(close()));
 
@@ -38,7 +38,7 @@ VyborgChartsDialog::VyborgChartsDialog(QSqlTableModel *model, QWidget *parent, Q
     setSizeGripEnabled(false);
 //    setSizePolicy(QSizePolicy::Fixed);
 
-    setWindowTitle(trUtf8("Charts Dialog"));
+    setWindowTitle(tr("Charts Dialog"));
 }
 
 QVBoxLayout * VyborgChartsDialog::layout() const

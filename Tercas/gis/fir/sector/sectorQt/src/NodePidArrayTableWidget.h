@@ -38,7 +38,7 @@ private:
     QList<int> m_nodepidarr;
     NodePidArrayTableModel *m_model;
 
-    QTableView *m_view;
+    QTableView  *m_view;
     QPushButton *m_insertButton;
     QPushButton *m_appendButton;
     QPushButton *m_removeButton;

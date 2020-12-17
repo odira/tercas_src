@@ -32,6 +32,7 @@ void MainDialog::setupView()
     m_view->setColumnHidden(EmplSheduleIntervalModel::Columns::column_activity_pid, true);
     m_view->setColumnHidden(EmplSheduleIntervalModel::Columns::column_activity_color, true);
     m_view->setColumnHidden(EmplSheduleIntervalModel::Columns::column_activity_note, true);
+    m_view->setColumnHidden(EmplSheduleIntervalModel::Columns::column_valid, true);
     m_view->horizontalHeader()->setStretchLastSection(true);
 
     m_view->selectRow(0);

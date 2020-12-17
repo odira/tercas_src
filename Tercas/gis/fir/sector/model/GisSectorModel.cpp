@@ -8,7 +8,7 @@ GisSectorModel::GisSectorModel(QObject *parent, QSqlDatabase db)
     : QSqlTableModel(parent, db)
 {
     setTable(PGSQL_TABLENAME);
-    generateRoleNames();
+//    generateRoleNames();
     setEditStrategy(QSqlTableModel::OnManualSubmit);
     select();
 }
@@ -18,7 +18,7 @@ void GisSectorModel::generateRoleNames()
     m_roleNames.clear();
     for (int i = 0; i < columnCount(); i++) {
         m_roleNames[Qt::UserRole + 1 + i] =
-                QVariant((headerData(i, Qt::Horizontal, Qt::UserRole)).toString().toUtf8()).toByteArray();
+            QVariant((headerData(i, Qt::Horizontal, Qt::UserRole)).toString().toUtf8()).toByteArray();
     }
 }
 
@@ -69,17 +69,6 @@ QVariant GisSectorModel::data(const QModelIndex &idx, int role) const
             {
                 QString sectorPidArrStr = QSqlTableModel::data(idx).toString();
                 return sectorPidArrStr;
-            }
-
-            break;
-
-        case sector_name:
-
-            if (role == Qt::FontRole)
-            {
-                QFont font = QFont();
-                font.setBold(true);
-                return font;
             }
 
             break;
@@ -213,51 +202,47 @@ QVariant GisSectorModel::headerData(int section, Qt::Orientation orientation, in
 
             switch (section) {
             case sector_pid:
-                return QString(trUtf8("PID"));
+                return QString(tr("PID"));
                 break;
 
             case sector_sectorpidarr:
-                return QString(trUtf8("Составные\nсектора"));
+                return QString(tr("Составные\nсектора"));
                 break;
 
             case sector_label:
-                return QString(trUtf8("Обозначение"));
-                break;
-
-            case sector_name:
-                return QString(trUtf8("Полное\nнаименование"));
+                return QString(tr("Обозначение"));
                 break;
 
             case sector_compound:
-                return QString(trUtf8("Сов\nме\nщен\nный"));
+                return QString(tr("Сов\nме\nщен\nный"));
                 break;
 
             case sector_freq:
-                return QString(trUtf8("Частота\nсектора"));
+                return QString(tr("Частота\nсектора"));
                 break;
 
             case sector_geog:
-                return QString(trUtf8("Граница сектора"));
+                return QString(tr("Граница сектора"));
                 break;
 
             case sector_nodepidarr:
-                return QString(trUtf8("Координаты\nточек границы"));
+                return QString(tr("Координаты\nточек границы"));
                 break;
 
             case sector_phone:
-                return QString(trUtf8("Телефон\nЦУП"));
+                return QString(tr("Телефон\nЦУП"));
                 break;
 
             case sector_npsdz:
-                return QString(trUtf8("НПС.\nДопустимое\nзначение"));
+                return QString(tr("НПС.\nДопустимое\nзначение"));
                 break;
 
             case sector_npspdz:
-                return QString(trUtf8("НПС.\nПредельно-\nдопустимое\nзначение"));
+                return QString(tr("НПС.\nПредельно-\nдопустимое\nзначение"));
                 break;
 
             case sector_color:
-                return QString(trUtf8("Цвет"));
+                return QString(tr("Цвет"));
                 break;
             }
         }
@@ -298,6 +283,11 @@ bool GisSectorModel::setData(const QModelIndex &index, const QVariant &value, in
                 return QSqlTableModel::setData(index, "{}");
             else
                 return QSqlTableModel::setData(index, sectorPidArrStr);
+        }
+        else if (col == sector_label)
+        {
+            QString sectorLabel = value.toString();
+            return QSqlTableModel::setData(index, sectorLabel);
         }
         else if (col == sector_compound)
         {

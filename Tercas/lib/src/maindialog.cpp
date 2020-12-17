@@ -98,8 +98,8 @@ void VyborgMainDialog::remove()
     int viewRow = viewIndex.row();  // row for view
 
     QMessageBox msgBox;
-    msgBox.setText(trUtf8("WARNING"));
-    msgBox.setInformativeText(trUtf8("Are you sure you want to delete the row?"));
+    msgBox.setText(tr("WARNING"));
+    msgBox.setInformativeText(tr("Are you sure you want to delete the row?"));
     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     msgBox.setDefaultButton(QMessageBox::No);
     int ret = msgBox.exec();
@@ -113,8 +113,8 @@ void VyborgMainDialog::remove()
         } else {
             m_model->database().rollback();
             QMessageBox::warning(this,
-                                 trUtf8("Commit Changes to Model"),
-                                 trUtf8("The database reported an error: %1").arg(m_model->lastError().text()));
+                                 tr("Commit Changes to Model"),
+                                 tr("The database reported an error: %1").arg(m_model->lastError().text()));
         }
 
         m_view->selectRow(qMin(viewRow, m_model->rowCount()));

@@ -1,7 +1,7 @@
 QT += core gui widgets sql
 TARGET = sectorQt
 TEMPLATE = app
-CONFIG += vyborg
+CONFIG += vyborg sdk_no_version_check
 macx | linux : DESTDIR = /usr/local/bin/vyborg
 DESTDIR += ~/Desktop
 

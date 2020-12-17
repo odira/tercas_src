@@ -29,13 +29,13 @@ VyborgMainWindow::VyborgMainWindow(QWidget *parent)
 
 
     filterDialog_ = new VyborgFilterDialog();
-    filterDialog_->setWindowTitle(trUtf8("Filter Dialog"));
+    filterDialog_->setWindowTitle(tr("Filter Dialog"));
 
     sortDialog_ = new VyborgSortDialog(m_model);
-    sortDialog_->setWindowTitle(trUtf8("Sort Dialog"));
+    sortDialog_->setWindowTitle(tr("Sort Dialog"));
 
     aboutDialog_ = new VyborgAboutDialog;
-    aboutDialog_->setWindowTitle(trUtf8("About Dialog"));
+    aboutDialog_->setWindowTitle(tr("About Dialog"));
 
 
     m_controlButtonBox = new VyborgMainDialogControlButtonBox(this);
@@ -80,8 +80,8 @@ void VyborgMainWindow::add()
     int val = m_model->insertRow(0);
     if (val == false) {
         QMessageBox::warning(this,
-                             trUtf8("Insert New Row"),
-                             trUtf8("The database reported an error: %1").arg(m_model->lastError().text()));
+                             tr("Insert New Row"),
+                             tr("The database reported an error: %1").arg(m_model->lastError().text()));
         return;
     } else {
         m_view->setCurrentIndex(m_model->index(0, 0));
@@ -99,8 +99,8 @@ void VyborgMainWindow::remove()
     int viewRow = viewIndex.row();  // row for view
 
     QMessageBox msgBox;
-    msgBox.setText(trUtf8("WARNING"));
-    msgBox.setInformativeText(trUtf8("Are you sure you want to delete the row?"));
+    msgBox.setText(tr("WARNING"));
+    msgBox.setInformativeText(tr("Are you sure you want to delete the row?"));
     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     msgBox.setDefaultButton(QMessageBox::No);
     int ret = msgBox.exec();
@@ -113,8 +113,8 @@ void VyborgMainWindow::remove()
         } else {
             m_model->database().rollback();
             QMessageBox::warning(this,
-                                 trUtf8("Commit Changes to Model"),
-                                 trUtf8("The database reported an error: %1").arg(m_model->lastError().text()));
+                                 tr("Commit Changes to Model"),
+                                 tr("The database reported an error: %1").arg(m_model->lastError().text()));
         }
 
         m_view->selectRow(qMin(viewRow, m_model->rowCount()));

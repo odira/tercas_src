@@ -7,13 +7,13 @@
 VyborgMainDialogControlButtonBox::VyborgMainDialogControlButtonBox(QWidget *parent)
     : QDialogButtonBox(parent)
 {
-    QPushButton *sortButton   = new QPushButton(trUtf8("Sort"));
-    QPushButton *filterButton = new QPushButton(trUtf8("Filter"));
-    QPushButton *updateButton = new QPushButton(trUtf8("Update"));
-    QPushButton *addButton    = new QPushButton(trUtf8("Add"));
-    QPushButton *removeButton = new QPushButton(trUtf8("Remove"));
-    QPushButton *aboutButton  = new QPushButton(trUtf8("About"));
-    QPushButton *closeButton  = new QPushButton(trUtf8("Close"));
+    QPushButton *sortButton   = new QPushButton(tr("Sort"));
+    QPushButton *filterButton = new QPushButton(tr("Filter"));
+    QPushButton *updateButton = new QPushButton(tr("Update"));
+    QPushButton *addButton    = new QPushButton(tr("Add"));
+    QPushButton *removeButton = new QPushButton(tr("Remove"));
+    QPushButton *aboutButton  = new QPushButton(tr("About"));
+    QPushButton *closeButton  = new QPushButton(tr("Close"));
 
     this->addButton(filterButton, QDialogButtonBox::ActionRole);
     this->addButton(sortButton,   QDialogButtonBox::ActionRole);
