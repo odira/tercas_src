@@ -1,5 +1,4 @@
-#ifndef GISSECTORMODEL_H
-#define GISSECTORMODEL_H
+#define pragma
 
 #define PGSQL
 #define PGSQL_DATABASE "gis"
@@ -45,5 +44,3 @@ private:
     QHash<int, QByteArray> m_roleNames;
     Columns m_columns;
 };
-
-#endif // GISSECTORMODEL_H

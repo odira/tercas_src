@@ -8,7 +8,7 @@ GisSectorModel::GisSectorModel(QObject *parent, QSqlDatabase db)
     : QSqlTableModel(parent, db)
 {
     setTable(PGSQL_TABLENAME);
-//    generateRoleNames();
+    generateRoleNames();
     setEditStrategy(QSqlTableModel::OnManualSubmit);
     select();
 }
