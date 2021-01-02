@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04C4E05B2598C52C0077464B /* ShiftRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C4E05A2598C52C0077464B /* ShiftRow.swift */; };
 		04F660F52572B6A300C38A8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F660F42572B6A300C38A8C /* AppDelegate.swift */; };
 		04F660F72572B6A300C38A8C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F660F62572B6A300C38A8C /* SceneDelegate.swift */; };
 		04F660F92572B6A300C38A8C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F660F82572B6A300C38A8C /* ContentView.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04C4E05A2598C52C0077464B /* ShiftRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftRow.swift; sourceTree = "<group>"; };
 		04F660F12572B6A300C38A8C /* ATCShift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ATCShift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F660F42572B6A300C38A8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04F660F62572B6A300C38A8C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +39,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04C4E056259691E20077464B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				04F660F82572B6A300C38A8C /* ContentView.swift */,
+				04C4E05A2598C52C0077464B /* ShiftRow.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		04F660E82572B6A300C38A8C = {
 			isa = PBXGroup;
 			children = (
@@ -56,9 +67,9 @@
 		04F660F32572B6A300C38A8C /* ATCShift */ = {
 			isa = PBXGroup;
 			children = (
+				04C4E056259691E20077464B /* Views */,
 				04F660F42572B6A300C38A8C /* AppDelegate.swift */,
 				04F660F62572B6A300C38A8C /* SceneDelegate.swift */,
-				04F660F82572B6A300C38A8C /* ContentView.swift */,
 				04F660FA2572B6A700C38A8C /* Assets.xcassets */,
 				04F660FF2572B6A700C38A8C /* LaunchScreen.storyboard */,
 				04F661022572B6A700C38A8C /* Info.plist */,
@@ -148,6 +159,7 @@
 				04F660F52572B6A300C38A8C /* AppDelegate.swift in Sources */,
 				04F660F72572B6A300C38A8C /* SceneDelegate.swift in Sources */,
 				04F660F92572B6A300C38A8C /* ContentView.swift in Sources */,
+				04C4E05B2598C52C0077464B /* ShiftRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +303,7 @@
 				DEVELOPMENT_TEAM = 2RLLV54K2J;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ATCShift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,6 +325,7 @@
 				DEVELOPMENT_TEAM = 2RLLV54K2J;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ATCShift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
