@@ -16,10 +16,10 @@ GisSectorModel::GisSectorModel(QObject *parent, QSqlDatabase db)
 void GisSectorModel::generateRoleNames()
 {
     m_roleNames.clear();
-    for (int i = 0; i < columnCount(); i++) {
-        m_roleNames[Qt::UserRole + 1 + i] =
-            QVariant((headerData(i, Qt::Horizontal, Qt::UserRole)).toString().toUtf8()).toByteArray();
-    }
+//    for (int i = 0; i < columnCount(); i++) {
+//        m_roleNames[Qt::UserRole + 1 + i] =
+//            QVariant((this->headerData(i, Qt::Horizontal, Qt::UserRole)).toString().toUtf8()).toByteArray();
+//    }
 }
 
 QHash<int, QByteArray> GisSectorModel::roleNames() const
@@ -197,58 +197,90 @@ QVariant GisSectorModel::headerData(int section, Qt::Orientation orientation, in
             return QVariant();
         }
 
-        if (role == Qt::DisplayRole)
-        {
-
-            switch (section) {
-            case sector_pid:
+        switch (section) {
+        case sector_pid:
+            if (role == Qt::DisplayRole)
                 return QString(tr("PID"));
-                break;
+            else if (role == Qt::UserRole)
+                return "pid";
+            break;
 
-            case sector_sectorpidarr:
+        case sector_sectorpidarr:
+            if (role == Qt::DisplayRole)
                 return QString(tr("Составные\nсектора"));
-                break;
+            else if (role == Qt::UserRole)
+                return "sectorpidarr";
+            break;
 
-            case sector_label:
+        case sector_label:
+            if (role == Qt::DisplayRole)
                 return QString(tr("Обозначение"));
-                break;
+            else if (role == Qt::UserRole)
+                return "label";
+            break;
 
-            case sector_compound:
+        case sector_compound:
+            if (role == Qt::DisplayRole)
                 return QString(tr("Сов\nме\nщен\nный"));
-                break;
+            else if (role == Qt::UserRole)
+                return "compound";
+            break;
 
-            case sector_freq:
+        case sector_freq:
+            if (role == Qt::DisplayRole)
                 return QString(tr("Частота\nсектора"));
-                break;
+            else if (role == Qt::UserRole)
+                return "freq";
+            break;
 
-            case sector_geog:
+        case sector_border:
+            if (role == Qt::DisplayRole)
+                return QString(tr("Граница сектора\n(postgis)"));
+            else if (role == Qt::UserRole)
+                return "border";
+            break;
+
+        case sector_geog:
+            if (role == Qt::DisplayRole)
                 return QString(tr("Граница сектора"));
-                break;
+            else if (role == Qt::UserRole)
+                return "geog";
+            break;
 
-            case sector_nodepidarr:
+        case sector_nodepidarr:
+            if (role == Qt::DisplayRole)
                 return QString(tr("Координаты\nточек границы"));
-                break;
+            else if (role == Qt::UserRole)
+                return "nodepidarr";
+            break;
 
-            case sector_phone:
+        case sector_phone:
+            if (role == Qt::DisplayRole)
                 return QString(tr("Телефон\nЦУП"));
-                break;
+            else if (role == Qt::UserRole)
+                return "phone";
+            break;
 
-            case sector_npsdz:
+        case sector_npsdz:
+            if (role == Qt::DisplayRole)
                 return QString(tr("НПС.\nДопустимое\nзначение"));
-                break;
+            else if (role == Qt::UserRole)
+                return "npsdz";
+            break;
 
-            case sector_npspdz:
+        case sector_npspdz:
+            if (role == Qt::DisplayRole)
                 return QString(tr("НПС.\nПредельно-\nдопустимое\nзначение"));
-                break;
+            else if (role == Qt::UserRole)
+                return "npspdz";
+            break;
 
-            case sector_color:
+        case sector_color:
+            if (role == Qt::DisplayRole)
                 return QString(tr("Цвет"));
-                break;
-            }
-        }
-        else if (role == Qt::UserRole)
-        {
-            return QSqlTableModel::headerData(section, orientation, Qt::DisplayRole);
+            else if (role == Qt::UserRole)
+                return "color";
+            break;
         }
 
     }
