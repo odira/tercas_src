@@ -47,7 +47,7 @@ struct LandmarkDetail_Previews: PreviewProvider {
             
             LandmarkDetail(landmark: modelData.landmarks[0])
                 .environmentObject(modelData)
-                .previewDevice("Apple Watch Series SE - 44mm")
+//                .previewDevice("Apple Watch Series SE - 44mm")
 //        }
     }
 }
