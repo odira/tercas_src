@@ -16,7 +16,7 @@ try:
 
     # Print PostgreSQL details
     print("PostgreSQL server information")
-    print(connection.get_dns_parameters(), "\n")
+    print(connection.get_dsn_parameters(), "\n")
 
     # Executing a SQL query
     cursor.execute("SELECT version();")

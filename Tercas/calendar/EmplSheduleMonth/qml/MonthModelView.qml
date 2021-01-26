@@ -199,6 +199,7 @@ ListView {
                         else if (dutyName === 'нсвп') return 'orange';
                         else if (dutyName === 'нстр') return 'orange';
                         else if (dutyName === 'нст2') return 'orange';
+                        else if (dutyName === 'тккс') return 'gray';
 //                        else return Func.getShiftColor(delegateDate);
                         else (TercasDate.isShiftWorking(delegateDate, 4) ? Qt.lighter("yellow") : "transparent");
                     }
